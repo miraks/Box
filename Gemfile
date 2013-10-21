@@ -10,11 +10,18 @@ gem 'puma'
 
 # Database
 gem 'pg'
-gem 'kaminari'
 gem 'redis'
 gem 'dalli'
+
+# Pagination
+gem 'kaminari'
+
+# Search
 gem 'tire'
+
+# Human-readable urls
 gem 'friendly_id'
+gem 'babosa'
 
 # Auth
 gem 'devise'
