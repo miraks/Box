@@ -43,7 +43,7 @@ group :development do
   gem 'bullet'
   gem 'better_errors'
   gem 'awesome_print'
-  gem 'rails-pry'
+  gem 'pry-rails'
 end
 
 group :test do
