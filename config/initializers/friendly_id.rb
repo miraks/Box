@@ -82,7 +82,7 @@ FriendlyId.defaults do |config|
   
   config.use Module.new do
     def normalize_friendly_id text
-      text.to_slug.normalize! transliterations: [:russian, :latin]
+      text.to_slug.normalize! transliterations: [:russian]
     end
   end
 end
