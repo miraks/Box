@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '4.0.1.rc1'
 
 # Ruby standart library
-gem 'rubysl'
+# gem 'rubysl' # lot of errors
 
 # Server
 gem 'puma'
