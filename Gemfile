@@ -1,9 +1,12 @@
 source 'http://rubygems.org'
 
-gem 'rails', '4.0.1.rc1'
+gem 'rails', '4.0.1.rc2'
 
+# Until it will be fixed by rails or rubinius
+gem 'rubysl-openssl', require: false, github: 'miraks/rubysl-openssl', branch: '2.0'
+gem 'rubysl-pathname', require: false, github: 'miraks/rubysl-pathname', branch: '2.0'
 # Ruby standart library
-gem 'rubysl', require: false # if you have errors then just install rubinius
+gem 'rubysl', require: false
 
 # Server
 gem 'puma'
