@@ -1,0 +1,1 @@
+pumactl -S $BOX_PATH/tmp/pids/puma.box.state -P $BOX_PATH/tmp/pids/puma.box.pid -C $BOX_PATH/tmp/sockets/pumactl.box.sock -F $BOX_PATH/config/puma.rb $1
