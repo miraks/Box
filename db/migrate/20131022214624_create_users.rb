@@ -3,9 +3,9 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.string :name
 
-	  ## Database authenticatable
-      t.string :email, :null => false, :default => "", unique: true
-      t.string :encrypted_password, :null => false, :default => ""
+      ## Database authenticatable
+      t.string :email, null: false, default: "", unique: true
+      t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable
       t.string :reset_password_token
@@ -15,7 +15,7 @@ class CreateUsers < ActiveRecord::Migration
       t.datetime :remember_created_at
 
       ## Trackable
-      t.integer :sign_in_count, :default => 0
+      t.integer :sign_in_count, default: 0
       t.datetime :current_sign_in_at
       t.datetime :last_sign_in_at
       t.string :current_sign_in_ip
@@ -23,7 +23,7 @@ class CreateUsers < ActiveRecord::Migration
 
       ## Encryptable
       t.string :password_salt
-      
+
       t.timestamps
     end
   end
