@@ -3,10 +3,10 @@ source 'http://rubygems.org'
 gem 'rails', '4.0.1.rc2'
 
 # Until it will be fixed by rails or rubinius
-gem 'rubysl-openssl', require: false, github: 'miraks/rubysl-openssl', branch: '2.0'
-gem 'rubysl-pathname', require: false, github: 'miraks/rubysl-pathname', branch: '2.0'
+gem 'rubysl-openssl', require: false, github: 'miraks/rubysl-openssl', branch: '2.0', platforms: :rbx
+gem 'rubysl-pathname', require: false, github: 'miraks/rubysl-pathname', branch: '2.0',  platforms: :rbx
 # Ruby standart library
-gem 'rubysl', require: false
+gem 'rubysl', require: false,  platforms: :rbx
 
 # Server
 gem 'puma'
@@ -69,4 +69,4 @@ gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
 gem 'yui-compressor'
-gem 'compass-rails'
+gem "compass-rails", "~> 2.0.alpha.0"

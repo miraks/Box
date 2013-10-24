@@ -21,3 +21,4 @@
 
 # Environment variables
 .env
+*.sass-cache*
