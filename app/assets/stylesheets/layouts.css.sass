@@ -1,0 +1,36 @@
+@import "compass/css3/box"
+
+* 
+  margin: 0
+  padding: 0
+
+header
+  background: limeGreen
+  height: 30px
+
+section#main 
+  +display-box
+  width: 100%
+
+  section#content, aside, nav
+    +box-orient(vertical)
+    display: inherit
+    height: 100px
+    padding: 10px
+    margin: 10px
+
+  section#content
+    height: auto
+    +box-ordinal-group(2)
+    +box-flex(1)
+    background: orange
+
+  aside
+    +box-ordinal-group(3)
+    width: 240px
+    background: salmon
+
+  nav
+    +box-ordinal-group(1)
+    width: 240px
+    background: skyblue
