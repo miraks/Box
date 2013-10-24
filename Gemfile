@@ -43,6 +43,7 @@ gem 'resque'
 
 # Configuration
 gem 'custom_configuration'
+gem 'dotenv-rails'
 
 # JSON
 gem 'rabl'

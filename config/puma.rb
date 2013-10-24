@@ -1,3 +1,6 @@
+require 'dotenv'
+Dotenv.load
+
 app_root = ENV['BOX_PATH']
 
 config = {
