@@ -4,7 +4,6 @@ html
   head
     title Box
     = stylesheet_link_tag 'application', media: 'all'
-    = javascript_include_tag 'application'
 
   body
     header
@@ -16,3 +15,5 @@ html
         | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       nav
         | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+    = javascript_include_tag 'application', async: true
