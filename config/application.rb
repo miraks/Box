@@ -21,5 +21,8 @@ module Box
     # config.i18n.default_locale = :de
 
     config.autoload_paths += %W(#{config.root}/lib)
+
+    config.assets.css_compressor = :yui
+    config.assets.js_compressor  = Uglifier.new mangle: false
   end
 end
