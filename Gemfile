@@ -52,6 +52,9 @@ gem 'dotenv-rails'
 gem 'active_model_serializers'
 gem 'oj' # very fast json, very!
 
+# Angular related
+gem 'angularjs-rails-resource', '1.0.0.pre.1'
+
 group :development do
   gem 'capistrano', require: false
   gem 'bullet'
