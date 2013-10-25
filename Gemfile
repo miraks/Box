@@ -9,6 +9,7 @@ gem 'rubysl-openssl', require: false, github: 'miraks/rubysl-openssl', branch: '
 gem 'rubysl-pathname', require: false, github: 'miraks/rubysl-pathname', branch: '2.0'
 # Ruby standart library
 gem 'rubysl', require: false
+gem 'racc', require: false
 
 # Server
 gem 'puma'
