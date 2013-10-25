@@ -49,7 +49,7 @@ gem 'custom_configuration'
 gem 'dotenv-rails'
 
 # JSON
-gem 'rabl'
+gem 'active_model_serializers'
 gem 'oj' # very fast json, very!
 
 group :development do
