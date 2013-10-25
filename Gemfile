@@ -72,4 +72,4 @@ gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
 gem 'yui-compressor'
-gem "compass-rails", "~> 2.0.alpha.0"
+gem 'compass-rails', '~> 2.0.alpha.0'

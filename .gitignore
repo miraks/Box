@@ -24,3 +24,7 @@
 
 # Cache
 *.sass-cache*
+
+# Uploads
+public/system
+public/uploads

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131024200129) do
+ActiveRecord::Schema.define(version: 20131025082301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,12 +38,12 @@ ActiveRecord::Schema.define(version: 20131024200129) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "uploads", force: true do |t|
-    t.string   "name",          null: false
-    t.string   "original_name", null: false
     t.integer  "user_id",       null: false
     t.integer  "folder_id",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "original_name"
+    t.string   "file"
   end
 
   create_table "users", force: true do |t|
