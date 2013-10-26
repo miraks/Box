@@ -1,0 +1,27 @@
+ru: 
+  shared: 
+    menu:
+      main: Главная
+      sign_in: Войти
+      sign_up: Зарегистрироваться
+      sign_out: Выйти
+  devise: 
+    sessions:
+      new: 
+        sign_in: Войти
+        email: Почта
+        password: Пароль
+        remember_me: Запомнить меня
+    registrations: 
+      new:
+        name: Имя
+        sign_up: Зарегистрироваться
+        email: Почта
+        password: Пароль
+        password_confirmation: 'Еще раз пароль, на всякий случай'
+
+    shared: 
+      links: 
+        sign_up: Зарегистрироваться 
+        forgot_your_password: Забыли пароль?
+        sign_in: Войти

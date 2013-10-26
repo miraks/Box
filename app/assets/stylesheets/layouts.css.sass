@@ -1,18 +1,35 @@
 @import "compass/css3/box"
 
-* 
-  margin: 0
-  padding: 0
+$header_height: 30px
+.header-text
+  *
+    color: white
+    font-weight: bold
+    text-decoration: none 
+    &:hover 
+      text-decoration: underline
 
 header
-  background: limeGreen
-  height: 30px
+  @extend .header-text
+  background: #333
+  height: $header_height
+
+  .menu
+    display: block 
+    margin: auto
+    width: 600px
+    height: $header_height
+    line-height: $header_height
+    ul > li 
+      display: inline-block
+      margin: 0 5px
 
 section#main 
   +display-box
   width: 100%
 
   section#content, aside, nav
+    @extend .ugly-styles
     +box-orient(vertical)
     display: inherit
     height: 100px
@@ -23,14 +40,23 @@ section#main
     height: auto
     +box-ordinal-group(2)
     +box-flex(1)
-    background: orange
 
   aside
     +box-ordinal-group(3)
     width: 240px
-    background: salmon
 
   nav
     +box-ordinal-group(1)
     width: 240px
-    background: skyblue
+
+.ugly-styles //delete
+  box-shadow: 0 0 5px #333
+  border-radius: 5px
+
+* 
+  margin: 0
+  padding: 0
+
+body
+  font-family: Verdana,sans-serif
+  font-size: 13px

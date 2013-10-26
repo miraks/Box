@@ -41,6 +41,7 @@ gem 'carrierwave'
 
 # Localization
 gem 'russian'
+gem 'devise-i18n'
 
 # Jobs
 gem 'resque'

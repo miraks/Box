@@ -12,7 +12,14 @@ class User < ActiveRecord::Base
 
   after_create :create_default_folders
 
+  # Дать пользователям вводить имя? Или генерить, а потом давать изменить ?
+  before_validation :generate_name
+
   private
+
+  def generate_name
+    self.name = email.split('@')[0]
+  end
 
   def create_default_folders
     DefaultFoldersCreator.new(self).create!
