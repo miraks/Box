@@ -18,6 +18,7 @@ gem 'puma'
 gem 'pg'
 gem 'redis'
 gem 'dalli'
+gem 'foreigner'
 
 # Pagination
 gem 'kaminari'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131025082301) do
+ActiveRecord::Schema.define(version: 20131026122417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,5 +65,10 @@ ActiveRecord::Schema.define(version: 20131025082301) do
   end
 
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
+
+  add_foreign_key "folders", "users", name: "folders_user_id_fk"
+
+  add_foreign_key "uploads", "folders", name: "uploads_folder_id_fk"
+  add_foreign_key "uploads", "users", name: "uploads_user_id_fk"
 
 end
