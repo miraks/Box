@@ -6,3 +6,5 @@ div = @user
     | {{folder.name}}
   .upload ng-repeat="upload in folder.uploads"
     | {{upload.name}}
+    div ng-show="upload.isUploading()" Progress: {{upload.percent}}
+  #upload_button Upload

@@ -1,4 +1,6 @@
 //= require sugar.js
+//= require moxie.js
+//= require plupload.js
 //= require angular.js
 //= require angularjs/rails/resource
 
