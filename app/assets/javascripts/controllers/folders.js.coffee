@@ -1,9 +1,12 @@
 angular.module('BoxApp').controller 'FoldersController', ($scope, Folder) ->
-  $scope.init = (data) ->
-    Object.merge $scope, data
-    $scope.currentFolderId = $scope.rootId
-    $scope.reloadContent()
+  $scope.init = (rootId) ->
+    currentFolderId = rootId # TODO: read folder id from location first
+    $scope.changeFolder new Folder(id: currentFolderId)
 
   $scope.reloadContent = ->
-    Folder.get($scope.currentFolderId).then (folder) ->
+    Folder.get($scope.currentFolder.id).then (folder) ->
       $scope.folder = folder
+
+  $scope.changeFolder = (folder) ->
+    $scope.currentFolder = folder
+    $scope.reloadContent()

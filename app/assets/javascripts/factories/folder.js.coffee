@@ -4,3 +4,8 @@ angular.module('BoxApp').factory 'Folder', (RailsResource) ->
       url: '/api/v1/folders'
       name: 'folder'
       serializer: 'FolderSerializer'
+
+    @beforeResponse (data) ->
+      format = "long"
+      ["createdAt", "UpdatedAt"].each (field) ->
+        data[field] = Date.create(data[field]).format(format)

@@ -1,0 +1,40 @@
+@import "compass/css3/box-sizing"
+
+$element_width: 200px
+$element_height: 200px
+$element_margin: 10px
+$element_padding: 10px
+
+#file_manager
+  width: 100%
+  background: grey
+
+  #path
+    +box-sizing(border-box)
+    width: 100%
+    height: $element_height / 4
+    padding: $element_padding
+    background: black
+    color: white
+
+  .path-part
+    width: $element_width / 2
+    height: $element_height / 4
+    margin: $element_margin
+    padding: $element_padding
+
+  .path-part, .folder, .upload
+    cursor: pointer
+    float: left
+
+  .folder, .upload
+    width: $element_width
+    height: $element_height
+    margin: $element_margin
+    padding: $element_padding
+
+  .folder
+    background: white
+
+  .upload
+    background: #555
