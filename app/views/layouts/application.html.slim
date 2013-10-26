@@ -3,9 +3,10 @@ doctype html
 html
   head
     title Box
+    = csrf_meta_tag
     = stylesheet_link_tag 'application', media: 'all'
 
-  body
+  body ng-app="BoxApp"
     header
     section#main
       section#content
@@ -16,4 +17,4 @@ html
       nav
         | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
-    = javascript_include_tag 'application', async: true
+    = javascript_include_tag 'application'

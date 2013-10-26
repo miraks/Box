@@ -1,0 +1,8 @@
+div = @user
+#file_manager ng-controller="FoldersController" ng-init="init({rootId: #{@user.folders.root.id}})"
+  .folder ng-repeat="folder in folder.children"
+    | Folder
+    | {{folder.name}}
+  .upload ng-repeat="upload in folder.uploads"
+    | Upload
+    | {{upload.name}}

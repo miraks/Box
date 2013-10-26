@@ -9,9 +9,16 @@ class Folder < ActiveRecord::Base
 
   before_save :set_parent_folders, if: :parent
 
-  def parent_folders reload = false
-    @parent_folders = self.class.where(id: parent_folder_ids).to_a if @parent_folders.nil? || reload
-    @parent_folders
+  scope :root, -> { find_by "parent_folder_ids = '{}'" }
+
+  def parents reload = false
+    @parents = self.class.where(id: parent_folder_ids) if @parents.nil? || reload
+    @parents
+  end
+
+  def children reload = false
+    @children = self.class.where('parent_folder_ids[1] = ?', id) if @children.nil? || reload
+    @children
   end
 
   private
