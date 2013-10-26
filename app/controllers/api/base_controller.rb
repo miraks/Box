@@ -6,9 +6,6 @@ class Api::BaseController < ActionController::Metal
   include AbstractController::Callbacks
   include ActionController::Helpers
   include ActionController::Cookies
-  include ActionController::RequestForgeryProtection
   include ActionController::Serialization
   include Rails.application.routes.url_helpers
-
-  protect_from_forgery with: :null_session
 end
