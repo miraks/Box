@@ -1,1 +1,1 @@
-cd $BOX_PATH && bundle exec rails c
+$BOX_PATH/bin/rails c
