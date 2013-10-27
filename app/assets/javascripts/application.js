@@ -4,6 +4,7 @@
 //= require angular.js
 //= require angularjs/rails/resource
 
+//= require helpers
 //= require box
 //= require routes
 

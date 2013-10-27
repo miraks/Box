@@ -1,21 +1,21 @@
 .menu
   ul
-    li 
-      = link_to t('.main'), root_path
-    li 
-      a href='#' Новости 
-    li 
+    li
+      = link_to t('.main'), root_url
+    li
+      a href='#' Новости
+    li
       a href='#' Группы
-    li 
+    li
       a href='#' Интернет магазин
     li |
-    - unless current_user 
-      li 
-        = link_to t('.sign_in'), new_session_path
-      li 
-        = link_to t('.sign_up'), new_registration_path
-    li 
-      = link_to current_user.name, user_path(current_user)
-    li 
-      / GET request instead DELETE, require jquery_ujs ? 
-      = link_to t('.sign_out'), destroy_user_session_path, method: :delete
+    - if logged_in?
+      li
+        = link_to current_user.name, user_path(current_user)
+      li
+        = link_to t('.sign_out'), destroy_user_session_path, data: { method: :delete }
+    - else
+      li
+        = link_to t('.sign_in'), new_user_session_path
+      li
+        = link_to t('.sign_up'), new_user_registration_path
