@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
+
   # Дать пользователям вводить имя? Или генерить, а потом давать изменить ?
   before_validation :generate_name
 

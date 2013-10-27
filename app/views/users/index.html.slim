@@ -1,3 +1,8 @@
+= form_tag users_path, method: :get do
+  p
+    = text_field_tag :query, params[:query]
+    = submit_tag 'Найти пользователя'
+
 ul 
   - @users.each do |user|
     li 
