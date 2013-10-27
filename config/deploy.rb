@@ -19,7 +19,8 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      execute release_path.join('scripts/control restart')
+      pid_path = release_path.join 'tmp/pids/puma.box.pid'
+      execute "kill -s USR2 `cat #{pid_path}`"
     end
   end
 

@@ -1,5 +1,1 @@
-#!/usr/bin/env ruby
-require 'dotenv'
-Dotenv.load
-
-system "#{ENV['BOX_PATH']}/bin/pumactl -S #{ENV['BOX_PATH']}/tmp/pids/puma.box.state -P #{ENV['BOX_PATH']}/tmp/pids/puma.box.pid -C #{ENV['BOX_PATH']}/tmp/sockets/pumactl.box.sock -F #{ENV['BOX_PATH']}/config/puma.rb $1"
+pumactl -S $BOX_PATH/tmp/pids/puma.box.state -P $BOX_PATH/tmp/pids/puma.box.pid -C $BOX_PATH/tmp/sockets/pumactl.box.sock -F $BOX_PATH/config/puma.rb $1
