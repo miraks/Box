@@ -5,7 +5,17 @@ ru:
       sign_in: Войти
       sign_up: Зарегистрироваться
       sign_out: Выйти
-  devise: 
+  devise:
+    passwords:
+      new: 
+        forgot_your_password: Забыл пароль?
+        email: Почта
+        reset_password_instructions: Выслать интсрукции по смене пароля
+      edit: 
+        change_your_password: Смена пароля
+        new_password: Новый пароль
+        password_confirmation: 'Еще раз пароль, на всякий случай'
+        change_password: Сменить пароль
     sessions:
       new: 
         sign_in: Войти
@@ -23,5 +33,5 @@ ru:
     shared: 
       links: 
         sign_up: Зарегистрироваться 
-        forgot_your_password: Забыли пароль?
+        forgot_your_password: Забыл пароль?
         sign_in: Войти
