@@ -1,1 +1,1 @@
-control start
+$BOX_PATH/bin/puma -d -C $BOX_PATH/config/puma.rb
