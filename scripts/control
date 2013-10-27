@@ -1,1 +1,1 @@
-pumactl -S $BOX_PATH/tmp/pids/puma.box.state -P $BOX_PATH/tmp/pids/puma.box.pid -C $BOX_PATH/tmp/sockets/pumactl.box.sock -F $BOX_PATH/config/puma.rb $1
+cd $BOX_PATH && bin/pumactl -S tmp/pids/puma.box.state -P tmp/pids/puma.box.pid -C tmp/sockets/pumactl.box.sock -F config/puma.rb $1

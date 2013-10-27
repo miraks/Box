@@ -1,1 +1,1 @@
-$BOX_PATH/bin/puma -d -C $BOX_PATH/config/puma.rb
+cd $BOX_PATH && bin/puma -d -C config/puma.rb

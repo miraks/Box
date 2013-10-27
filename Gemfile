@@ -59,6 +59,9 @@ gem 'angularjs-rails-resource', '1.0.0.pre.1'
 
 group :development do
   gem 'capistrano', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'rvm1-capistrano3', require: false
   gem 'bullet'
   gem 'better_errors'
   gem 'awesome_print'

@@ -18,9 +18,12 @@ require 'capistrano/deploy'
 # require 'capistrano/rvm'
 # require 'capistrano/rbenv'
 # require 'capistrano/chruby'
+
+# Until https://github.com/capistrano/bundler/pull/6 will be merged
 # require 'capistrano/bundler'
-# require 'capistrano/rails/assets'
+require 'capistrano/rails/assets'
 # require 'capistrano/rails/migrations'
+require 'rvm1/capistrano3'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }

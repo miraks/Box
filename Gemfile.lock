@@ -58,6 +58,10 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (>= 0.0.23)
+    capistrano-bundler (1.0.0)
+      capistrano (>= 3.0.0.pre)
+    capistrano-rails (1.0.0)
+      capistrano
     carrierwave (0.9.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -387,6 +391,8 @@ GEM
     rubysl-zlib (2.0.1)
     russian (0.6.0)
       i18n (>= 0.5.0)
+    rvm1-capistrano3 (0.8.0)
+      capistrano (~> 3.0)
     sass (3.2.12)
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
@@ -455,6 +461,8 @@ DEPENDENCIES
   better_errors
   bullet
   capistrano
+  capistrano-bundler
+  capistrano-rails
   carrierwave
   coffee-rails
   compass-rails (~> 2.0.alpha.0)
@@ -481,6 +489,7 @@ DEPENDENCIES
   rubysl-openssl!
   rubysl-pathname!
   russian
+  rvm1-capistrano3
   sass-rails
   slim
   timecop
