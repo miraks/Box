@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
-  extend FriendlyId
+  # Дать пользователям вводить имя? Или генерить, а потом давать изменить ?
+  before_validation :generate_name
 
+  extend FriendlyId
   friendly_id :name
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
@@ -11,9 +13,6 @@ class User < ActiveRecord::Base
   validates :name, presence: true
 
   after_create :create_default_folders
-
-  # Дать пользователям вводить имя? Или генерить, а потом давать изменить ?
-  before_validation :generate_name
 
   private
 
