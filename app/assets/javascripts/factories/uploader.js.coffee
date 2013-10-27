@@ -1,4 +1,4 @@
-angular.module('BoxApp').factory 'Uploader', (Upload) ->
+angular.module('BoxApp').factory 'Uploader', ['Upload', (Upload) ->
   class Uploader
     defaultSetting:
       browse_button: 'upload_button'
@@ -44,3 +44,4 @@ angular.module('BoxApp').factory 'Uploader', (Upload) ->
       @uploader.settings.url = url
 
   Uploader
+]

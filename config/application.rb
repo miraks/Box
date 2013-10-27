@@ -22,9 +22,6 @@ module Box
 
     config.autoload_paths += %W(#{config.root}/lib)
 
-    config.assets.css_compressor = :yui
-    config.assets.js_compressor  = Uglifier.new mangle: false
-
     # Слимовские темплейты можно хранить в ассетах
     assets.register_engine '.slim', Slim::Template
   end

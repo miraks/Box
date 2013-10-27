@@ -1,4 +1,4 @@
-angular.module('BoxApp').factory 'Folder', (RailsResource) ->
+angular.module('BoxApp').factory 'Folder', ['RailsResource', (RailsResource) ->
   class Folder extends RailsResource
     @configure
       url: '/api/v1/folders'
@@ -9,3 +9,4 @@ angular.module('BoxApp').factory 'Folder', (RailsResource) ->
       format = "long"
       ["createdAt", "UpdatedAt"].each (field) ->
         data[field] = Date.create(data[field]).format(format)
+]
