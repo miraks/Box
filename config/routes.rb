@@ -6,7 +6,9 @@ Box::Application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :folders, only: [:show]
-      resources :uploads, only: [:create]
+      resources :uploads, only: [:create] do
+        get :download
+      end
     end
   end
 

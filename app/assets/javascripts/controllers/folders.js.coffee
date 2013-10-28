@@ -1,5 +1,4 @@
 angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'Uploader', ($scope, Folder, Uploader) ->
-
   $scope.init = (rootId) ->
     currentFolderId = rootId # TODO: read folder id from location first
     $scope.setupUploader()

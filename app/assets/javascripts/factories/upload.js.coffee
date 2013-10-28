@@ -1,4 +1,4 @@
-angular.module('BoxApp').factory 'Upload', ['RailsResource', (RailsResource) ->
+angular.module('BoxApp').factory 'Upload', ['RailsResource', 'Downloader', (RailsResource, Downloader) ->
   class Upload extends RailsResource
     @configure
       url: '/api/v1/uploads'
@@ -9,4 +9,8 @@ angular.module('BoxApp').factory 'Upload', ['RailsResource', (RailsResource) ->
 
       ["uploaded", "uploading"].each (state) =>
         @["is#{state.camelize()}"] = -> @state == state
+
+    download: ->
+      Downloader.download @$url('download')
+      true
 ]

@@ -7,9 +7,9 @@ class Upload < ActiveRecord::Base
 
   validates :original_name, :file, :user_id, :folder_id, presence: true
 
-  mount_uploader :file, FileUploader
-
   before_validation :set_original_name, if: :file_changed?
+
+  mount_uploader :file, FileUploader
 
   def name
     original_name.sub(EXTENSION_REGEXP, '')
