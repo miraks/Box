@@ -43,7 +43,7 @@ class FileUploader < CarrierWave::Uploader::Base
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
-    @random_filename ||= SecureRandom.uuid + File.extname(original_filename)
+    @random_filename ||= SecureRandom.uuid + File.extname(original_filename) if original_name
   end
 
   def original_name
