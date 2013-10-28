@@ -1,1 +1,1 @@
-$BOX_PATH/bin/rails c
+cd $BOX_PATH && RAILS_ENV=production bin/rails c
