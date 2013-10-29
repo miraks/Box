@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   has_many :uploads
   has_many :folders
-
+  has_many :purchases
   validates :name, presence: true
 
   after_create :create_default_folders

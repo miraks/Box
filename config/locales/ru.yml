@@ -5,6 +5,7 @@ ru:
       sign_in: Войти
       sign_up: Зарегистрироваться
       sign_out: Выйти
+      purchases: Покупки
   devise:
     passwords:
       new: 

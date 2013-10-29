@@ -12,5 +12,9 @@ Box::Application.routes.draw do
     end
   end
 
-  resources :users, only: [:show, :index]
+  resources :users, only: [:show, :index] do 
+    member do
+      get :purchases 
+    end 
+  end 
 end
