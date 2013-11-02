@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131029184832) do
+ActiveRecord::Schema.define(version: 20131102090201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,18 +40,17 @@ ActiveRecord::Schema.define(version: 20131029184832) do
   create_table "purchases", force: true do |t|
     t.integer  "user_id",     null: false
     t.integer  "upload_id",   null: false
-    t.string   "upload_name"
+    t.string   "upload_name", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "uploads", force: true do |t|
-    t.string   "original_name", null: false
     t.integer  "user_id",       null: false
     t.integer  "folder_id",     null: false
-    t.integer  "purchase_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "original_name"
     t.string   "file"
   end
 
@@ -76,6 +75,9 @@ ActiveRecord::Schema.define(version: 20131029184832) do
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
 
   add_foreign_key "folders", "users", name: "folders_user_id_fk"
+
+  add_foreign_key "purchases", "uploads", name: "purchases_upload_id_fk"
+  add_foreign_key "purchases", "users", name: "purchases_user_id_fk"
 
   add_foreign_key "uploads", "folders", name: "uploads_folder_id_fk"
   add_foreign_key "uploads", "users", name: "uploads_user_id_fk"
