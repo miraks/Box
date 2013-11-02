@@ -1,5 +1,5 @@
 Box::Application.routes.draw do
-  devise_for :users, path: '', path_names: { :sign_in => 'login', :sign_out => 'logout', :sign_up => 'register' }
+  devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
   root to: "users#index"
 
@@ -12,9 +12,9 @@ Box::Application.routes.draw do
     end
   end
 
-  resources :users, only: [:show, :index] do 
-    member do
-      get :purchases 
-    end 
-  end 
+  resources :users, only: [:show, :index] do
+    scope module: :users do
+      resources :purchases, only: [:index]
+    end
+  end
 end

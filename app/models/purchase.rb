@@ -1,5 +1,5 @@
 class Purchase < ActiveRecord::Base
-  # TODO: only users who has purchased files can download it 
+  # TODO: only users who has purchased files can download it
   belongs_to :user
   belongs_to :upload
 
@@ -20,8 +20,9 @@ class Purchase < ActiveRecord::Base
     self.upload_name = generate_fake_name
   end
 
-  def generate_fake_name 
-    "#{upload.name.parameterize}_#{Devise.friendly_token[0,5]}"
+  def generate_fake_name
+    name = upload.name.to_slug.normalize! transliterations: [:russian]
+    "#{name}_#{SecureRandom.hex(3)}"
   end
 
 end

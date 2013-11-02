@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  find :user, only: [:show, :purchases]
+  find :user, only: [:show]
   before_filter :authenticate_user!, only: :show
 
   def index
@@ -12,10 +12,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find params[:id]
-  end
-
-  def purchases
-    @purchases = @user.purchases
   end
 
 end
