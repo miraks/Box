@@ -15,11 +15,10 @@ onLoad bootstrapAngular, true
 
 # Эмуляция рельсового method для ссылок
 # Обрабатывает только редиректы, любые другие ответы от сервера игнорируются
-# TODO: Написать хак для IE для работы с dataset (Element.prototype?)
 useDataMethod = ->
   document.body.addEventListener 'click', (event) ->
     target = event.target
-    method = target.dataset.method
+    method = target.getAttribute 'data-method'
     return true unless target.tagName == 'A' and method?
 
     event.preventDefault()
