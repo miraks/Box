@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 ruby '2.1.0', engine: 'rbx', engine_version: '2.1.1'
 
-gem 'rails', '4.0.1.rc2'
+gem 'rails', '4.0.1'
 
 # Until it will be fixed by rails or rubinius
 gem 'rubysl-openssl', require: false, github: 'miraks/rubysl-openssl', branch: '2.0'
