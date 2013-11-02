@@ -1,7 +1,5 @@
 class Api::V1::FoldersController < Api::V1::BaseController
-  include FolderFinder
-
-  before_filter :find_folder
+  find :folder
   before_filter :has_access
 
   def show
