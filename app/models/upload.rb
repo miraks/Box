@@ -28,7 +28,7 @@ class Upload < ActiveRecord::Base
   end
 
   def has_purchases?
-    purchases.present?
+    purchases.exists?
   end
 
   def set_original_name
