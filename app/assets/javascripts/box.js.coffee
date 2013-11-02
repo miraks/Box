@@ -12,7 +12,3 @@ boxApp.config ['$httpProvider', ($httpProvider) ->
 boxApp.config ['RailsResourceProvider', (RailsResourceProvider) ->
   RailsResourceProvider.updateMethod 'patch'
 ]
-
-# boxApp.run ($rootScope, $state, $stateParams) ->
-#   $rootScope.$state = $state
-#   $rootScope.$stateParams = $stateParams

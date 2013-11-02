@@ -4,7 +4,8 @@ html ng-app="BoxApp"
   head
     title Box
     = csrf_meta_tag
-    = stylesheet_link_tag 'application', media: 'all'
+    = stylesheet_link_tag 'application', media: 'all', "data-turbolinks-track" => true
+    = javascript_include_tag 'application', "data-turbolinks-track" => true
 
   body
     header
@@ -16,5 +17,4 @@ html ng-app="BoxApp"
         | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       nav
         | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-    = javascript_include_tag 'application'
+    = render 'shared/uploads_status'
