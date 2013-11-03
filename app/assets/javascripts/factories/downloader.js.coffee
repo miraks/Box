@@ -5,5 +5,5 @@ angular.module('BoxApp').factory 'Downloader', [ ->
       frame = document.createElement 'iframe'
       frame.src = url
       frame.style.display = 'none'
-      document.body.appendChild(frame) # .parentNode.removeChild(frame)
+      document.body.appendChild(frame)
 ]

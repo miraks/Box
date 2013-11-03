@@ -10,6 +10,13 @@ angular.module('BoxApp').factory 'Upload', ['RailsResource', 'Downloader', (Rail
       ["uploaded", "uploading"].each (state) =>
         @["is#{state.camelize()}"] = -> @state == state
 
+    equal: (other) ->
+      return false unless @state == other.state
+      if @id?
+        @id == other.id
+      else
+        @file.id == other.file.id
+
     download: ->
       Downloader.download @$url('download')
       true

@@ -28,3 +28,6 @@
 # Uploads
 public/system
 public/uploads
+
+# Precompiled assets
+public/assets

@@ -6,7 +6,7 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
 
   $scope.setupUploader = ->
     $scope.uploader = new Uploader $scope
-    $scope.uploader.uploadAdded = (upload) ->
+    $scope.uploader.bind 'fileAdded', (upload) ->
       $scope.folder.uploads.push upload
 
   $scope.reloadContent = ->
