@@ -44,7 +44,7 @@ gem 'russian'
 gem 'devise-i18n'
 
 # Jobs
-gem 'resque'
+gem 'sidekiq'
 
 # Configuration
 gem 'custom_configuration'
