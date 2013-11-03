@@ -1,0 +1,11 @@
+ul
+  li
+    a href="#" ng-click="showMessageForm = !showMessageForm"
+      = t('.new_message')
+  li
+    a href="#" ng-click="loadMessages()"
+      = t('.received')
+  li
+    a href="#" ng-click="loadMessages({sent: true})"
+      = t('.sent')
+

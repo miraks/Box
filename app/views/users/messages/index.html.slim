@@ -1,0 +1,39 @@
+.messages ng-controller='MessagesController' ng-init='loadMessages()'
+  h1
+    = t '.messages'
+
+  .menu
+    = render 'menu'
+
+  / .message_show ng-show='showMessage'
+  /   .from
+  /     | {{show_message.recepient_id}}
+  /   .title
+  /     | {{show_message.title}}
+  /   .body
+  /     | {{show_message.body}}
+
+  .message_form ng-show='showMessageForm'
+    form
+      p
+        // TODO: user search
+        = text_field_tag :recepient_id, nil, 'ng-model' => 'message.recepient_id', required: '', placeholder: t('.recepient'), title: t('.recepient')
+        br
+        = text_field_tag :title, nil, 'ng-model' => 'message.title', required: '', placeholder: t('.title'), title: t('.title')
+        br
+        = text_area_tag :body, nil, 'ng-model' => 'message.body', required: ''
+        br
+        a href='#' ng-click='sentMessage()'
+          = t('.sent_message')
+
+  .messages_list
+    table
+      tr.message ng-repeat='message in messages'
+        td
+          a href='{{message.url}}'
+            /ng-click="showMessage({{message.id}})"
+            | {{message.title}}
+        td
+          | {{message.body}}
+        td
+          | {{message.created_at}}

@@ -1,8 +1,0 @@
-#purchases ng-controller="PurchasesController"
-  - if @purchases
-    ul
-      - @purchases.each do |purchase|
-        li 
-          = purchase.upload.name
-          = link_to 'Скачать', purchase.link
-

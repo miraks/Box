@@ -15,6 +15,7 @@ Box::Application.routes.draw do
   resources :users, only: [:show, :index] do
     scope module: :users do
       resources :purchases, only: [:index]
+      resources :messages, only: [:index, :show, :new, :create, :destroy]
     end
   end
 end

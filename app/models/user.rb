@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   include Tire::Model::Search
   include Tire::Model::Callbacks
+  include UserMessages
 
   # Дать пользователям вводить имя? Или генерить, а потом давать изменить ?
   before_validation :generate_name
@@ -14,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :uploads
   has_many :folders
   has_many :purchases
+  has_many :messages
   validates :name, presence: true
 
   after_create :create_default_folders
