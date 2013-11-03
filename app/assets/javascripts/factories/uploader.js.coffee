@@ -66,6 +66,4 @@ angular.module('BoxApp').factory 'Uploader', ['Upload', (Upload) ->
 
     setUrl: (url) ->
       @uploader.settings.url = url
-
-  Uploader
 ]
