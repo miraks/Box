@@ -1,0 +1,5 @@
+h3 = t '.friends'
+- if logged_in? and current_user.has_friends?
+  = render current_user.friends
+- else
+  = t '.no_friends'

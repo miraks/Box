@@ -1,29 +1,22 @@
-ru: 
-  shared: 
-    menu:
-      main: Главная
-      sign_in: Войти
-      sign_up: Зарегистрироваться
-      sign_out: Выйти
-      purchases: Покупки
+ru:
   devise:
     passwords:
-      new: 
+      new:
         forgot_your_password: Забыл пароль?
         email: Почта
         reset_password_instructions: Выслать интсрукции по смене пароля
-      edit: 
+      edit:
         change_your_password: Смена пароля
         new_password: Новый пароль
         password_confirmation: 'Еще раз пароль, на всякий случай'
         change_password: Сменить пароль
     sessions:
-      new: 
+      new:
         sign_in: Войти
         email: Почта
         password: Пароль
         remember_me: Запомнить меня
-    registrations: 
+    registrations:
       new:
         name: Имя
         sign_up: Зарегистрироваться
@@ -31,8 +24,8 @@ ru:
         password: Пароль
         password_confirmation: 'Еще раз пароль, на всякий случай'
 
-    shared: 
-      links: 
-        sign_up: Зарегистрироваться 
+    shared:
+      links:
+        sign_up: Зарегистрироваться
         forgot_your_password: Забыл пароль?
         sign_in: Войти

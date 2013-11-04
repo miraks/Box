@@ -14,7 +14,7 @@ html ng-app="BoxApp"
       section#content
         = yield
       aside
-        | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        = render 'sidebars/friends'
       nav
         | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     = render 'shared/uploads_status'
