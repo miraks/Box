@@ -1,4 +1,4 @@
-angular.module('BoxApp').factory 'Uploader', ['Upload', (Upload) ->
+angular.module('BoxApp').factory 'Uploader', ['Upload', 'Storage', (Upload, Storage) ->
   class Uploader
     defaultSetting:
       browse_button: 'upload_button'
@@ -7,8 +7,7 @@ angular.module('BoxApp').factory 'Uploader', ['Upload', (Upload) ->
       url: '/'
 
     constructor: (@$scope, settings) ->
-      window.box.uploads ||= []
-      @globalUploads = window.box.uploads
+      @globalUploads = Storage.get 'uploads', []
 
       @uploads = []
       @callbacks = {}
@@ -45,7 +44,7 @@ angular.module('BoxApp').factory 'Uploader', ['Upload', (Upload) ->
 
     bindUploadsStatusUpdate: ->
       @bind 'fileAdded uploadProgress fileUploaded', ->
-        window.box.$uploadsStatusScope?.$apply()
+        Storage.get('$uploadsStatusScope')?.$apply()
 
     bind: (eventTypes, callback) ->
       eventTypes.split(' ').each (eventType) =>
