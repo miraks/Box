@@ -1,7 +1,7 @@
 div = @user
 
 - if logged_in? and not self? @user
-  div ng-controller="FriendshipController" ng-init="init({friendId: #{@user.id}, friends: #{@user.considered_friend_by?(current_user)}})"
+  div ng-controller="FriendshipController" ng-init="init('#{FriendshipSerializer.new(current_user.friendship_with(@user)).to_json}')"
     a href="#" ng-click="becomeFriend()" ng-hide="isFriend()" data-no-turbolink=""
       = t '.become_friend'
     a href="#" ng-click="stopBeingFriend()" ng-show="isFriend()" data-no-turbolink=""

@@ -3,3 +3,4 @@ angular.module('BoxApp').directive 'userLink', ->
   scope:
     user: '='
   templateUrl: '/assets/user_link.html'
+  replace: true

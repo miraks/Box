@@ -17,6 +17,11 @@ Friend = Struct.new(:user) do
   end
 
   def stop_being_friend_of other_user
-    friendship = user.friendships.with(other_user).last.destroy
+    friendship = friendship_with(other_user).destroy
+  end
+
+  def friendship_with other_user
+    friendship = user.friendships.with(other_user)
+    friendship.last ? friendship.last : friendship.new
   end
 end

@@ -3,6 +3,7 @@ angular.module('BoxApp').factory 'Upload', ['RailsResource', 'Downloader', (Rail
     @configure
       url: '/api/v1/uploads'
       name: 'upload'
+      pluralName: 'uploads'
 
     constructor: (state) ->
       @state = state || "uploaded"
@@ -10,6 +11,7 @@ angular.module('BoxApp').factory 'Upload', ['RailsResource', 'Downloader', (Rail
       ["uploaded", "uploading"].each (state) =>
         @["is#{state.camelize()}"] = -> @state == state
 
+    # TODO: переписать
     equal: (other) ->
       return false unless @state == other.state
       if @id?

@@ -1,16 +1,8 @@
-angular.module('BoxApp').factory 'Friendship', ['RailsResource', (RailsResource) ->
+angular.module('BoxApp').factory 'Friendship', ['RailsResource', 'railsSerializer', (RailsResource, railsSerializer) ->
   class Friendship extends RailsResource
     @configure
-      url: '/api/v1/users/{{friendId}}/friendships'
+      url: '/api/v1/users/{{friend.id}}/friendships'
       name: 'friendship'
-
-      afterResponseInterceptors: [ (promise) ->
-        promise.then (friendship) ->
-          friendship.friends = not friendship.friends
-        , (reason) ->
-          # TODO: показывать сообщение при неудаче
-      ]
-
-    isNew: ->
-      not @friends
+      pluralName: 'friendships'
+      serializer: 'FriendshipSerializer'
 ]

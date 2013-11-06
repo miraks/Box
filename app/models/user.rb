@@ -29,7 +29,8 @@ class User < ActiveRecord::Base
     @friend ||= Friend.new self
   end
   delegate :friend_of?, :considered_friend_by?, :has_friends?,
-           :become_friend_with, :stop_being_friend_of, to: :friend
+           :become_friend_with, :stop_being_friend_of,
+           :friendship_with, to: :friend
 
   private
 
