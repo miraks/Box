@@ -3,6 +3,7 @@ angular.module('BoxApp').factory 'Folder', ['RailsResource', (RailsResource) ->
     @configure
       url: '/api/v1/folders'
       name: 'folder'
+      pluralName: 'folders'
       serializer: 'FolderSerializer'
 
     @beforeResponse (data) ->

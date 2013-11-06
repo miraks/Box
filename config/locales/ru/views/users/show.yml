@@ -1,0 +1,5 @@
+ru:
+  users:
+    show:
+      become_friend: Подружиться
+      stop_being_friend: Перестать дружить

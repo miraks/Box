@@ -1,28 +1,4 @@
 ru:
-  users:
-    messages:
-      menu:
-        new_message: Написать
-        sent: Отправленные
-        received: Входящие
-      index:
-        messages: Личные сообщения
-        recepient: Кому
-        title: Тема
-        sent_message: Написать
-      form:
-        recepient: Кому
-        title: Тема
-        sent_message: Написать
-
-  shared:
-    menu:
-      main: Главная
-      sign_in: Войти
-      sign_up: Зарегистрироваться
-      sign_out: Выйти
-      purchases: Покупки
-      messages: Сообщения
   devise:
     passwords:
       new:

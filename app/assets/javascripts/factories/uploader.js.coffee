@@ -1,4 +1,4 @@
-angular.module('BoxApp').factory 'Uploader', ['Upload', (Upload) ->
+angular.module('BoxApp').factory 'Uploader', ['Upload', 'Storage', (Upload, Storage) ->
   class Uploader
     defaultSetting:
       browse_button: 'upload_button'
@@ -7,13 +7,12 @@ angular.module('BoxApp').factory 'Uploader', ['Upload', (Upload) ->
       url: '/'
 
     constructor: (@$scope, settings) ->
-      window.box.uploads ||= []
-      @globalUploads = window.box.uploads
+      @globalUploads = Storage.get 'uploads', []
 
       @uploads = []
       @callbacks = {}
       Object.merge settings, @defaultSetting, true, false
-      @uploader = new plupload.Uploader @defaultSetting
+      @uploader = new plupload.Uploader settings
 
       @uploader.init()
       @bindCallbacks()
@@ -24,28 +23,28 @@ angular.module('BoxApp').factory 'Uploader', ['Upload', (Upload) ->
         files.each (file) =>
           upload = new Upload 'uploading'
           @addUpload upload
-          @$scope.$apply =>
+          @$scope.$apply ->
             Object.merge upload, file: file, name: file.name, percent: 0
           @trigger 'fileAdded', upload
         uploader.start()
 
       @uploader.bind 'uploadProgress', (uploader, file) =>
         upload = @uploads.find (up) -> up.file.id == file.id
-        @$scope.$apply =>
+        @$scope.$apply ->
           upload.percent = file.percent
         @trigger 'uploadProgress', upload
 
       @uploader.bind 'fileUploaded', (uploader, file, resp) =>
         upload = @uploads.find (up) -> up.file.id == file.id
         @removeUpload upload
-        @$scope.$apply =>
+        @$scope.$apply ->
           Object.merge upload, resp.upload
           Object.merge upload, state: 'uploaded', file: null
         @trigger 'fileUploaded', upload, resp
 
     bindUploadsStatusUpdate: ->
       @bind 'fileAdded uploadProgress fileUploaded', ->
-        window.box.$uploadsStatusScope?.$apply()
+        Storage.get('$uploadsStatusScope')?.$apply()
 
     bind: (eventTypes, callback) ->
       eventTypes.split(' ').each (eventType) =>

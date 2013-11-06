@@ -16,9 +16,23 @@ class User < ActiveRecord::Base
   has_many :folders
   has_many :purchases
   has_many :messages
+  has_many :friendships
+  has_many :friends, through: :friendships, source: :friend
   validates :name, presence: true
 
   after_create :create_default_folders
+
+  def to_s
+    name
+  end
+
+  def friend
+    @friend ||= Friend.new self
+  end
+
+  delegate :friend_of?, :considered_friend_by?, :has_friends?,
+           :become_friend_with, :stop_being_friend_of,
+           :friendship_with, to: :friend
 
   private
 

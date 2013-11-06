@@ -9,6 +9,14 @@ Box::Application.routes.draw do
       resources :uploads, only: [:create] do
         get :download
       end
+      resources :users, only: [] do
+        scope module: :users do
+          resource :friendships, only: [:create, :destroy]
+          collection do
+            resources :friends, only: [:index]
+          end
+        end
+      end
     end
   end
 

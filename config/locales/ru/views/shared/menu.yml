@@ -1,0 +1,8 @@
+ru:
+  shared:
+    menu:
+      main: Главная
+      sign_in: Войти
+      sign_up: Зарегистрироваться
+      sign_out: Выйти
+      purchases: Покупки
