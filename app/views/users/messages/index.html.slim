@@ -5,14 +5,6 @@
   .menu
     = render 'menu'
 
-  / .message_show ng-show='showMessage'
-  /   .from
-  /     | {{show_message.recepient_id}}
-  /   .title
-  /     | {{show_message.title}}
-  /   .body
-  /     | {{show_message.body}}
-
   .message_form ng-show='showMessageForm'
     form
       p
@@ -28,10 +20,9 @@
 
   .messages_list
     table
-      tr.message ng-repeat='message in messages'
+      tr.message ng-repeat='message in messages' ng-class='message.unread'
         td
           a href='{{message.url}}'
-            /ng-click="showMessage({{message.id}})"
             | {{message.title}}
         td
           | {{message.body}}

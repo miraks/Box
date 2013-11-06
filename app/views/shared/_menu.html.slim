@@ -16,6 +16,7 @@
       /   = link_to t('.purchases'), user_purchases_path(current_user)
       li
         = link_to t('.messages'), user_messages_path(current_user)
+        | (#{current_user.unread_messages_count})
     - else
       li
         = link_to t('.sign_in'), new_user_session_path

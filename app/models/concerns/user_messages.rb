@@ -8,4 +8,8 @@ module UserMessages
     Message.where(recepient_id: self.id)
   end
 
+  def unread_messages_count
+    Message.where(recepient_id: self.id, read_at: nil).count
+  end
+
 end

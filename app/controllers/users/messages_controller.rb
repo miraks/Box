@@ -29,7 +29,7 @@ class Users::MessagesController < ApplicationController
 
   def create
     user = User.find params[:message][:recepient_id] || :name
-    if user
+    if user and user != current_user
       params[:message].merge! recepient_id: user.id, user_id: current_user.id
       @message = Message.new message_params
       @message.save
