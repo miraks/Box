@@ -18,6 +18,12 @@ angular.module('BoxApp').provider 'Storage', [ ->
     storeDefault: (name, value) ->
       @storage[name] ||= value
 
+    has: (name) ->
+      @storage.hasOwnProperty name
+
+    remove: (name) ->
+      delete @storage[name]
+
   @$get = ->
     new Storage storage
 ]

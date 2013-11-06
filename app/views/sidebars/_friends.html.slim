@@ -1,5 +1,6 @@
-h3 = t '.friends'
-- if logged_in? and current_user.has_friends?
-  = render current_user.friends
-- else
-  = t '.no_friends'
+div ng-controller="FriendsListController"
+  h3 = t '.friends'
+  div ng-show="hasFriends()"
+    user-link user="friend" ng-repeat="friend in friends"
+  div ng-hide="hasFriends()"
+    = t '.no_friends'

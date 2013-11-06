@@ -1,4 +1,4 @@
-angular.module('BoxApp').controller 'FriendshipController', ['$scope', 'Friendship', ($scope, Friendship) ->
+angular.module('BoxApp').controller 'FriendshipController', ['$scope', 'Friendship', 'Storage', ($scope, Friendship, Storage) ->
   $scope.init = (params) ->
     $scope.friendship = new Friendship params
 

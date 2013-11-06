@@ -12,7 +12,7 @@ angular.module('BoxApp').factory 'Uploader', ['Upload', 'Storage', (Upload, Stor
       @uploads = []
       @callbacks = {}
       Object.merge settings, @defaultSetting, true, false
-      @uploader = new plupload.Uploader @defaultSetting
+      @uploader = new plupload.Uploader settings
 
       @uploader.init()
       @bindCallbacks()
