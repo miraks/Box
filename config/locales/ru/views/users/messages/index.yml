@@ -1,0 +1,12 @@
+ru:
+  users:
+    messages:
+      menu:
+        new_message: Новое сообщение
+        received: Входящие
+        sent: Отправленные
+      index:
+        messages: Сообщения
+        recepient: Кому
+        title: Заголовок
+        sent_message: Отправить
