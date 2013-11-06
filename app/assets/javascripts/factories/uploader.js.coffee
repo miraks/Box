@@ -23,21 +23,21 @@ angular.module('BoxApp').factory 'Uploader', ['Upload', 'Storage', (Upload, Stor
         files.each (file) =>
           upload = new Upload 'uploading'
           @addUpload upload
-          @$scope.$apply =>
+          @$scope.$apply ->
             Object.merge upload, file: file, name: file.name, percent: 0
           @trigger 'fileAdded', upload
         uploader.start()
 
       @uploader.bind 'uploadProgress', (uploader, file) =>
         upload = @uploads.find (up) -> up.file.id == file.id
-        @$scope.$apply =>
+        @$scope.$apply ->
           upload.percent = file.percent
         @trigger 'uploadProgress', upload
 
       @uploader.bind 'fileUploaded', (uploader, file, resp) =>
         upload = @uploads.find (up) -> up.file.id == file.id
         @removeUpload upload
-        @$scope.$apply =>
+        @$scope.$apply ->
           Object.merge upload, resp.upload
           Object.merge upload, state: 'uploaded', file: null
         @trigger 'fileUploaded', upload, resp
