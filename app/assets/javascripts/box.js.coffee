@@ -29,5 +29,5 @@ boxApp.run ['$templateCache', 'Storage', ($templateCache, Storage) ->
   oldPut = $templateCache.put
   $templateCache.put = (key, value) ->
     templates[key] = value
-    oldPut key, value
+    oldPut.call @, key, value
 ]
