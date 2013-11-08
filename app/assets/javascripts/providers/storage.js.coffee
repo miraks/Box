@@ -6,7 +6,6 @@ angular.module('BoxApp').provider 'Storage', [ ->
 
   class Storage
     constructor: (@storage) ->
-      @storage ||= {}
 
     get: (name, def) ->
       @storeDefault name, def if def?
@@ -19,7 +18,7 @@ angular.module('BoxApp').provider 'Storage', [ ->
       @storage[name] ||= value
 
     has: (name) ->
-      @storage.hasOwnProperty name
+      Object.has @storage, name
 
     remove: (name) ->
       delete @storage[name]
