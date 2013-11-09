@@ -5,6 +5,9 @@ angular.module('BoxApp').provider 'Storage', [ ->
     storage = newStorage
 
   class Storage
+    @$get = ->
+      new @ storage
+
     constructor: (@storage) ->
 
     get: (name, def) ->
@@ -22,7 +25,4 @@ angular.module('BoxApp').provider 'Storage', [ ->
 
     remove: (name) ->
       delete @storage[name]
-
-  @$get = ->
-    new Storage storage
 ]

@@ -9,6 +9,12 @@ bootstrapAngular = ->
   apps = document.querySelectorAll '[ng-app]'
   for app in apps
     module = app.getAttribute 'ng-app'
+    app = angular.element app
+
+    # Ангуляр проверяет, что приложение уже было запущено,
+    # этот хак позволяет обойти эту проверку
+    app.injector = (arg1, arg2) ->
+
     angular.bootstrap app, [module]
 
 onLoad bootstrapAngular, true
