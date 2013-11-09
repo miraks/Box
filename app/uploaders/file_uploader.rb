@@ -8,6 +8,8 @@ class FileUploader < CarrierWave::Uploader::Base
   storage :file
   # storage :fog
 
+  before :cache, :save_original_filename
+
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
@@ -43,11 +45,17 @@ class FileUploader < CarrierWave::Uploader::Base
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
-    @random_filename ||= SecureRandom.uuid + File.extname(@filename) if @filename
+    "#{secure_token}.#{file.extension}" if original_filename.present?
   end
 
-  def original_name
-    @filename
+  protected
+
+  def save_original_filename file
+    model.original_name ||= file.original_filename
+  end
+
+  def secure_token
+    @secure_token ||= SecureRandom.hex
   end
 
 end

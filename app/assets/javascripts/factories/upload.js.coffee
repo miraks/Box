@@ -5,11 +5,21 @@ angular.module('BoxApp').factory 'Upload', ['RailsResource', 'Downloader', (Rail
       name: 'upload'
       pluralName: 'uploads'
 
+    @manipulate = (action, uploads, folder) ->
+      ids = uploads.map 'id'
+      @$patch @$url(action), ids: ids, folder_id: folder.id
+
+    @move = (uploads, folder) ->
+      @manipulate 'move', uploads, folder
+
+    @copy = (uploads, folder) ->
+      @manipulate 'copy', uploads, folder
+
     constructor: (state) ->
       @state = state || "uploaded"
 
-      ["uploaded", "uploading"].each (state) =>
-        @["is#{state.camelize()}"] = -> @state == state
+    ["uploaded", "uploading"].each (state) =>
+      @::["is#{state.camelize()}"] = -> @state == state
 
     # TODO: переписать
     equal: (other) ->

@@ -8,6 +8,9 @@ Box::Application.routes.draw do
       resources :folders, only: [:show]
       resources :uploads, only: [:create] do
         get :download
+        collection do
+          patch :move, :copy
+        end
       end
       resources :users, only: [] do
         scope module: :users do
