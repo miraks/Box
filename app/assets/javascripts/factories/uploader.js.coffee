@@ -1,4 +1,4 @@
-angular.module('BoxApp').factory 'Uploader', ['Upload', 'Storage', (Upload, Storage) ->
+angular.module('BoxApp').factory 'Uploader', ['$rootScope', 'Upload', 'Storage', ($rootScope, Upload, Storage) ->
   class Uploader
     defaultSetting:
       browse_button: 'upload_button'
@@ -6,7 +6,7 @@ angular.module('BoxApp').factory 'Uploader', ['Upload', 'Storage', (Upload, Stor
       flash_swf_url: '/files/Moxie.swf'
       url: '/'
 
-    constructor: (@$scope, settings = {}) ->
+    constructor: (settings = {}) ->
       @globalUploads = Storage.get 'uploads', []
 
       @uploads = []
@@ -23,28 +23,28 @@ angular.module('BoxApp').factory 'Uploader', ['Upload', 'Storage', (Upload, Stor
         files.each (file) =>
           upload = new Upload 'uploading'
           @addUpload upload
-          @$scope.$apply ->
+          $rootScope.$apply ->
             Object.merge upload, file: file, name: file.name, percent: 0
           @trigger 'fileAdded', upload
         uploader.start()
 
       @uploader.bind 'uploadProgress', (uploader, file) =>
         upload = @uploads.find (up) -> up.file.id == file.id
-        @$scope.$apply ->
+        $rootScope.$apply ->
           upload.percent = file.percent
         @trigger 'uploadProgress', upload
 
       @uploader.bind 'fileUploaded', (uploader, file, resp) =>
         upload = @uploads.find (up) -> up.file.id == file.id
         @removeUpload upload
-        @$scope.$apply ->
+        $rootScope.$apply ->
           Object.merge upload, resp.upload
           Object.merge upload, state: 'uploaded', file: null
         @trigger 'fileUploaded', upload, resp
 
     bindUploadsStatusUpdate: ->
       @bind 'fileAdded uploadProgress fileUploaded', ->
-        Storage.get('$uploadsStatusScope')?.$apply()
+        $rootScope.$apply()
 
     bind: (eventTypes, callback) ->
       eventTypes.split(' ').each (eventType) =>
