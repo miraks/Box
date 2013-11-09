@@ -6,7 +6,6 @@ angular.module('BoxApp').service 'Clipboard', [ ->
       cut: 2
 
     constructor: ->
-      debugger
       @clear()
       @callbacks = {}
 
