@@ -10,8 +10,7 @@ bootstrapAngular = ->
   for app in apps
     # Это примерно то же самое, что делает ангуляр
     # при вызове bootstrap
-    app = angular.element app
-    injector = app.injector()
+    injector = angular.element(app).injector()
     scope = injector.get '$rootScope'
     compile = injector.get '$compile'
 
