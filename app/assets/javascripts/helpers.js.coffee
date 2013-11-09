@@ -8,14 +8,14 @@ onLoad = (callback, turbolinksOnly = false) ->
 bootstrapAngular = ->
   apps = document.querySelectorAll '[ng-app]'
   for app in apps
-    module = app.getAttribute 'ng-app'
+    # Это примерно то же самое, что делает ангуляр
+    # при вызове bootstrap
     app = angular.element app
+    injector = app.injector()
+    scope = injector.get '$rootScope'
+    compile = injector.get '$compile'
 
-    # Ангуляр проверяет, что приложение уже было запущено,
-    # этот хак позволяет обойти эту проверку
-    app.injector = (arg1, arg2) ->
-
-    angular.bootstrap app, [module]
+    compile(app)(scope)
 
 onLoad bootstrapAngular, true
 
