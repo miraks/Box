@@ -6,7 +6,7 @@ angular.module('BoxApp').factory 'Uploader', ['Upload', 'Storage', (Upload, Stor
       flash_swf_url: '/files/Moxie.swf'
       url: '/'
 
-    constructor: (@$scope, settings) ->
+    constructor: (@$scope, settings = {}) ->
       @globalUploads = Storage.get 'uploads', []
 
       @uploads = []
