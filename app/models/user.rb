@@ -2,9 +2,9 @@ class User < ActiveRecord::Base
 
   include Tire::Model::Search
   include Tire::Model::Callbacks
-  include UserMessages
 
-  # Дать пользователям вводить имя? Или генерить, а потом давать изменить ?
+  DELEGATED_MODULES = %w{ friend user_message }.freeze
+
   before_validation :generate_name
 
   extend FriendlyId
@@ -26,13 +26,18 @@ class User < ActiveRecord::Base
     name
   end
 
-  def friend
-    @friend ||= Friend.new self
+  DELEGATED_MODULES.each do |mod|
+    define_method mod do
+      instance_variable_set "@#{mod}" , mod.classify.constantize.new(self)
+    end
   end
 
+  # Friend
   delegate :friend_of?, :considered_friend_by?, :has_friends?,
            :become_friend_with, :stop_being_friend_of,
            :friendship_with, to: :friend
+  # UserMessage
+  delegate :sent_messages, :received_messages, :unread_messages_count, to: :user_message
 
   private
 

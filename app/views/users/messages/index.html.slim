@@ -1,4 +1,4 @@
-.messages ng-controller='MessagesController' ng-init='loadMessages()'
+.messages ng-controller='MessagesController' ng-init='init({userId: #{current_user.id}})'
   h1
     = t '.messages'
 
@@ -15,16 +15,16 @@
         br
         = text_area_tag :body, nil, 'ng-model' => 'message.body', required: ''
         br
-        a href='#' ng-click='sentMessage()'
+        a href='' ng-click='sentMessage()'
           = t('.sent_message')
 
   .messages_list
     table
       tr.message ng-repeat='message in messages' ng-class='message.unread'
         td
-          a href='{{message.url}}'
+          a href='' ng-click='loadMessage(message.id)'
             | {{message.title}}
         td
           | {{message.body}}
         td
-          | {{message.created_at}}
+          | {{message.createdAt}}
