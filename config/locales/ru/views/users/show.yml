@@ -3,3 +3,9 @@ ru:
     show:
       become_friend: Подружиться
       stop_being_friend: Перестать дружить
+      download: Скачать
+      progress: Прогресс
+      upload: Загрузить
+      copy: Копировать
+      cut: Вырезать
+      paste: Вставить

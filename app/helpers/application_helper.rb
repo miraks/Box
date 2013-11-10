@@ -4,4 +4,8 @@ module ApplicationHelper
     logged_in? and current_user == user
   end
 
+  def void
+    'javascript:void(0)'
+  end
+
 end

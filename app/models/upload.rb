@@ -8,7 +8,6 @@ class Upload < ActiveRecord::Base
 
   validates :original_name, :file, :user_id, :folder_id, presence: true
 
-  before_validation :set_original_name, if: :file_changed?
   before_destroy :copy_to_storage, if: :has_purchases?
 
   mount_uploader :file, FileUploader
@@ -21,6 +20,11 @@ class Upload < ActiveRecord::Base
     file.path
   end
 
+  def manipulator
+    @manipulator ||= Manipulator.new self
+  end
+  delegate :move, :copy, to: :manipulator
+
   private
 
   def copy_to_storage
@@ -29,10 +33,6 @@ class Upload < ActiveRecord::Base
 
   def has_purchases?
     purchases.exists?
-  end
-
-  def set_original_name
-    self.original_name = file.original_name
   end
 
 end
