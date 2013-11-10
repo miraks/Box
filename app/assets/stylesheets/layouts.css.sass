@@ -1,5 +1,3 @@
-@import "compass/css3/box"
-
 $header_height: 30px
 .header-text
   *
@@ -25,29 +23,26 @@ header
       margin: 0 5px
 
 section#main
-  +display-box
-  width: 100%
+  width: 1000px
+  margin: auto
 
   section#content, aside, nav
     @extend .ugly-styles
-    +box-orient(vertical)
-    display: inherit
-    height: 100px
+    height: auto
     padding: 10px
     margin: 10px
 
   section#content
-    height: auto
-    +box-ordinal-group(2)
-    +box-flex(1)
+    float: left
+    width: 410px
 
   aside
-    +box-ordinal-group(3)
-    width: 240px
+    float: left
+    width: 260px
 
   nav
-    +box-ordinal-group(1)
-    width: 240px
+    float: left
+    width: 200px
 
 .ugly-styles //delete
   box-shadow: 0 0 5px #333

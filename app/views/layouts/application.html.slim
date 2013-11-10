@@ -11,10 +11,10 @@ html ng-app="BoxApp"
     header
       = render 'shared/menu'
     section#main
-      section#content
-        = yield
       aside
         = render 'sidebars/friends'
+      section#content
+        = yield
       nav
         | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     = render 'shared/uploads_status'
