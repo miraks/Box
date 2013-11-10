@@ -12,9 +12,13 @@ html ng-app="BoxApp"
       = render 'shared/menu'
     section#main
       aside
-        = render 'sidebars/friends'
+        .block.balance
+          = render 'sidebars/balance'
+        .block
+          = render 'sidebars/friends'
       section#content
         = yield
       nav
-        | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        .block
+          | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     = render 'shared/uploads_status'
