@@ -26,11 +26,47 @@ section#main
   width: 1000px
   margin: auto
 
-  section#content, aside, nav
-    @extend .ugly-styles
+  .block
     height: auto
     padding: 10px
     margin: 10px
+    background: #fff
+    border: 1px solid #bac3cb
+    border-radius: 3px
+
+    &.balance
+      background: #bac3cb
+      border: none
+      color: #fff
+      font-weight: bold
+
+    &.profile
+      height: 275px
+      .avatar
+        width: 150px
+        height: 150px
+        float: left
+        img
+          border-radius: 5px
+      .details
+        margin: 5px 25px
+        float: left
+        .name
+          font-size: 18px
+          font-weight: bold
+        .rating
+          color: #2f9b00
+          font-size: 15px
+          font-weight: bold
+          margin: 5px 0
+        .online_status
+          color: #989a9b
+          font-size: 11px
+        .city, .birthday, .company
+          color: #686464
+
+  section#content, aside, nav
+    height: auto
 
   section#content
     float: left
@@ -44,10 +80,6 @@ section#main
     float: left
     width: 200px
 
-.ugly-styles //delete
-  box-shadow: 0 0 5px #333
-  border-radius: 5px
-
 *
   margin: 0
   padding: 0
@@ -57,3 +89,5 @@ section#main
 body
   font-family: Verdana,sans-serif
   font-size: 13px
+  color: #312f2f
+  background: #e2e8ec

@@ -1,24 +1,4 @@
-div = @user
-
-- if logged_in? and not self? @user
-  div ng-controller="FriendshipController" ng-init="init('#{FriendshipSerializer.new(current_user.friendship_with(@user)).to_json}')"
-    a href=void ng-click="becomeFriend()" ng-hide="isFriend()"
-      = t '.become_friend'
-    a href=void ng-click="stopBeingFriend()" ng-show="isFriend()"
-      = t '.stop_being_friend'
-
-#file_manager ng-controller="FoldersController" ng-init="init(#{@user.folders.root.id})"
-  #action_buttons
-    - %w(copy cut paste).each do |button|
-      a href=void class=['action-button', button] ng-click="#{button}()"
-        = t ".#{button}"
-  #path
-    .path-part ng-repeat="folder in folder.parents" ng-click="changeFolder(folder)" {{folder.name}}
-  .folder ng-repeat="folder in folder.children" ng-click="changeFolder(folder)"
-    | {{folder.name}}
-  .upload ng-repeat="upload in folder.uploads" ng-click="toggleUploadSelection(upload)" ng-class="{selected: isSelectedUpload(upload)}"
-    div
-      | {{upload.name}}
-    a href=void ng-click="upload.download()" = t '.download'
-    div ng-show="upload.isUploading()" = "#{t '.progress'}: {{upload.percent}}"
-  #upload_button = t '.upload'
+.block.profile
+  = render 'sidebars/profile'
+.block
+  = render 'sidebars/file_manager'
