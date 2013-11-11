@@ -1,22 +1,27 @@
 angular.module('BoxApp').controller 'MessagesController', ['$scope', 'Message', ($scope, Message) ->
 
-  $scope.init = (params) ->
-    $scope.userId = params.userId
-    $scope.message = new Message params
+  $scope.init = (userId) ->
+    $scope.userId = userId
+    $scope.message = $scope.newMessage()
     $scope.loadReceivedMessages()
 
   $scope.loadReceivedMessages = ->
-    $scope.message.received().then (messages) ->
+    Message.received($scope.userId).then (messages) ->
       $scope.messages = messages
 
   $scope.loadSentMessages = ->
-    $scope.message.sent().then (messages) ->
+    Message.sent($scope.userId).then (messages) ->
       $scope.messages = messages
 
-  $scope.loadMessage = (id) ->
-    Message.get(userId: $scope.userId, id: id).then (response) ->
+  $scope.loadMessage = (message) ->
+    Message.get(message).then (message) ->
+      message.unread = false
 
   $scope.sentMessage = ->
-    $scope.message.create().then (response) ->
+    $scope.message.create().then (message) ->
+      $scope.message = $scope.newMessage()
       $scope.showMessageForm = !$scope.showMessageForm
+
+  $scope.newMessage = ->
+    new Message user: { id: $scope.userId }
 ]

@@ -1,19 +1,24 @@
 angular.module('BoxApp').factory 'Message', ['RailsResource', (RailsResource) ->
   class Message extends RailsResource
     @configure
-      url: '/api/v1/users/{{userId}}/messages/{{id}}'
+      url: '/api/v1/users/{{user.id}}/messages/{{id}}'
       name: 'message'
       pluralName: 'messages'
+      serializer: 'MessageSerializer'
 
-    received: ->
-      Message.$get @.$url('/received')
+    messageProcessor = (message) ->
+      message.createdAt = Date.create(message.createdAt).format('{dd}.{MM}.{yyyy}')
+      message.unread = 'unread' unless message.readAt
 
-    sent: ->
-      Message.$get @.$url('/sent')
+    @afterResponse (data) ->
+      if Object.isArray data
+        data.each (message) -> messageProcessor message
+      else
+        messageProcessor data
 
-    @beforeResponse (data) ->
-      if data.length
-        data.each (message) ->
-          message.createdAt = Date.create(message.createdAt).format('{dd}.{MM}.{yyyy}')
-          message.unread = 'unread' unless message.readAt
+    @received = (userId) ->
+      @$get @$url(user: { id: userId }, 'received')
+
+    @sent = (userId) ->
+      @$get @$url(user: { id: userId }, 'sent')
 ]

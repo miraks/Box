@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131103143442) do
+ActiveRecord::Schema.define(version: 20131110172017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20131103143442) do
 
   create_table "messages", force: true do |t|
     t.integer  "user_id",      null: false
-    t.integer  "recepient_id", null: false
+    t.integer  "recipient_id", null: false
     t.string   "title",        null: false
     t.text     "body"
     t.datetime "read_at"
@@ -63,11 +63,11 @@ ActiveRecord::Schema.define(version: 20131103143442) do
   end
 
   create_table "uploads", force: true do |t|
-    t.string   "original_name", null: false
     t.integer  "user_id",       null: false
     t.integer  "folder_id",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "original_name"
     t.string   "file"
   end
 
@@ -95,6 +95,9 @@ ActiveRecord::Schema.define(version: 20131103143442) do
 
   add_foreign_key "friendships", "users", name: "friendships_friend_id_fk", column: "friend_id"
   add_foreign_key "friendships", "users", name: "friendships_user_id_fk"
+
+  add_foreign_key "messages", "users", name: "messages_recipient_id_fk", column: "recipient_id"
+  add_foreign_key "messages", "users", name: "messages_user_id_fk"
 
   add_foreign_key "purchases", "uploads", name: "purchases_upload_id_fk"
   add_foreign_key "purchases", "users", name: "purchases_user_id_fk"
