@@ -26,6 +26,9 @@ section#main
   width: 1000px
   margin: auto
 
+  .clear
+    clear: both
+
   .block
     height: auto
     padding: 10px
@@ -33,6 +36,52 @@ section#main
     background: #fff
     border: 1px solid #bac3cb
     border-radius: 3px
+
+    &.users
+      input.search
+        border: 1px solid #bac3cb
+        outline: none
+        padding: 5px 0
+        text-indent: 10px
+        width: 100%
+      .friend
+        display: inline-block
+        margin-top: 10px
+        border: 1px solid #e7e7e7
+        width: 100%
+        padding: 3px 0
+        border-radius: 3px
+        .avatar
+          float: left
+          display: inline-block
+          width: 30px
+          height: 30px
+          margin-left: 3px
+          img
+            border-radius: 3px
+        a
+          float: left
+          margin-left: 10px
+          line-height: 30px
+          text-decoration: none
+          color: inherit
+          font-weight: bold
+
+      .users-filter
+        margin: 10px 0
+        a.active
+          color: #686464
+          background: #f3f3e7
+          padding: 3px
+          text-decoration: none
+          font-weight: bold
+          float: left
+        a.inactive
+          color: #66b7ef
+          text-decoration: none
+          font-weight: bold
+          border-bottom: 1px dashed
+          float: right
 
     &.balance
       background: #bac3cb
@@ -59,7 +108,7 @@ section#main
           font-size: 15px
           font-weight: bold
           margin: 5px 0
-        .online_status
+        .online-status
           color: #989a9b
           font-size: 11px
         .city, .birthday, .company

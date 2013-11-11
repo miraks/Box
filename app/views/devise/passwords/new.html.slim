@@ -1,15 +1,16 @@
-h2 
-  = t '.forgot_your_password'
+.block
+  h2
+    = t '.forgot_your_password'
 
-= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| 
-  = devise_error_messages! 
+  = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+    = devise_error_messages!
 
-  div
-    = f.label :email, t('.email')
-    br
-    = f.email_field :email, :autofocus => true
+    div
+      = f.label :email, t('.email')
+      br
+      = f.email_field :email, :autofocus => true
 
-  div
-    = f.submit t('.reset_password_instructions')
+    div
+      = f.submit t('.reset_password_instructions')
 
-= render 'devise/shared/links'
+  = render 'devise/shared/links'
