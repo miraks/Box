@@ -7,6 +7,6 @@ ru:
         sent: Отправленные
       index:
         messages: Сообщения
-        recepient: Кому
+        recipient: Кому
         title: Заголовок
         sent_message: Отправить

@@ -4,10 +4,10 @@ UserMessage = Struct.new(:user) do
   end
 
   def received_messages
-    Message.where(recepient_id: user.id)
+    Message.where(recipient: user)
   end
 
   def unread_messages_count
-    Message.where(recepient_id: user.id, read_at: nil).count
+    Message.where(recipient: user, read_at: nil).count
   end
 end

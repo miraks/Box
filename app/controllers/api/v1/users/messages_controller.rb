@@ -1,32 +1,28 @@
 class Api::V1::Users::MessagesController < Api::V1::BaseController
   find :user
+  find :message, only: [:show]
   before_filter :authenticate_user!
 
   def received
-    @messages = @user.received_messages
+    @messages = @user.received_messages.with_users
     render json: @messages
   end
 
   def sent
-    @messages = @user.sent_messages
+    @messages = @user.sent_messages.with_users
     render json: @messages
   end
 
   def show
-    @message = Message.find params[:id]
-    if current_user != @message.user
-      @message.update_attributes read_at: Time.now
-    end
+    @message.read current_user
     render json: @message
   end
 
   def create
-    user = User.find params[:message][:recepient_id]
-    if user
-      params[:message].merge! recepient_id: user.id, user_id: current_user.id
-      @message = Message.new params[:message]
-      @message.save
-    end
+    user = User.find params[:message][:recipient_id]
+    params[:message].merge! recipient_id: user.id, user_id: current_user.id
+    @message = Message.new params[:message]
+    @message.save
     render json: @message, meta: { success: @message.persisted? }
   end
 

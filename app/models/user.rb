@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
-  DELEGATED_MODULES = %w{ friend user_message }.freeze
+  DELEGATED_MODULES = %w{friend user_message}.freeze
 
   before_validation :generate_name
 
@@ -27,9 +27,11 @@ class User < ActiveRecord::Base
   end
 
   DELEGATED_MODULES.each do |mod|
-    define_method mod do
-      instance_variable_set "@#{mod}" , mod.classify.constantize.new(self)
-    end
+    class_eval <<-CODE, __FILE__, __LINE__ + 1
+      def #{mod}
+        @#{mod} ||= #{mod.classify}.new self
+      end
+    CODE
   end
 
   # Friend
