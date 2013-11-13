@@ -15,14 +15,12 @@ class QuietAssets
     end
   end
 
-  protected
+  private
 
   def logger
     Rails.logger
   end
   delegate :level, :level=, to: :logger
-
-  private
 
   def asset_request? path
     path.start_with? assets_prefix
