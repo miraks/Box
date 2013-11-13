@@ -23,19 +23,49 @@ header
       margin: 0 5px
 
 section#main
-  width: 1000px
+  width: 1020px
   margin: auto
 
   .clear
     clear: both
 
-  .block
-    height: auto
+  .block-style
     padding: 10px
-    margin: 10px
     background: #fff
     border: 1px solid #bac3cb
     border-radius: 3px
+
+  .tabs
+    li
+      @extend .block-style
+      display: inline-block
+      border-bottom-left-radius: 0px
+      border-bottom-right-radius: 0px
+      border-bottom: 1px solid #fff
+      z-index: 2
+      &:first-child
+        margin-left: 10px
+      &:not(:first-child)
+        border-left: none
+      &:not(.active)
+        border-bottom: inherit
+        a
+          color: #66b7ef
+      a
+        text-decoration: none
+        color: #686464
+        font-size: 15px
+        font-weight: bold
+    .block
+      margin: 0 10px
+      border-top-left-radius: 0px
+    .tab-content
+      margin-top: -1px
+
+  .block
+    @extend .block-style
+    height: auto
+    margin: 10px
 
     &.users
       input.search
@@ -119,7 +149,7 @@ section#main
 
   section#content
     float: left
-    width: 410px
+    width: 460px
 
   aside
     float: left
@@ -127,7 +157,7 @@ section#main
 
   nav
     float: left
-    width: 200px
+    width: 300px
 
 *
   margin: 0
