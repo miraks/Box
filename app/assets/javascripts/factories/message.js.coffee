@@ -8,7 +8,6 @@ angular.module('BoxApp').factory 'Message', ['RailsResource', (RailsResource) ->
 
     messageProcessor = (message) ->
       message.createdAt = Date.create(message.createdAt).format('{dd}.{MM}.{yyyy}')
-      message.unread = 'unread' unless message.readAt
 
     @afterResponse (data) ->
       if Object.isArray data

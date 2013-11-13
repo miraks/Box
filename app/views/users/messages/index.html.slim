@@ -20,7 +20,7 @@
 
   .messages-list
     table
-      tr.message ng-repeat='message in messages' ng-class='message.unread'
+      tr.message ng-repeat='message in messages' ng-class='{unread: message.unread}'
         td
           a href='' ng-click='loadMessage(message)'
             | {{message.title}}
