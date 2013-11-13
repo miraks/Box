@@ -1,10 +1,6 @@
 ru:
   users:
     messages:
-      menu:
-        new_message: Новое сообщение
-        received: Входящие
-        sent: Отправленные
       index:
         messages: Сообщения
         recipient: Кому

@@ -1,4 +1,4 @@
-angular.module('BoxApp').factory 'Upload', ['RailsResource', 'Downloader', (RailsResource, Downloader) ->
+angular.module('BoxApp').factory 'Upload', ['RailsResource', 'Downloader', 'AppError', (RailsResource, Downloader, AppError) ->
   class Upload extends RailsResource
     @configure
       url: '/api/v1/uploads'
@@ -21,15 +21,14 @@ angular.module('BoxApp').factory 'Upload', ['RailsResource', 'Downloader', (Rail
     ["uploaded", "uploading"].each (state) =>
       @::["is#{state.camelize()}"] = -> @state == state
 
-    # TODO: переписать
     equal: (other) ->
-      return false unless @state == other.state
-      if @id?
-        @id == other.id
-      else
-        @file.id == other.file.id
+      @state == other.state and
+      ((@id? and @id == other.id) or
+      (@file? and other.file and @file.id == other.file.id))
 
     download: ->
-      Downloader.download @$url('download')
-      true
+      Upload.$get(@$url('download')).then (upload) ->
+        Downloader.download upload.url
+      , (data) ->
+        AppError.create(data).show()
 ]

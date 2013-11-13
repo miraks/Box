@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
+  include Pundit
   include CustomFinder
+  include AuthorizationErrorProcessor
 
   protect_from_forgery with: :exception
 

@@ -10,13 +10,17 @@ class Api::BaseController < ActionController::Metal
   include ActionController::Cookies
   include ActionController::Serialization
   include ActionController::DataStreaming
+  include ActionController::Rescue
   include Rails.application.routes.url_helpers
 
   # Gems modules
   include Devise::Controllers::Helpers
   # Разкомментить если будет нужно
   # include Devise::Controllers::UrlHelpers
+  include Pundit
 
   # Our modules
   include CustomFinder
+  include AuthorizationErrorProcessor
+
 end

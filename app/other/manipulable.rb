@@ -1,4 +1,4 @@
-Manipulator = Struct.new(:upload) do
+Manipulable = Struct.new(:upload) do
   def move new_folder
     upload.folder = new_folder
     upload.save

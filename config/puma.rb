@@ -12,10 +12,10 @@ config = {
 
 threads config.fetch(:min_threads_count, 4).to_i, config.fetch(:max_threads_count, 8).to_i
 workers config.fetch(:workers_count, 4).to_i
-bind 'unix://tmp/sockets/puma.box.sock'
-pidfile File.join(app_root, 'tmp/pids/puma.box.pid')
-state_path File.join(app_root, 'tmp/pids/puma.box.state')
-activate_control_app 'unix://tmp/sockets/pumactl.box.sock'
+bind "unix://#{File.join(app_root, 'tmp/sockets/puma.sock')}"
+pidfile File.join(app_root, 'tmp/pids/puma.pid')
+state_path File.join(app_root, 'tmp/pids/puma.state')
+activate_control_app "unix://#{File.join(app_root, 'tmp/sockets/pumactl.sock')}"
 environment config.fetch(:env, 'production')
 
 on_worker_boot do

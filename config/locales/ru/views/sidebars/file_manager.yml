@@ -1,6 +1,6 @@
 ru:
-  users:
-    show:
+  sidebars:
+    file_manager:
       become_friend: Подружиться
       stop_being_friend: Перестать дружить
       download: Скачать

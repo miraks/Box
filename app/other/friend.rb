@@ -3,7 +3,6 @@ Friend = Struct.new(:user) do
     user.friends.include? other_user
   end
 
-  # TODO: Подумать над названием получше
   def considered_friend_by? other_user
     other_user.friend_of? user
   end

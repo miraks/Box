@@ -1,9 +1,7 @@
 class User < ActiveRecord::Base
-
+  include Roleplayer
   include Tire::Model::Search
   include Tire::Model::Callbacks
-
-  DELEGATED_MODULES = %w{friend user_message}.freeze
 
   before_validation :generate_name
 
@@ -22,24 +20,13 @@ class User < ActiveRecord::Base
 
   after_create :create_default_folders
 
+  role :friend, methods: [:friend_of?, :considered_friend_by?, :has_friends?,
+       :become_friend_with, :stop_being_friend_of, :friendship_with]
+  role :user_message, methods: [:sent_messages, :received_messages, :unread_messages_count]
+
   def to_s
     name
   end
-
-  DELEGATED_MODULES.each do |mod|
-    class_eval <<-CODE, __FILE__, __LINE__ + 1
-      def #{mod}
-        @#{mod} ||= #{mod.classify}.new self
-      end
-    CODE
-  end
-
-  # Friend
-  delegate :friend_of?, :considered_friend_by?, :has_friends?,
-           :become_friend_with, :stop_being_friend_of,
-           :friendship_with, to: :friend
-  # UserMessage
-  delegate :sent_messages, :received_messages, :unread_messages_count, to: :user_message
 
   private
 

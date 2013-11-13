@@ -11,8 +11,8 @@ class Api::V1::UploadsController < Api::V1::BaseController
   end
 
   def download
-    # TODO: rewrite this to use only nginx in download
-    send_file @upload.file.path, filename: @upload.original_name
+    authorize @upload, args: params[:password]
+    render json: @upload, serializer: UploadUrlSerializer
   end
 
   def move

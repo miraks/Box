@@ -10,7 +10,7 @@ set :format, :pretty
 set :log_level, :info
 
 set :linked_files, %w{.env}
-set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets tmp/states vendor/bundle public/system}
 
 set :keep_releases, 10
 
@@ -26,7 +26,7 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      pid_path = release_path.join 'tmp/pids/puma.box.pid'
+      pid_path = release_path.join 'tmp/pids/puma.pid'
       if test "[ -f #{pid_path} ]"
         info 'Restart puma'
         pid = capture "cat #{pid_path}"

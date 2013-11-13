@@ -1,4 +1,5 @@
 class Folder < ActiveRecord::Base
+  include PasswordProtected
 
   attr_accessor :parent
 

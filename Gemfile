@@ -31,8 +31,12 @@ gem 'tire'
 gem 'friendly_id'
 gem 'babosa'
 
-# Auth
+# Authentication
 gem 'devise'
+
+# Authorization
+# Until PRs 50 and 68 will be merged
+gem 'pundit', github: 'miraks/pundit'
 
 # Templates
 gem 'slim'

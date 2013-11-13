@@ -1,6 +1,6 @@
 class Upload < ActiveRecord::Base
-
-  EXTENSION_REGEXP = /\.[[:alnum:]]+$/.freeze
+  include Roleplayer
+  include PasswordProtected
 
   belongs_to :user
   belongs_to :folder
@@ -13,17 +13,15 @@ class Upload < ActiveRecord::Base
   mount_uploader :file, FileUploader
 
   def name
-    original_name.sub(EXTENSION_REGEXP, '')
+    original_name
   end
 
   def path
     file.path
   end
 
-  def manipulator
-    @manipulator ||= Manipulator.new self
-  end
-  delegate :move, :copy, to: :manipulator
+  role :secure_link_generator, methods: [:generate_download_link]
+  role :manipulable, methods: [:move, :copy]
 
   private
 

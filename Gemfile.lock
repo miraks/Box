@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/miraks/pundit.git
+  revision: 8cb4a55a8e6cf386e137904681deff6b70a84d94
+  specs:
+    pundit (0.2.1)
+      activesupport (>= 3.0.0)
+
+GIT
   remote: git://github.com/miraks/rubysl-openssl.git
   revision: c61752082251d3b3d7d3c612bfb5a9f2734f8bd4
   branch: 2.0
@@ -486,6 +493,7 @@ DEPENDENCIES
   pg
   pry-rails
   puma
+  pundit!
   racc
   rails (= 4.0.1)
   redis

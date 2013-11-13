@@ -1,8 +1,8 @@
 angular.module('BoxApp').factory 'Downloader', [ ->
   download: (url) ->
-    # TODO: maybe there is better way
-    frame = document.createElement 'iframe'
-    frame.src = url
-    frame.style.display = 'none'
-    document.body.appendChild(frame)
+    form = document.createElement 'form'
+    form.method = 'get'
+    form.action = url
+    document.body.appendChild form
+    form.submit()
 ]
