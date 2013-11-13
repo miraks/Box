@@ -1,7 +1,16 @@
 div ng-controller="FriendsListController"
-  h3 = t '.friends'
+  /h3 = t '.friends'
+  input.search type='text'
+  .users-filter
+    a.active href=''
+      = t '.friends_online'
+    a.inactive href=''
+      = t '.all_friends'
+  .clear
   div ng-show="hasFriends()"
     .friend ng-repeat="friend in friends"
+      .avatar
+        img src="http://placehold.it/30x30"
       user-link user="friend"
   div ng-hide="hasFriends()"
     = t '.no_friends'
