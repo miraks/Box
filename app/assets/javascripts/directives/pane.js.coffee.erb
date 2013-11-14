@@ -1,0 +1,12 @@
+angular.module('BoxApp').directive 'pane', ->
+  require: '^tabs'
+  restrict: 'E'
+  replace: true
+  transclude: true
+  scope:
+    title: '@'
+
+  link: (scope, element, attrs, tabsCtrl) ->
+    tabsCtrl scope
+
+  templateUrl: '<%= asset_path "pane.html" %>'
