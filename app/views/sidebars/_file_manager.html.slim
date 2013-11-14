@@ -15,7 +15,7 @@
     div ng-click="$event.stopPropagation()"
       | {{folder.name}}
       - if self? @user
-        input type="password" ng-model="folder.password" placeholder="{{folder.locked ? '******' : ''}}"
+        br
         a href="" ng-click="setPassword(folder)" = t '.set_password'
         br
         a href="" ng-click="deletePassword(folder)" ng-show="folder.locked" = t '.delete_password'
@@ -25,7 +25,7 @@
         | {{upload.name}}
       a href="" ng-click="upload.download()" = t '.download'
       - if self? @user
-        input type="password" ng-model="upload.password" placeholder="{{upload.locked ? '******' : ''}}"
+        br
         a href="" ng-click="setPassword(upload)" = t '.set_password'
         br
         a href="" ng-click="deletePassword(upload)" ng-show="upload.locked" = t '.delete_password'

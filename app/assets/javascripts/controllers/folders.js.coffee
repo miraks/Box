@@ -46,8 +46,9 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
   # Password manipulation
 
   $scope.setPassword = (object) ->
+    object.password = prompt "Введи пароль"
     object.update().then (object) ->
-      object.password = ''
+      delete object.password
       Notifier.show 'Пароль установлен'
 
   $scope.deletePassword = (object) ->
