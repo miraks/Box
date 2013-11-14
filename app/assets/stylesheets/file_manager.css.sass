@@ -1,13 +1,49 @@
 @import "compass/css3/box-sizing"
+@import "compass/css3/transition"
+
+@font-face
+  font-family: 'fontello'
+  src: url('../fonts/fontello.eot')
+  src: url('../fonts/fontello.eot?#iefix') format('embedded-opentype'), url('../fonts/fontello.woff') format('woff'), url('../fonts/fontello.svg#webfont3yLmuNsx') format('svg'), url('../fonts/fontello.ttf') format('truetype')
+  font-weight: normal
+  font-style: normal
 
 $element_width: 200px
 $element_height: 200px
 $element_margin: 10px
 $element_padding: 10px
 
+=font_icon($icon)
+  &:before
+    content: '\e8'+$icon
+
 #file_manager
   width: 100%
-  background: grey
+
+  .folder
+    &:before
+      font-family: 'fontello'
+      font-size: 80px
+      color: #555
+
+  #action_buttons
+    .copy, .cut, .paste
+      &:before
+        font-family: 'fontello'
+        font-size: 20px
+      text-decoration: none
+      color: #555
+      display: inline-block
+      margin: 10px
+      +transition(color .6s linear)
+      &:hover
+        color: #66b7ef
+    .copy
+      +font_icon('04')
+    .cut
+      +font_icon('1f')
+    .paste
+      +font_icon('1e')
 
   #path
     +box-sizing(border-box)
@@ -34,7 +70,7 @@ $element_padding: 10px
     padding: $element_padding
 
   .folder
-    background: white
+    +font_icon('00')
 
   .upload
     background: #555
