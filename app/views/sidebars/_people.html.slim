@@ -1,0 +1,8 @@
+pane title='Люди'
+  .block.users
+    - if users
+      - users.each do |user|
+        .user
+          .avatar
+            img src="http://placehold.it/30x30"
+          = link_to user, user_path(user)

@@ -36,6 +36,7 @@ section#main
     border-radius: 3px
 
   .tabs
+    margin-bottom: 10px
     li
       @extend .block-style
       display: inline-block
@@ -66,17 +67,25 @@ section#main
     @extend .block-style
     height: auto
     margin: 10px
+    // clearfix
+    &:after
+      content: ''
+      display: block
+      clear: both
+      height: 0
 
     &.users
+      max-height: 300px
+      overflow-y: auto
       input.search
         border: 1px solid #bac3cb
         outline: none
         padding: 5px 0
         text-indent: 10px
         width: 100%
-      .friend
-        display: inline-block
-        margin-top: 10px
+      .user
+        float: left
+        margin-top: 5px
         border: 1px solid #e7e7e7
         width: 100%
         padding: 3px 0
@@ -94,7 +103,7 @@ section#main
           margin-left: 10px
           line-height: 30px
           text-decoration: none
-          color: inherit
+          color: #686464
           font-weight: bold
 
       .users-filter

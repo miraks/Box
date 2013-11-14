@@ -16,9 +16,9 @@ html ng-app="BoxApp"
           = render 'sidebars/balance'
         tabs
           = render 'sidebars/friends'
-          pane title='test'
-            .block
-              | fsdfsdf
+        tabs
+          = render 'sidebars/people', users: User.all
+          = render 'sidebars/company'
       section#content
         = yield
       nav

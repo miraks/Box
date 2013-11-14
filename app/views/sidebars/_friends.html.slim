@@ -8,7 +8,7 @@ pane title=t('.friends')
         = t '.all_friends'
     .clear
     div ng-show="hasFriends()"
-      .friend ng-repeat="friend in friends"
+      .user ng-repeat="friend in friends"
         .avatar
           img src="http://placehold.it/30x30"
         user-link user="friend"
