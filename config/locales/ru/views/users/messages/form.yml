@@ -1,0 +1,6 @@
+ru:
+  users:
+    messages:
+      form:
+        recipient: Кому
+        sent_message: Отправить

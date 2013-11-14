@@ -1,29 +1,27 @@
 class Api::V1::Users::MessagesController < Api::V1::BaseController
-  find :user
-  find :message, only: [:show]
   before_filter :authenticate_user!
 
-  def received
-    @messages = @user.received_messages.with_users
-    render json: @messages
-  end
-
-  def sent
-    @messages = @user.sent_messages.with_users
+  def index
+    @messages = Message.last_in_conversations current_user
     render json: @messages
   end
 
   def show
-    @message.read current_user
-    render json: @message
+    @messages = Message.where(conversation_id: params[:id]).last.conversation.messages.with_users
+    @messages.each { |message| message.read current_user }
+    render json: @messages
   end
 
   def create
-    user = User.find params[:message][:recipient_id]
-    params[:message].merge! recipient_id: user.id, user_id: current_user.id
-    @message = Message.new params[:message]
+    recipient = User.find params[:message][:recipient_id]
+    @message = Message.new message_params.merge(user: current_user, recipient: recipient)
     @message.save
-    render json: @message, meta: { success: @message.persisted? }
+    render json: @message
   end
 
+  private
+
+  def message_params
+    params.require(:message).permit(:body)
+  end
 end

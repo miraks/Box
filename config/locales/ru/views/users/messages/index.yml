@@ -2,7 +2,5 @@ ru:
   users:
     messages:
       index:
-        messages: Сообщения
-        recipient: Кому
-        title: Заголовок
-        sent_message: Отправить
+        conversations: Переписки
+        new_message: Новое сообщение

@@ -1,7 +1,7 @@
 class MessageSerializer < ActiveModel::Serializer
-  attributes :id, :title, :body, :created_at, :unread?
+  attributes :id, :body, :created_at, :conversation_id, :unread
 
-  def unread?
+  def unread
     object.read_at?
   end
 

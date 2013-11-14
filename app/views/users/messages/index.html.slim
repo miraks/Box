@@ -1,29 +1,18 @@
 .block.messages ng-controller='MessagesController' ng-init='init(#{current_user.id})'
   h1
-    = t '.messages'
+    = t '.conversations'
 
-  .menu
-    = render 'menu'
+  a href='' ng-click="showMessageForm = !showMessageForm"
+    = t '.new_message'
 
-  .message-form ng-show='showMessageForm'
-    form
-      p
-        // TODO: user search
-        = text_field_tag :recipient_id, nil, 'ng-model' => 'message.recipient_id', required: '', placeholder: t('.recipient'), title: t('.recipient')
-        br
-        = text_field_tag :title, nil, 'ng-model' => 'message.title', required: '', placeholder: t('.title'), title: t('.title')
-        br
-        = text_area_tag :body, nil, 'ng-model' => 'message.body', required: ''
-        br
-        a href='' ng-click='sentMessage()'
-          = t('.sent_message')
+  = render 'form'
 
-  .messages-list
+  .messages-list ng-hide="showMessageForm"
     table
       tr.message ng-repeat='message in messages' ng-class='{unread: message.unread}'
         td
-          a href='' ng-click='loadMessage(message)'
-            | {{message.title}}
+          a href="/users/#{current_user.slug}/messages/{{message.conversationId}}"
+            | {{message.other(userId).name}}
         td
           | {{message.body}}
         td

@@ -3,8 +3,6 @@ class User < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
-  before_validation :generate_name
-
   extend FriendlyId
   friendly_id :name
 
@@ -16,13 +14,15 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :friendships
   has_many :friends, through: :friendships, source: :friend
+
   validates :name, presence: true
 
+  before_validation :generate_name
   after_create :create_default_folders
 
   role :friend, methods: [:friend_of?, :considered_friend_by?, :has_friends?,
        :become_friend_with, :stop_being_friend_of, :friendship_with]
-  role :user_message, methods: [:sent_messages, :received_messages, :unread_messages_count]
+  role :babbler, methods: [:conversation_with, :unread_messages_count]
 
   def to_s
     name

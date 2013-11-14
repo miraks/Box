@@ -15,9 +15,7 @@ angular.module('BoxApp').factory 'Message', ['RailsResource', (RailsResource) ->
       else
         messageProcessor data
 
-    @received = (userId) ->
-      @$get @$url(user: { id: userId }, 'received')
-
-    @sent = (userId) ->
-      @$get @$url(user: { id: userId }, 'sent')
+    other: (user) ->
+      userId = user.id unless Object.isNumber user
+      [@user, @recipient].find (user) -> user.id != userId
 ]
