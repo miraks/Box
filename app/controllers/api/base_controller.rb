@@ -9,8 +9,8 @@ class Api::BaseController < ActionController::Metal
   include ActionController::Helpers
   include ActionController::Cookies
   include ActionController::Serialization
-  include ActionController::DataStreaming
   include ActionController::Rescue
+  include ActionController::StrongParameters
   include Rails.application.routes.url_helpers
 
   # Gems modules

@@ -1,4 +1,4 @@
-angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'Uploader', 'Upload', 'Clipboard', ($scope, Folder, Uploader, Upload, Clipboard) ->
+angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'Uploader', 'Upload', 'Clipboard', 'Notifier', ($scope, Folder, Uploader, Upload, Clipboard, Notifier) ->
   $scope.init = (rootId) ->
     currentFolderId = rootId # TODO: read folder id from location first
     $scope.setupUploader()
@@ -42,6 +42,18 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
 
   $scope.cleanSelectedUploads = ->
     $scope.selectedUploads = []
+
+  # Password manipulation
+
+  $scope.setPassword = (object) ->
+    object.update().then (object) ->
+      object.password = ''
+      Notifier.show 'Пароль установлен'
+
+  $scope.deletePassword = (object) ->
+    object.password = null
+    object.update().then (object) ->
+      Notifier.show 'Пароль удален'
 
   # Actions with clipboard
 

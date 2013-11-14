@@ -1,6 +1,7 @@
 class Upload < ActiveRecord::Base
   include Roleplayer
   include PasswordProtected
+  include Lockable
 
   belongs_to :user
   belongs_to :folder
@@ -8,6 +9,7 @@ class Upload < ActiveRecord::Base
 
   validates :original_name, :file, :user_id, :folder_id, presence: true
 
+  before_save :update_lock
   before_destroy :copy_to_storage, if: :has_purchases?
 
   mount_uploader :file, FileUploader
@@ -24,6 +26,10 @@ class Upload < ActiveRecord::Base
   role :manipulable, methods: [:move, :copy]
 
   private
+
+  def upload_lock
+
+  end
 
   def copy_to_storage
     # TODO
