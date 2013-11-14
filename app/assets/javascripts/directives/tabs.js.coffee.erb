@@ -2,7 +2,7 @@ angular.module('BoxApp').directive 'tabs', ->
   restrict: 'E'
   transclude: true
   scope: {}
-  controller: ($scope) ->
+  controller: ['$scope', ($scope) ->
     $scope.panes = []
 
     $scope.select = (pane) ->
@@ -14,5 +14,6 @@ angular.module('BoxApp').directive 'tabs', ->
     @addPane = (pane) ->
       $scope.select pane if $scope.panes.isEmpty()
       $scope.panes.push pane
+  ]
 
   templateUrl: '<%= asset_path "tabs.html" %>'
