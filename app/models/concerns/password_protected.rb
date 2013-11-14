@@ -9,10 +9,19 @@ module PasswordProtected
   end
 
   def password= new_password
-    self.password_hash = @password = Password.create new_password
+    self.password_hash = @password = if new_password.present?
+      Password.create new_password
+    else
+      nil
+    end
   end
 
   def password?
     password.present?
   end
+
+  def password_changed?
+    password_hash_changed?
+  end
+
 end

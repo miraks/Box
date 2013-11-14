@@ -1,5 +1,6 @@
 class Folder < ActiveRecord::Base
   include PasswordProtected
+  include Lockable
 
   attr_accessor :parent
 

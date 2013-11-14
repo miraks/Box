@@ -11,18 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131112204745) do
+ActiveRecord::Schema.define(version: 20131114171419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "folders", force: true do |t|
-    t.string   "name",                           null: false
-    t.integer  "user_id",                        null: false
-    t.integer  "parent_folder_ids", default: [],              array: true
+    t.string   "name",                              null: false
+    t.integer  "user_id",                           null: false
+    t.integer  "parent_folder_ids", default: [],                 array: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_hash"
+    t.boolean  "locked",            default: false
   end
 
   create_table "friendly_id_slugs", force: true do |t|
@@ -64,13 +65,14 @@ ActiveRecord::Schema.define(version: 20131112204745) do
   end
 
   create_table "uploads", force: true do |t|
-    t.integer  "user_id",       null: false
-    t.integer  "folder_id",     null: false
+    t.integer  "user_id",                       null: false
+    t.integer  "folder_id",                     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "original_name"
     t.string   "file"
     t.string   "password_hash"
+    t.boolean  "locked",        default: false
   end
 
   create_table "users", force: true do |t|

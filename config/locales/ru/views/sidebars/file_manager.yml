@@ -9,3 +9,5 @@ ru:
       copy: Копировать
       cut: Вырезать
       paste: Вставить
+      set_password: Установить пароль
+      delete_password: Удалить пароль
