@@ -26,8 +26,8 @@ angular.module('BoxApp').factory 'Upload', ['RailsResource', 'Downloader', 'AppE
       ((@id? and @id == other.id) or
       (@file? and other.file and @file.id == other.file.id))
 
-    download: ->
-      Upload.$get(@$url('download')).then (upload) ->
+    download: (params) ->
+      Upload.$get(@$url('download'), params).then (upload) ->
         Downloader.download upload.url
       , (data) ->
         AppError.create(data).show()

@@ -2,6 +2,6 @@
 
 UploadPolicy = Struct.new(:user, :upload) do
   def download? password = nil
-    not upload.password? or user.id == upload.user_id or password == upload.password
+    not upload.password? or user.id == upload.user_id or upload.password == password
   end
 end

@@ -5,7 +5,7 @@
     a href="" ng-click="stopBeingFriend()" ng-show="isFriend()"
       = t '.stop_being_friend'
 
-#file_manager ng-controller="FoldersController" ng-init="init(#{@user.folders.root.id})"
+#file_manager ng-controller="FoldersController" ng-init="init(#{@user.folders.root.id}, #{current_user.id})"
   #action_buttons
     - %w(copy cut paste).each do |button|
       a href="" class=['action-button', button] ng-click="#{button}()" title=t(".#{button}")
@@ -23,7 +23,7 @@
       div
         | {{upload.name}}
       .menu
-        a.download href="" ng-click="upload.download()" title=t('.download')
+        a.download href="" ng-click="download(upload)" title=t('.download')
         - if self? @user
           a.lock href="" ng-click="setPassword(upload)" title=t('.set_password')
           a.unlock href="" ng-click="deletePassword(upload)" ng-show="upload.locked" title=t('.delete_password')
