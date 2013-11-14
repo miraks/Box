@@ -8,8 +8,6 @@
   font-weight: normal
   font-style: normal
 
-$element_width: 200px
-$element_height: 200px
 $element_margin: 10px
 $element_padding: 10px
 
@@ -20,11 +18,65 @@ $element_padding: 10px
 #file_manager
   width: 100%
 
-  .folder
+  .moxie-shim
+    top: initial !important
+    bottom: 0
+
+  .path-part, .folder, .upload
+    cursor: pointer
+
+  .folder, .upload
+    float: left
+    cursor: pointer
+    width: 95px
+    position: relative
+    margin: $element_margin
+    padding: $element_padding
+    text-align: center
+    &:hover
+      .menu
+        display: block
+        opacity: 1
+
+    .menu
+      +transition(opacity .6s linear)
+      opacity: 0
+      position: absolute
+      top: 0
+      right: 0
+      width: 20px
+      a
+        display: inline-block
+        text-decoration: none
+        color: #555
+        &:hover
+          &:before
+            color: #66b7ef
+
+        &.lock, &.unlock, &.download
+          &:before
+            +transition(color .3s linear)
+            font-family: 'fontello'
+            font-size: 20px
+
+        &.lock
+          +font_icon('25')
+        &.unlock
+          +font_icon('24')
+        &.download
+          +font_icon('0a')
+
     &:before
+      +transition(color .3s linear)
       font-family: 'fontello'
-      font-size: 80px
+      font-size: 55px
       color: #555
+    &.selected
+      &:before
+        color: #66b7ef
+    &:hover
+      &:before
+        color: #66b7ef
 
   #action_buttons
     .copy, .cut, .paste
@@ -35,7 +87,7 @@ $element_padding: 10px
       color: #555
       display: inline-block
       margin: 10px
-      +transition(color .6s linear)
+      +transition(color .3s linear)
       &:hover
         color: #66b7ef
     .copy
@@ -48,40 +100,27 @@ $element_padding: 10px
   #path
     +box-sizing(border-box)
     width: 100%
-    height: $element_height / 4
-    padding: $element_padding
-    background: black
-    color: white
+    height: 30px
+    background: #666
+    color: #fff
+    border-radius: 3px
+    border: 1px solid #bac3cb
+    line-height: 30px
+    padding: 0 10px
 
   .path-part
-    width: $element_width / 2
-    height: $element_height / 4
-    margin: $element_margin
-    padding: $element_padding
-
-  .path-part, .folder, .upload
-    cursor: pointer
-    float: left
-
-  .folder, .upload
-    width: $element_width
-    height: $element_height
-    margin: $element_margin
-    padding: $element_padding
+    display: inline-block
+    margin-left: 5px
+    &:after
+      content: ' >'
 
   .folder
-    +font_icon('00')
+    +font_icon('22')
 
   .upload
-    background: #555
-
-    &.selected
-      background: #333
+    +font_icon('23')
 
 #upload_button
   clear: both
-  background: green
-  width: 100px
-  height: 30px
   text-align: center
   cursor: pointer
