@@ -15,19 +15,17 @@
     div ng-click="$event.stopPropagation()"
       | {{folder.name}}
       - if self? @user
-        br
-        a href="" ng-click="setPassword(folder)" = t '.set_password'
-        br
-        a href="" ng-click="deletePassword(folder)" ng-show="folder.locked" = t '.delete_password'
+        .menu
+          a.lock href="" ng-click="setPassword(folder)" title=t('.set_password')
+          a.unlock href="" ng-click="deletePassword(folder)" ng-show="folder.locked" title=t('.delete_password')
   .upload ng-repeat="upload in folder.uploads" ng-click="toggleUploadSelection(upload)" ng-class="{selected: isSelectedUpload(upload)}"
     div ng-click="$event.stopPropagation()"
       div
         | {{upload.name}}
-      a href="" ng-click="upload.download()" = t '.download'
-      - if self? @user
-        br
-        a href="" ng-click="setPassword(upload)" = t '.set_password'
-        br
-        a href="" ng-click="deletePassword(upload)" ng-show="upload.locked" = t '.delete_password'
+      .menu
+        a.download href="" ng-click="upload.download()" title=t('.download')
+        - if self? @user
+          a.lock href="" ng-click="setPassword(upload)" title=t('.set_password')
+          a.unlock href="" ng-click="deletePassword(upload)" ng-show="upload.locked" title=t('.delete_password')
       div ng-show="upload.isUploading()" = "#{t '.progress'}: {{upload.percent}}"
-  #upload_button = t '.upload'
+  #upload_button.button = t '.upload'
