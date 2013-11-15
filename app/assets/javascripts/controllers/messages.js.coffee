@@ -1,6 +1,7 @@
 angular.module('BoxApp').controller 'MessagesController', ['$scope', 'Message', 'CurrentUser', ($scope, Message, CurrentUser) ->
 
   $scope.init = ->
+    $scope.currentUser = CurrentUser
     $scope.message = $scope.newMessage()
     $scope.loadMessages()
 

@@ -13,7 +13,7 @@ class Api::V1::Users::MessagesController < Api::V1::BaseController
   end
 
   def create
-    recipient = User.find params[:message][:recipient_id].to_slug.normalize! # TODO: change that when users search will work
+    recipient = User.find params[:message][:recipient_id].to_s.to_slug.normalize! # TODO: change that when users search will work
     @message = Message.new message_params.merge(user: current_user, recipient: recipient)
     @message.save
     render json: @message

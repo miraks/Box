@@ -12,7 +12,7 @@
       tr.message ng-repeat='message in messages' ng-class='{unread: message.unread}'
         td
           a href="/users/#{current_user.slug}/messages/{{message.conversationId}}"
-            | {{message.other(userId).name}}
+            | {{message.other(currentUser).name}}
         td
           | {{message.body}}
         td
