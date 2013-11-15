@@ -14,8 +14,7 @@ SecureLinkGenerator = Struct.new(:upload) do
   end
 
   def path
-    # Здесь может быть ошибка
-    @path ||= Rails.root.join(dir_path, upload.name).to_s
+    @path ||= File.join dir_path, upload.name
   end
 
   def dir_path
