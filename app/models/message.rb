@@ -8,14 +8,17 @@ class Message < ActiveRecord::Base
   before_create :set_conversation_id
 
   scope :with_users, -> { includes(:user, :recipient) }
+  scope :to, -> user { where recipient: user }
   scope :of, -> user { where 'user_id = :user OR recipient_id = :user', user: user }
+  scope :unread, -> { where read_at: nil }
+  scope :unread_by, -> user { to(user).unread }
   scope :last_in_conversations, -> user do
-    ids = of(user).group(:conversation_id).select('max(id)')
+    ids = of(user).group(:conversation_id).select('max(messages.id)')
     where "id in (#{ids.to_sql})"
   end
 
   def conversation
-    return nil unless user && recipient
+    return unless user && recipient
     @conversation ||= Conversation.new user, recipient
   end
 

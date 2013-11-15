@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
 
   role :friend, methods: [:friend_of?, :considered_friend_by?, :has_friends?,
        :become_friend_with, :stop_being_friend_of, :friendship_with]
-  role :babbler, methods: [:conversation_with, :unread_messages_count]
+  role :babbler, methods: [:unread_messages_count]
 
   def to_s
     name

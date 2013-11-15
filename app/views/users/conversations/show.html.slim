@@ -1,0 +1,11 @@
+.block.messages ng-controller='ConversationController' ng-init='init(#{@conversation.other(current_user).id}, "#{@conversation.id}")'
+  h1 = "Переписка с #{@conversation.other(current_user)}"
+
+  .messages-list
+    .message ng-repeat="message in conversation.messages"
+      div
+        | {{message.user.name}} написал:
+      div
+        | {{message.body}}
+
+  = render 'form'

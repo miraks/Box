@@ -1,0 +1,19 @@
+.block.messages ng-controller='ConversationsController'
+  h1
+    = t '.conversations'
+
+  a href='' ng-click="showMessageForm = !showMessageForm"
+    = t '.new_message'
+
+  = render 'form'
+
+  .messages-list ng-hide="showMessageForm"
+    table
+      tr.message ng-repeat='conversation in conversations' ng-class='{unread: conversation.unread}'
+        td
+          a href="/users/#{current_user.slug}/conversations/{{conversation.id}}"
+            | {{conversation.lastMessage.other(currentUser).name}}
+        td
+          | {{conversation.lastMessage.body}}
+        td
+          | {{conversation.updatedAt}}

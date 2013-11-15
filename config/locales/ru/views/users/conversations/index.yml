@@ -1,6 +1,6 @@
 ru:
   users:
-    messages:
+    conversations:
       index:
         conversations: Переписки
         new_message: Новое сообщение

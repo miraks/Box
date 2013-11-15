@@ -1,7 +1,7 @@
 angular.module('BoxApp').factory 'Message', ['RailsResource', (RailsResource) ->
   class Message extends RailsResource
     @configure
-      url: '/api/v1/users/{{user.id}}/messages/{{id}}'
+      url: '/api/v1/users/{{user.id}}/messages'
       name: 'message'
       pluralName: 'messages'
       serializer: 'MessageSerializer'
@@ -16,6 +16,5 @@ angular.module('BoxApp').factory 'Message', ['RailsResource', (RailsResource) ->
         messageProcessor data
 
     other: (user) ->
-      userId = user.id unless Object.isNumber user
-      [@user, @recipient].find (user) -> user.id != userId
+      if @user.id == user.id then @recipient else @user
 ]
