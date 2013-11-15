@@ -3,9 +3,6 @@ class User < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
-  extend FriendlyId
-  friendly_id :name
-
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
   has_many :uploads
@@ -19,6 +16,9 @@ class User < ActiveRecord::Base
 
   before_validation :generate_name
   after_create :create_default_folders
+
+  extend FriendlyId
+  friendly_id :name
 
   role :friend, methods: [:friend_of?, :considered_friend_by?, :has_friends?,
        :become_friend_with, :stop_being_friend_of, :friendship_with]
