@@ -1,6 +1,5 @@
-angular.module('BoxApp').controller 'ConversationController', ['$scope', 'Message', ($scope, Message) ->
-  $scope.init = (userId, recipientId, conversationId) ->
-    $scope.userId = userId
+angular.module('BoxApp').controller 'ConversationController', ['$scope', 'Message', 'CurrentUser', ($scope, Message, CurrentUser) ->
+  $scope.init = (recipientId, conversationId) ->
     $scope.recipientId = recipientId
     $scope.conversationId = conversationId
     $scope.showMessageForm = true
@@ -9,7 +8,7 @@ angular.module('BoxApp').controller 'ConversationController', ['$scope', 'Messag
     $scope.loadMessages()
 
   $scope.loadMessages = ->
-    Message.get(user: { id: $scope.userId }, id: $scope.conversationId).then (messages) ->
+    Message.get(user: { id: CurrentUser.id }, id: $scope.conversationId).then (messages) ->
       $scope.messages = messages
 
   $scope.sentMessage = ->
@@ -18,5 +17,5 @@ angular.module('BoxApp').controller 'ConversationController', ['$scope', 'Messag
       $scope.message = $scope.newMessage()
 
   $scope.newMessage = ->
-    new Message user: { id: $scope.userId }, recipientId: $scope.recipientId
+    new Message user: { id: CurrentUser.id }, recipientId: $scope.recipientId
 ]

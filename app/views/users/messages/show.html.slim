@@ -1,4 +1,4 @@
-.block.messages ng-controller='ConversationController' ng-init='init(#{current_user.id}, #{@message.other(current_user).id}, "#{@message.conversation_id}")'
+.block.messages ng-controller='ConversationController' ng-init='init(#{@message.other(current_user).id}, "#{@message.conversation_id}")'
   h1 = "Переписка с #{@message.other(current_user)}"
 
   .messages-list

@@ -1,7 +1,6 @@
-angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'Uploader', 'Upload', 'Clipboard', 'Notifier', ($scope, Folder, Uploader, Upload, Clipboard, Notifier) ->
-  $scope.init = (rootId, currentUserId) ->
+angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'Uploader', 'Upload', 'Clipboard', 'Notifier', 'CurrentUser', ($scope, Folder, Uploader, Upload, Clipboard, Notifier, CurrentUser) ->
+  $scope.init = (rootId) ->
     currentFolderId = rootId # TODO: read folder id from location first
-    $scope.currentUserId = currentUserId # TODO: remove later
     $scope.setupUploader()
     $scope.setupClipboard()
     $scope.changeFolder new Folder(id: currentFolderId)
@@ -25,7 +24,7 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
   # Downloading
 
   $scope.download = (upload) ->
-    params = { password: prompt("Введи пароль") } if upload.locked and upload.user.id != $scope.currentUserId
+    params = { password: prompt("Введи пароль") } if upload.locked and CurrentUser.isSelf(upload.user)
     upload.download params
 
   # Move around

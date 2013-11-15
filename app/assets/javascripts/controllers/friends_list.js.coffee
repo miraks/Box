@@ -1,4 +1,4 @@
-angular.module('BoxApp').controller 'FriendsListController', ['$scope', 'Friend', 'Storage', ($scope, Friend, Storage) ->
+angular.module('BoxApp').controller 'FriendsListController', ['$scope', 'Friend', 'Storage', 'CurrentUser', ($scope, Friend, Storage, CurrentUser) ->
   $scope.loadFriends = ->
     return $scope.friends = Storage.get 'friends' if Storage.has 'friends'
     Friend.query().then (friends) ->
@@ -8,5 +8,5 @@ angular.module('BoxApp').controller 'FriendsListController', ['$scope', 'Friend'
   $scope.hasFriends = ->
     $scope.friends? and not $scope.friends.isEmpty()
 
-  $scope.loadFriends()
+  $scope.loadFriends() if CurrentUser.isLoggedIn()
 ]

@@ -5,7 +5,7 @@
     a href="" ng-click="stopBeingFriend()" ng-show="isFriend()"
       = t '.stop_being_friend'
 
-#file_manager ng-controller="FoldersController" ng-init="init(#{@user.folders.root.id}, #{current_user.id})"
+#file_manager ng-controller="FoldersController" ng-init="init(#{@user.folders.root.id})"
   #action_buttons
     - %w(copy cut paste).each do |button|
       a href="" class=['action-button', button] ng-click="#{button}()" title=t(".#{button}")
