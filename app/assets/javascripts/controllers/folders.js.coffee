@@ -24,7 +24,7 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
   # Downloading
 
   $scope.download = (upload) ->
-    params = { password: prompt("Введи пароль") } if upload.locked and CurrentUser.isSelf(upload.user)
+    params = { password: prompt("Введи пароль") } if upload.locked and not CurrentUser.isSelf(upload.user)
     upload.download params
 
   # Move around
