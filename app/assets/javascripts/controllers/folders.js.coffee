@@ -1,9 +1,16 @@
-angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'Uploader', 'Upload', 'Clipboard', 'Notifier', 'CurrentUser', ($scope, Folder, Uploader, Upload, Clipboard, Notifier, CurrentUser) ->
+# TODO: Хорошо бы в файловом менеджере на стороне
+#       клиента запоминать введенный пароль пока пользователь бродит
+#       по запароленной директории, что бы каждый раз его не спрашивать.
+#       Возможно стоит использовать localstorage для хранения паролей,
+#       тогда их можно будет вводить всего один раз, но тут проблема,
+#       они будут хранится в открытом виде.
+
+angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'Uploader', 'Upload', 'Clipboard', 'Notifier', 'Downloader', 'CurrentUser', ($scope, Folder, Uploader, Upload, Clipboard, Notifier, Downloader, CurrentUser) ->
   $scope.init = (rootId) ->
     currentFolderId = rootId # TODO: read folder id from location first
     $scope.setupUploader()
     $scope.setupClipboard()
-    $scope.changeFolder new Folder(id: currentFolderId)
+    $scope.changeFolder new Folder(id: currentFolderId), false
 
   # Setup
 
@@ -15,25 +22,35 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
   $scope.setupClipboard = ->
     $scope.clipboard = new Clipboard
 
-  # Data load
+  # Move around
 
-  $scope.reloadContent = ->
-    Folder.get($scope.currentFolder.id).then (folder) ->
+  $scope.checkPermission = (object, callback) ->
+    object.permission().then (obj) ->
+      return Notifier.show "Доступ запрещен" if obj.permission == 'no'
+      params = {}
+      if obj.permission == 'password'
+        params.password = prompt "Введи пароль"
+        return unless params.password?
+      callback params
+
+  $scope.changeFolder = (folder, checkPermission = true) ->
+    actions = (params) ->
+      $scope.currentFolder = folder
+      $scope.cleanSelectedUploads()
+      $scope.uploader.setUrl "/api/v1/uploads?folder_id=#{$scope.currentFolder.id}"
+      $scope.reloadContent params
+    if checkPermission then $scope.checkPermission folder, actions else actions()
+
+  $scope.reloadContent = (params) ->
+    Folder.get($scope.currentFolder.id, params).then (folder) ->
       $scope.folder = folder
 
   # Downloading
 
   $scope.download = (upload) ->
-    params = { password: prompt("Введи пароль") } if upload.locked and not CurrentUser.isSelf(upload.user)
-    upload.download params
-
-  # Move around
-
-  $scope.changeFolder = (folder) ->
-    $scope.currentFolder = folder
-    $scope.cleanSelectedUploads()
-    $scope.uploader.setUrl "/api/v1/uploads?folder_id=#{$scope.currentFolder.id}"
-    $scope.reloadContent()
+    $scope.checkPermission upload, (params) ->
+      upload.download(params).then (upload) ->
+        Downloader.download upload.url
 
   # Uploads selection
 

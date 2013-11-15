@@ -1,6 +1,6 @@
 class Api::V1::UploadsController < Api::V1::BaseController
   find :folder, only: [:create]
-  find :upload, only: [:update, :download]
+  find :upload, only: [:update, :download, :permission]
   find :folder, in: :upload, only: [:move, :copy]
   find :uploads, in: :upload, only: [:move, :copy]
 
@@ -18,6 +18,10 @@ class Api::V1::UploadsController < Api::V1::BaseController
   def download
     authorize @upload, args: params[:password]
     render json: @upload, serializer: UploadUrlSerializer
+  end
+
+  def permission
+    render json: @upload, serializer: UploadPermissionSerializer
   end
 
   def move

@@ -1,7 +1,6 @@
-# TODO: проверять что одна из директорий выше незапароленна
-
 UploadPolicy = Struct.new(:user, :upload) do
   def download? password = nil
-    not upload.password? or user.id == upload.user_id or upload.password == password
+    permission = upload.permission user
+    permission == :yes or (permission == :password and upload.password == password)
   end
 end

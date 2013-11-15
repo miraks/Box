@@ -14,6 +14,9 @@ class Upload < ActiveRecord::Base
 
   mount_uploader :file, FileUploader
 
+  role :secure_link_generator, methods: [:generate_download_link]
+  role :manipulable, methods: [:move, :copy]
+
   def name
     original_name
   end
@@ -22,8 +25,9 @@ class Upload < ActiveRecord::Base
     file.path
   end
 
-  role :secure_link_generator, methods: [:generate_download_link]
-  role :manipulable, methods: [:move, :copy]
+  def parents
+    folder.parents
+  end
 
   private
 

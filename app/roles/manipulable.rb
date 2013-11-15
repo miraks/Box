@@ -6,7 +6,7 @@ Manipulable = Struct.new(:upload) do
 
   def copy new_folder
     upload_copy = upload.dup
-    # Возможно стоит хранить symlink на файл, надо обсудить
+    # TODO: Возможно стоит хранить symlink на файл, надо обсудить
     upload_copy.file = upload.file
     upload_copy.folder = new_folder
     upload_copy.user = new_folder.user

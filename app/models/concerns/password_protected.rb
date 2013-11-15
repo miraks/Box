@@ -4,8 +4,9 @@ module PasswordProtected
   include BCrypt
 
   def password
-    return nil unless password_hash?
-    @password ||= Password.new password_hash
+    return @password if defined? @password
+    password_hash = self.password_hash || parents.with_password.last.try(:password_hash)
+    @password = password_hash.present? ? Password.new(password_hash) : nil
   end
 
   def password= new_password

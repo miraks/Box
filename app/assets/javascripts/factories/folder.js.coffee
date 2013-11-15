@@ -9,13 +9,11 @@ angular.module('BoxApp').factory 'Folder', ['RailsResource', 'AppError', (RailsR
         (promise) ->
           # Sometimes it's not a promise
           # should be fixed in RailsResource
-          return promise unless promise.catch?
-          promise.catch (data) ->
+          promise.catch? (data) ->
             AppError.create(data).show()
+          promise
       ]
 
-    @beforeResponse (data) ->
-      format = "long"
-      ["createdAt", "UpdatedAt"].each (field) ->
-        data[field] = Date.create(data[field]).format(format)
+    permission: ->
+      Folder.$get @$url('permission')
 ]

@@ -1,9 +1,17 @@
-angular.module('BoxApp').factory 'Upload', ['RailsResource', 'Downloader', 'AppError', (RailsResource, Downloader, AppError) ->
+angular.module('BoxApp').factory 'Upload', ['RailsResource', 'AppError', (RailsResource, AppError) ->
   class Upload extends RailsResource
     @configure
       url: '/api/v1/uploads'
       name: 'upload'
       pluralName: 'uploads'
+      responseInterceptors: [
+        (promise) ->
+          # Sometimes it's not a promise
+          # should be fixed in RailsResource
+          promise.catch? (data) ->
+            AppError.create(data).show()
+          promise
+      ]
 
     @manipulate = (action, uploads, folder) ->
       ids = uploads.map 'id'
@@ -26,9 +34,9 @@ angular.module('BoxApp').factory 'Upload', ['RailsResource', 'Downloader', 'AppE
       ((@id? and @id == other.id) or
       (@file? and other.file and @file.id == other.file.id))
 
+    permission: ->
+      Upload.$get @$url('permission')
+
     download: (params) ->
-      Upload.$get(@$url('download'), params).then (upload) ->
-        Downloader.download upload.url
-      , (data) ->
-        AppError.create(data).show()
+      Upload.$get @$url('download'), params
 ]

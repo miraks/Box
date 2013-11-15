@@ -3,10 +3,14 @@ Box::Application.routes.draw do
 
   root to: "users#index"
 
+  concern :lockable do
+    get :permission
+  end
+
   namespace :api do
     namespace :v1 do
-      resources :folders, only: [:show, :update]
-      resources :uploads, only: [:create, :update] do
+      resources :folders, only: [:show, :update], concerns: [:lockable]
+      resources :uploads, only: [:create, :update], concerns: [:lockable] do
         get :download
         collection do
           patch :move, :copy

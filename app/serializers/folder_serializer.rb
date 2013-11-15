@@ -1,5 +1,5 @@
 class FolderSerializer < ActiveModel::Serializer
-  attributes :id, :name, :created_at, :updated_at, :locked
+  attributes :id, :name, :locked
 
   has_many :uploads
   has_many :children, serializer: FolderWithoutContentSerializer
