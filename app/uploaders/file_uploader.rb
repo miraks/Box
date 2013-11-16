@@ -13,7 +13,7 @@ class FileUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "system/#{model.class.to_s.underscore}/#{model.id}"
+    "system/#{model.class.to_s.underscore}/#{split_id(model.id)}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -56,6 +56,10 @@ class FileUploader < CarrierWave::Uploader::Base
 
   def secure_token
     @secure_token ||= SecureRandom.hex
+  end
+
+  def split_id id
+    id.to_s.rjust(9, '0').insert(3, '/').insert(7, '/')
   end
 
 end
