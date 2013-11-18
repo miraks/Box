@@ -12,8 +12,11 @@ html ng-app="BoxApp"
       = render 'shared/menu'
     section#main
       aside
-        .block.balance
+        /.block.balance
           = render 'sidebars/balance'
+        .block
+          =' link_to 'Мои сообщений', user_conversations_path(current_user)
+          | (#{current_user.unread_messages_count})
         tabs
           = render 'sidebars/friends'
         tabs
