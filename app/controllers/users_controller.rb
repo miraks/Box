@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def index
     unless params[:query].present?
-      @users = User.all
+      @users = User.last(10)
     else
       @users = User.search params[:query]
     end

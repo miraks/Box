@@ -21,7 +21,7 @@ html ng-app="BoxApp"
         tabs
           = render 'sidebars/friends'
         tabs
-          = render 'sidebars/people', users: User.all
+          = render 'sidebars/people', users: User.last(10)
           = render 'sidebars/company'
       section#content
         = yield
