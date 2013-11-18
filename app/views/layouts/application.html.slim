@@ -14,9 +14,10 @@ html ng-app="BoxApp"
       aside
         /.block.balance
           = render 'sidebars/balance'
-        .block
-          =' link_to 'Мои сообщений', user_conversations_path(current_user)
-          | (#{current_user.unread_messages_count})
+        - if logged_in?
+          .block
+            =' link_to 'Мои сообщений', user_conversations_path(current_user)
+            | (#{current_user.unread_messages_count})
         tabs
           = render 'sidebars/friends'
         tabs
