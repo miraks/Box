@@ -123,7 +123,7 @@ user_ids = []
 user_slugs = {}
 
 helper.create :users do |inserter, index|
-  name = words.sample + SecureRandom.hex(2)
+  name = "#{words.sample}-#{SecureRandom.hex(2)}"
   slug = name
   email = "#{name}@#{words.sample}.#{config[:first_level_domains].sample}"
   password = BCrypt::Password.create("#{config[:password]}#{User.pepper}").to_s
@@ -152,7 +152,7 @@ helper.create :folders do |inserter, index|
   files_id = inserter.call user_id: user_id, name: 'Файлы', parent_folder_ids: "{#{root_id}}"
   folder_ids << files_id
   ['Фото', 'Видео', 'Аудио'].each do |name|
-    folder_ids << inserter.call(user_id: user_id, name: name, parent_folder_ids: "{#{[root_id, files_id].join(',')}}")
+    folder_ids << inserter.call(user_id: user_id, name: name, parent_folder_ids: "{#{[files_id, root_id].join(',')}}")
   end
 
   helper.synchronize do
