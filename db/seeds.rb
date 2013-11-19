@@ -212,6 +212,8 @@ helper.create :messages do |inserter, index|
   end
 end
 
+# Friendships
+
 helper.create :friendships do |inserter, index|
   user_id = user_ids[index]
   friend_ids = []
