@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131114184505) do
+ActiveRecord::Schema.define(version: 20131119204135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20131114184505) do
     t.string   "password_hash"
     t.boolean  "locked",            default: false
   end
+
+  add_index "folders", ["user_id"], name: "index_folders_on_user_id", using: :btree
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -46,6 +48,8 @@ ActiveRecord::Schema.define(version: 20131114184505) do
     t.datetime "updated_at"
   end
 
+  add_index "friendships", ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true, using: :btree
+
   create_table "messages", force: true do |t|
     t.integer  "user_id",         null: false
     t.integer  "recipient_id",    null: false
@@ -55,6 +59,10 @@ ActiveRecord::Schema.define(version: 20131114184505) do
     t.datetime "updated_at"
     t.string   "conversation_id"
   end
+
+  add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
+  add_index "messages", ["recipient_id", "read_at", "conversation_id"], name: "index_messages_on_recipient_id_and_read_at_and_conversation_id", using: :btree
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "purchases", force: true do |t|
     t.integer  "user_id",     null: false
@@ -74,6 +82,8 @@ ActiveRecord::Schema.define(version: 20131114184505) do
     t.string   "password_hash"
     t.boolean  "locked",        default: false
   end
+
+  add_index "uploads", ["folder_id"], name: "index_uploads_on_folder_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
