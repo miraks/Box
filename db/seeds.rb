@@ -95,19 +95,7 @@ class SeedHelper
 
   def prepare!
     cpu_count = self.cpu_count
-
-    # We will need bigger pool
-    Rails.application.config.after_initialize do
-      ActiveRecord::Base.connection_pool.disconnect!
-      ActiveSupport.on_load(:active_record) do
-        config = Rails.application.config.database_configuration[Rails.env]
-        config['pool'] = cpu_count * 4
-        ActiveRecord::Base.establish_connection(config)
-      end
-    end
-
     BCrypt::Engine.cost = 1
-
     Box::Application.eager_load!
   end
 end
