@@ -94,7 +94,6 @@ class SeedHelper
   end
 
   def prepare!
-    cpu_count = self.cpu_count
     BCrypt::Engine.cost = 1
     Box::Application.eager_load!
   end
