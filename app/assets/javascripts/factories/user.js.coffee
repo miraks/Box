@@ -4,4 +4,7 @@ angular.module('BoxApp').factory 'User', ['RailsResource', (RailsResource) ->
       url: '/api/v1/users'
       name: 'user'
       pluralName: 'users'
+
+    @search = (params) ->
+      @$get @$url('search'), query: params
 ]

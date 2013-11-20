@@ -3,6 +3,12 @@ class User < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
+  mapping do
+    indexes :name, type: 'string', boost: 10, analyzer: 'snowball'
+    indexes :slug, type: 'string', analyzer: 'snowball'
+    indexes :created_at, type: 'date'
+  end
+
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
   has_many :uploads
@@ -26,6 +32,12 @@ class User < ActiveRecord::Base
 
   def to_s
     name
+  end
+
+  def self.search params
+    tire.search(load: true) do
+      query { string "name: #{params[:query]}*" } if params[:query].present?
+    end
   end
 
   private

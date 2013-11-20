@@ -1,0 +1,25 @@
+angular.module('BoxApp').directive 'search', ['$timeout', ($timeout) ->
+  restrict: 'E'
+  replace: true
+  transclude: true
+
+  link: (scope, element, attrs) ->
+    timer = false
+    scope.$watch 'query', ->
+      $timeout.cancel timer if timer
+      timer = $timeout( ->
+        if scope.query
+          scope.showResults = true
+          scope.search()
+        else
+          scope.showResults = false
+      , 600)
+
+  controller: ($scope, $element) ->
+    $scope.click = (item) ->
+      $scope.search.item = item
+      $scope.query = item.name
+      $scope.showResults = false
+
+  templateUrl: '<%= asset_path "search.html" %>'
+]

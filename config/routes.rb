@@ -23,6 +23,7 @@ Box::Application.routes.draw do
           resource :friendships, only: [:create, :destroy]
           collection do
             resources :friends, only: [:index]
+            resources :search, only: [:index]
           end
         end
       end

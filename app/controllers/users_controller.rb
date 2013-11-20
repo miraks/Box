@@ -3,11 +3,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, only: :show
 
   def index
-    unless params[:query].present?
-      @users = User.all
-    else
-      @users = User.search params[:query]
-    end
+    @users = User.all
   end
 
   def show

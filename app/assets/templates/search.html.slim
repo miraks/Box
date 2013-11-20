@@ -1,0 +1,7 @@
+.search
+  input.search type='text' ng-model='query' autocomplete='off'
+  .result ng-show='showResults'
+    ul
+      li ng-repeat="item in items"
+        a href='' ng-click='click(item)'
+          | {{item.name}}

@@ -1,6 +1,7 @@
 pane title=t('.friends')
   .block.users ng-controller="FriendsListController"
-    input.search type='text'
+    div ng-controller='UserSearchController'
+      search
     .users-filter
       a.active href=''
         = t '.friends_online'

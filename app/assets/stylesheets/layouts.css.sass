@@ -37,7 +37,7 @@ section#main
 
   .tabs
     margin-bottom: 10px
-    li
+    li.pane
       @extend .block-style
       display: inline-block
       border-bottom-left-radius: 0px
@@ -63,6 +63,65 @@ section#main
     .tab-content
       margin-top: -1px
 
+  .search
+    position: relative
+    input
+      border: 1px solid #bac3cb
+      outline: none
+      padding: 5px 0
+      text-indent: 10px
+      width: 100%
+      border-radius: 3px
+    .result
+      @extend .block-style
+      padding: 0
+      width: 100%
+      position: absolute
+      ul
+        margin: 10px
+
+  .users
+    max-height: 300px
+    //overflow-y: auto
+    .user
+      float: left
+      margin-top: 5px
+      border: 1px solid #e7e7e7
+      width: 100%
+      padding: 3px 0
+      border-radius: 3px
+      .avatar
+        float: left
+        display: inline-block
+        width: 30px
+        height: 30px
+        margin-left: 3px
+        img
+          border-radius: 3px
+      a
+        float: left
+        margin-left: 10px
+        line-height: 30px
+        text-decoration: none
+        color: #686464
+        font-weight: bold
+
+    .users-filter
+      margin: 10px 0
+      a.active
+        color: #686464
+        background: #f3f3e7
+        padding: 3px
+        text-decoration: none
+        font-weight: bold
+        float: left
+      a.inactive
+        color: #66b7ef
+        text-decoration: none
+        font-weight: bold
+        border-bottom: 1px dashed
+        float: right
+
   .block
     @extend .block-style
     height: auto
@@ -73,54 +132,6 @@ section#main
       display: block
       clear: both
       height: 0
-
-    &.users
-      max-height: 300px
-      overflow-y: auto
-      input.search
-        border: 1px solid #bac3cb
-        outline: none
-        padding: 5px 0
-        text-indent: 10px
-        width: 100%
-      .user
-        float: left
-        margin-top: 5px
-        border: 1px solid #e7e7e7
-        width: 100%
-        padding: 3px 0
-        border-radius: 3px
-        .avatar
-          float: left
-          display: inline-block
-          width: 30px
-          height: 30px
-          margin-left: 3px
-          img
-            border-radius: 3px
-        a
-          float: left
-          margin-left: 10px
-          line-height: 30px
-          text-decoration: none
-          color: #686464
-          font-weight: bold
-
-      .users-filter
-        margin: 10px 0
-        a.active
-          color: #686464
-          background: #f3f3e7
-          padding: 3px
-          text-decoration: none
-          font-weight: bold
-          float: left
-        a.inactive
-          color: #66b7ef
-          text-decoration: none
-          font-weight: bold
-          border-bottom: 1px dashed
-          float: right
 
     &.balance
       background: #bac3cb
