@@ -1,4 +1,4 @@
-.folder.item ng-repeat="folder in folder.children" ng-click="changeFolder(folder)"
+.folder.item ng-repeat="folder in folder.children" ng-click="changeFolder(folder)" ddropable="folder" on-drop="dropped"
   .name
     | {{folder.name}}
   - if self? @user

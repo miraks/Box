@@ -74,6 +74,14 @@ $element_padding: 10px
       &:before
         color: #66b7ef
 
+  .folder
+    +transition(text-shadow .3s linear)
+    &.drag-target:before
+      text-shadow: 0 0 5px black
+    &.drag-over:before
+      color: #66b7ef
+      text-shadow: 0 0 5px #66b7ef
+
   .action-buttons
     .button
       text-decoration: none

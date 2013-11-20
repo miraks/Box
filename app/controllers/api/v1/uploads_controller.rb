@@ -25,7 +25,6 @@ class Api::V1::UploadsController < Api::V1::BaseController
   end
 
   def move
-    # TODO: обрабатывать ошибки
     # TODO: это будет работать очень медленно при большом числе файлов
     result = @uploads.all? { |upload| upload.move @folder }
     if result

@@ -96,4 +96,11 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
         when Clipboard.MODE.cut  then 'move'
       Upload[method](uploads, $scope.currentFolder).then (uploads) ->
         $scope.folder.uploads.push uploads...
+
+  # Drag and drop
+
+  $scope.dropped = (upload, folder) ->
+    Upload.move(upload, folder).then (uploads) ->
+      upload = uploads[0]
+      $scope.folder.uploads.remove (up) -> up.equal upload
 ]
