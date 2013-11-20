@@ -1,7 +1,6 @@
 angular.module('BoxApp').directive 'search', ['$timeout', ($timeout) ->
   restrict: 'E'
   replace: true
-  transclude: true
 
   link: (scope, element, attrs) ->
     timer = false
@@ -17,7 +16,6 @@ angular.module('BoxApp').directive 'search', ['$timeout', ($timeout) ->
 
   controller: ($scope, $element) ->
     $scope.click = (item) ->
-      $scope.search.item = item
       $scope.query = item.name
       $scope.showResults = false
 

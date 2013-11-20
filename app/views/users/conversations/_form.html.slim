@@ -3,7 +3,7 @@
     p
       div ng-controller='UserSearchController'
         search
-      / = text_field_tag :recipient_id, nil, 'ng-model' => 'message.recipient_id', 'ng-hide' => 'hideRecipientField', required: '', placeholder: t('.recipient'), title: t('.recipient')
+      = text_field_tag :recipient_id, nil, 'ng-model' => 'message.recipient_id', 'ng-hide' => 'hideRecipientField', required: '', placeholder: t('.recipient'), title: t('.recipient')
       br
       = text_area_tag :body, nil, 'ng-model' => 'message.body', required: ''
       br
