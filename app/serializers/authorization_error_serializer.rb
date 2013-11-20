@@ -1,3 +1,2 @@
-class AuthorizationErrorSerializer < ActiveModel::Serializer
-  attributes :message
+class AuthorizationErrorSerializer < BaseErrorSerializer
 end

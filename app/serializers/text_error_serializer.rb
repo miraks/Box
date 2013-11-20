@@ -1,0 +1,2 @@
+class TextErrorSerializer < BaseErrorSerializer
+end
