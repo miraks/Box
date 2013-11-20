@@ -14,6 +14,7 @@ angular.module('BoxApp').factory 'Upload', ['RailsResource', 'AppError', (RailsR
       ]
 
     @manipulate = (action, uploads, folder) ->
+      uploads = [uploads] unless Object.isArray uploads
       ids = uploads.map 'id'
       @$patch @$url(action), ids: ids, folder_id: folder.id
 

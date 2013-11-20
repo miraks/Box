@@ -6,9 +6,9 @@
 #       они будут хранится в открытом виде.
 
 angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'Uploader', 'Upload', 'Clipboard', 'Notifier', 'Downloader', 'CurrentUser', ($scope, Folder, Uploader, Upload, Clipboard, Notifier, Downloader, CurrentUser) ->
-  $scope.init = (rootId) ->
+  $scope.init = (rootId, setupUploder) ->
     currentFolderId = rootId # TODO: read folder id from location first
-    $scope.setupUploader()
+    $scope.setupUploader() if setupUploder
     $scope.setupClipboard()
     $scope.changeFolder new Folder(id: currentFolderId), false
 
@@ -37,7 +37,7 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
     actions = (params) ->
       $scope.currentFolder = folder
       $scope.cleanSelectedUploads()
-      $scope.uploader.setUrl "/api/v1/uploads?folder_id=#{$scope.currentFolder.id}"
+      $scope.uploader?.setUrl "/api/v1/uploads?folder_id=#{$scope.currentFolder.id}"
       $scope.reloadContent params
     if checkPermission then $scope.checkPermission folder, actions else actions()
 
@@ -96,4 +96,11 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
         when Clipboard.MODE.cut  then 'move'
       Upload[method](uploads, $scope.currentFolder).then (uploads) ->
         $scope.folder.uploads.push uploads...
+
+  # Drag and drop
+
+  $scope.dropped = (upload, folder) ->
+    Upload.move(upload, folder).then (uploads) ->
+      upload = uploads[0]
+      $scope.folder.uploads.remove (up) -> up.equal upload
 ]

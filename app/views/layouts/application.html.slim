@@ -12,17 +12,21 @@ html ng-app="BoxApp"
       = render 'shared/menu'
     section#main
       aside
-        .block.balance
+        /.block.balance
           = render 'sidebars/balance'
+        - if logged_in?
+          .block
+            =' link_to 'Мои сообщений', user_conversations_path(current_user)
+            | (#{current_user.unread_messages_count})
         tabs
           = render 'sidebars/friends'
         tabs
-          = render 'sidebars/people', users: User.all
+          = render 'sidebars/people', users: User.last(10)
           = render 'sidebars/company'
       section#content
         = yield
       nav
         .block
-          | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          = render 'sidebars/file_manager'
     = render 'shared/uploads_status'
     = render 'shared/current_user'

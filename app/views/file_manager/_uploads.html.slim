@@ -1,0 +1,9 @@
+.item.upload ng-repeat="upload in folder.uploads" ng-click="toggleUploadSelection(upload)" ng-class="{selected: isSelectedUpload(upload)}" ddragable="upload"
+  .name
+    | {{upload.name}}
+  .menu stop-propagation="click"
+    a.action.download href="" ng-click="download(upload)" title=t('.download')
+    - if self? @user
+      a.action.lock href="" ng-click="setPassword(upload)" title=t('.set_password')
+      a.action.unlock href="" ng-click="deletePassword(upload)" ng-show="upload.locked" title=t('.delete_password')
+  .progress ng-show="upload.isUploading()" = "#{t '.progress'}: {{upload.percent}}"

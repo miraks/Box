@@ -25,10 +25,13 @@ class Api::V1::UploadsController < Api::V1::BaseController
   end
 
   def move
-    # TODO: обрабатывать ошибки
     # TODO: это будет работать очень медленно при большом числе файлов
-    @uploads.each { |upload| upload.move @folder }
-    render json: @uploads, each_serializer: UploadSerializer
+    result = @uploads.all? { |upload| upload.move @folder }
+    if result
+      render json: @uploads, each_serializer: UploadSerializer
+    else
+      render json: TextError.new(I18n.t('errors.move_fail')), status: 500
+    end
   end
 
   def copy

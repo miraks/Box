@@ -1,4 +1,4 @@
-angular.module('BoxApp').factory 'Downloader', [ ->
+angular.module('BoxApp').service 'Downloader', [ ->
   download: (url) ->
     form = document.createElement 'form'
     form.method = 'get'

@@ -1,0 +1,6 @@
+- if logged_in? and not self? @user
+  div ng-controller="FriendshipController" ng-init="init('#{FriendshipSerializer.new(current_user.friendship_with(@user)).to_json}')"
+    a href="" ng-click="becomeFriend()" ng-hide="isFriend()"
+      = t '.become_friend'
+    a href="" ng-click="stopBeingFriend()" ng-show="isFriend()"
+      = t '.stop_being_friend'

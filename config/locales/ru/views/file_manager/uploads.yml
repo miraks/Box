@@ -1,0 +1,7 @@
+ru:
+  file_manager:
+    uploads:
+      download: Скачать
+      progress: Прогресс
+      set_password: Установить пароль
+      delete_password: Удалить пароль
