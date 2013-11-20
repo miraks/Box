@@ -2,6 +2,6 @@
   .name
     | {{folder.name}}
   - if self? @user
-    .menu
+    .menu stop-propagation="click"
       a.action.lock href="" ng-click="setPassword(folder)" title=t('.set_password')
       a.action.unlock href="" ng-click="deletePassword(folder)" ng-show="folder.locked" title=t('.delete_password')
