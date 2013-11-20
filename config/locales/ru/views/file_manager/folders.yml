@@ -1,0 +1,5 @@
+ru:
+  file_manager:
+    folders:
+      set_password: Установить пароль
+      delete_password: Удалить пароль

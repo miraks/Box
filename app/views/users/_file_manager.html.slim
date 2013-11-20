@@ -1,0 +1,6 @@
+.file-manager ng-controller="FoldersController" ng-init="init(#{@user.folders.root.id})"
+  = render 'file_manager/buttons'
+  = render 'file_manager/path'
+  = render 'file_manager/folders'
+  = render 'file_manager/uploads'
+  #upload_button.upload-button.button = t '.upload'

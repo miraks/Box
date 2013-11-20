@@ -27,6 +27,6 @@ html ng-app="BoxApp"
         = yield
       nav
         .block
-          | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          = render 'sidebars/file_manager'
     = render 'shared/uploads_status'
     = render 'shared/current_user'

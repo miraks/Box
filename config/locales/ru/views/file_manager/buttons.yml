@@ -1,0 +1,6 @@
+ru:
+  file_manager:
+    buttons:
+      copy: Копировать
+      cut: Вырезать
+      paste: Вставить

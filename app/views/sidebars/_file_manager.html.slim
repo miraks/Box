@@ -1,31 +1,5 @@
-- if logged_in? and not self? @user
-  div ng-controller="FriendshipController" ng-init="init('#{FriendshipSerializer.new(current_user.friendship_with(@user)).to_json}')"
-    a href="" ng-click="becomeFriend()" ng-hide="isFriend()"
-      = t '.become_friend'
-    a href="" ng-click="stopBeingFriend()" ng-show="isFriend()"
-      = t '.stop_being_friend'
-
-#file_manager ng-controller="FoldersController" ng-init="init(#{@user.folders.root.id})"
-  #action_buttons
-    - %w(copy cut paste).each do |button|
-      a href="" class=['action-button', button] ng-click="#{button}()" title=t(".#{button}")
-  #path
-    .path-part ng-repeat="folder in folder.parents" ng-click="changeFolder(folder)" {{folder.name}}
-  .folder ng-repeat="folder in folder.children" ng-click="changeFolder(folder)"
-    div ng-click="$event.stopPropagation()"
-      | {{folder.name}}
-      - if self? @user
-        .menu
-          a.lock href="" ng-click="setPassword(folder)" title=t('.set_password')
-          a.unlock href="" ng-click="deletePassword(folder)" ng-show="folder.locked" title=t('.delete_password')
-  .upload ng-repeat="upload in folder.uploads" ng-click="toggleUploadSelection(upload)" ng-class="{selected: isSelectedUpload(upload)}"
-    div ng-click="$event.stopPropagation()"
-      div
-        | {{upload.name}}
-      .menu
-        a.download href="" ng-click="download(upload)" title=t('.download')
-        - if self? @user
-          a.lock href="" ng-click="setPassword(upload)" title=t('.set_password')
-          a.unlock href="" ng-click="deletePassword(upload)" ng-show="upload.locked" title=t('.delete_password')
-      div ng-show="upload.isUploading()" = "#{t '.progress'}: {{upload.percent}}"
-  #upload_button.button = t '.upload'
+.file-manager.small ng-controller="FoldersController" ng-init="init(#{current_user.folders.root.id})"
+  = render 'file_manager/buttons'
+  = render 'file_manager/path'
+  = render 'file_manager/folders'
+  = render 'file_manager/uploads'
