@@ -27,5 +27,8 @@ angular.module('BoxApp').controller 'ConversationsController', ['$scope', 'Conve
   $scope.newMessage = ->
     new Message user: { id: CurrentUser.id }
 
+  $scope.recipientSelected = (recipient) ->
+    $scope.message.recipient = recipient
+
   $scope.init()
 ]

@@ -1,8 +1,12 @@
-angular.module('BoxApp').directive 'search', ['$timeout', ($timeout) ->
+angular.module('BoxApp').directive 'search', ['$timeout', '$injector', ($timeout, $injector) ->
   setupTimer = true
 
   restrict: 'E'
   replace: true
+
+  scope:
+    onSelect: '='
+    searchFor: '@'
 
   link: (scope, element, attrs) ->
     scope.$watch 'query', ->
@@ -17,10 +21,15 @@ angular.module('BoxApp').directive 'search', ['$timeout', ($timeout) ->
       , 600)
 
   controller: ($scope, $element) ->
+    $scope.search = ->
+      $injector.get($scope.searchFor).search($scope.query).then (result) ->
+        $scope.items = result
+
     $scope.click = (item) ->
       $scope.query = item.name
       setupTimer = false
       $scope.showResults = false
+      $scope.onSelect? item
 
   templateUrl: '<%= asset_path "search.html" %>'
 ]
