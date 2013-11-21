@@ -26,7 +26,8 @@ html ng-app="BoxApp"
       section#content
         = yield
       nav
-        .block
-          = render 'sidebars/file_manager'
+        - if logged_in?
+          .block
+            = render 'sidebars/file_manager'
     = render 'shared/uploads_status'
     = render 'shared/current_user'
