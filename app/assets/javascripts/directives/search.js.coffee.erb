@@ -7,13 +7,14 @@ angular.module('BoxApp').directive 'search', ['$timeout', '$injector', ($timeout
   scope:
     onSelect: '='
     searchFor: '@'
+    property: '='
 
   link: (scope, element, attrs) ->
-    scope.$watch 'query', ->
+    scope.$watch 'property', ->
       $timeout.cancel timer if timer?
       return setupTimer = true unless setupTimer
       timer = $timeout( ->
-        if scope.query
+        if scope.property
           scope.showResults = true
           scope.search()
         else
@@ -22,11 +23,11 @@ angular.module('BoxApp').directive 'search', ['$timeout', '$injector', ($timeout
 
   controller: ($scope, $element) ->
     $scope.search = ->
-      $injector.get($scope.searchFor).search($scope.query).then (result) ->
+      $injector.get($scope.searchFor).search($scope.property).then (result) ->
         $scope.items = result
 
     $scope.click = (item) ->
-      $scope.query = item.name
+      $scope.property = item.name
       setupTimer = false
       $scope.showResults = false
       $scope.onSelect? item
