@@ -1,7 +1,8 @@
 .message-form ng-show='showMessageForm'
   form
     p
-      search on-select="recipientSelected" search-for="User" property="message.recipient_id"
+      div ng-hide="hideRecipientField"
+        search on-select="recipientSelected" search-for="User" property="message.recipient_id"
       br
       = text_area_tag :body, nil, 'ng-model' => 'message.body', required: ''
       br
