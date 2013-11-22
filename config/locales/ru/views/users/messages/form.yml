@@ -1,6 +1,6 @@
 ru:
   users:
-    conversations:
+    messages:
       form:
         recipient: Кому
         sent_message: Отправить
