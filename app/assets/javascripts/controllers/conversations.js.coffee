@@ -24,6 +24,9 @@ angular.module('BoxApp').controller 'ConversationsController', ['$scope', 'Conve
       unread: false
     $scope.conversations.unshift conversation
 
+  $scope.loadConversation = (conversation) ->
+    Turbolinks.visit "/users/#{CurrentUser.slug}/conversations/#{conversation.id}"
+
   $scope.newMessage = ->
     new Message user: { id: CurrentUser.id }
 

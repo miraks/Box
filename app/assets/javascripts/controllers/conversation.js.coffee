@@ -2,7 +2,6 @@ angular.module('BoxApp').controller 'ConversationController', ['$scope', 'Conver
   $scope.init = (recipientId, conversationId) ->
     $scope.recipientId = recipientId
     $scope.conversationId = conversationId
-    $scope.showMessageForm = true
     $scope.hideRecipientField = true
     $scope.message = $scope.newMessage()
     $scope.loadConversation()
@@ -13,7 +12,7 @@ angular.module('BoxApp').controller 'ConversationController', ['$scope', 'Conver
 
   $scope.sentMessage = ->
     $scope.message.create().then (message) ->
-      $scope.conversation.messages.push message
+      $scope.conversation.messages.unshift message
       $scope.message = $scope.newMessage()
 
   $scope.deleteMessage = (message) ->

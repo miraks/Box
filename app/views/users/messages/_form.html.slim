@@ -1,10 +1,7 @@
-.message-form ng-show='showMessageForm'
-  form
-    p
-      div ng-hide="hideRecipientField"
-        search on-select="recipientSelected" search-for="User" property="message.recipient_id"
-      br
-      = text_area_tag :body, nil, 'ng-model' => 'message.body', required: ''
-      br
-      a href='' ng-click='sentMessage()'
-        = t '.sent_message'
+form.message-form
+  div ng-hide="hideRecipientField"
+    search on-select="recipientSelected" search-for="User" property="message.recipient_id" placeholder=t('.recipient')
+  div
+    = text_area_tag :body, nil, 'ng-model' => 'message.body', placeholder: t('.message_body'), rows: 5, required: ''
+  a.button href='' ng-click='sentMessage()'
+    = t '.sent_message'

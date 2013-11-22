@@ -1,7 +1,13 @@
+/ TODO: подумать над тем как показывать разные модели
+
 .search
-  input.search type='text' ng-model='property' autocomplete='off'
-  .result ng-show='showResults'
-    ul
-      li ng-repeat="item in items"
-        a href='' ng-click='click(item)'
+  input.search type='text' ng-model='property' autocomplete='off' placeholder="{{placeholder}}"
+  ul.results ng-show='showResults'
+    li.result ng-repeat="item in items"
+      a href='' ng-click='click(item)'
+        img.avatar src="http://placehold.it/30x30"
+        span.name
           | {{item.name}}
+        .clear
+    li.result ng-show="items.isEmpty()"
+      | Ничего не найдено

@@ -8,6 +8,7 @@ angular.module('BoxApp').directive 'search', ['$timeout', '$injector', ($timeout
     onSelect: '='
     searchFor: '@'
     property: '='
+    placeholder: '@'
 
   link: (scope, element, attrs) ->
     scope.$watch 'property', ->

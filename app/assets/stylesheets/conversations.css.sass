@@ -1,0 +1,129 @@
+@import "compass/css3/box-sizing"
+@import "compass/css3/transition"
+
+=awesome-hover
+  +transition(color .3s linear)
+
+  &:hover
+    color: #66B7EF
+
+=font-icon($icon)
+  &:before
+    content: '\e8'+$icon
+
+=messages-container
+  position: relative
+  padding: 0
+
+  h1
+    margin: 10px
+
+  .message
+    position: relative
+    padding: 10px
+
+    &:last-child
+      border-bottom: none
+
+    &.unread
+      background: #eee
+
+    .top
+      border-top: 1px solid #BAC3CB
+      border-bottom: 1px solid #BAC3CB
+      padding: 5px 10px
+
+    .avatar
+      float: left
+
+    .author
+      float: left
+      margin-left: 10px
+
+    .name
+      font-weight: bold
+
+    .date
+      position: absolute
+      right: 10px
+
+    .body
+      margin: 5px 10px
+
+    .body-preview
+      margin-top: 5px
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+
+    .actions .action
+      font-family: 'fontello'
+      font-size: 30px
+      cursor: pointer
+      color: #555555
+      text-decoration: none
+      +awesome-hover
+
+      &.delete
+        +font-icon("1f") // TODO: replace it
+
+section#main
+  .conversations
+    +messages-container
+
+    .message
+      border-bottom: 1px solid #BAC3CB
+      cursor: pointer
+
+      .author
+        width: 355px // sorry
+
+  .messages
+    +messages-container
+
+    .message
+      padding: 10px 0
+
+  .message-form
+    padding: 10px
+
+    input, textarea
+      width: 100%
+      padding: 10px
+      margin-bottom: 20px
+      border: none
+      +box-sizing(border-box)
+
+    .search .results
+      background: #ddd
+      border: 1px solid #BAC3CB
+      border-radius: 0
+      padding: 0 10px
+      +box-sizing(border-box)
+
+      li
+        margin: 10px 0
+
+      a
+        color: black
+        text-decoration: none
+        +awesome-hover
+
+      .avatar, .name
+        float: left
+
+      .name
+        position: relative
+        top: 7px
+        margin: 0 10px
+
+    .button
+      display: block
+      width: 100%
+      color: black
+      border: 1px solid #BAC3CB
+      padding: 10px
+      text-decoration: none
+      text-align: center
+      +box-sizing(border-box)
+      +awesome-hover

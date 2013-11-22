@@ -2,5 +2,6 @@ ru:
   users:
     messages:
       form:
-        recipient: Кому
+        recipient: Получатель
+        message_body: Текст сообщения
         sent_message: Отправить

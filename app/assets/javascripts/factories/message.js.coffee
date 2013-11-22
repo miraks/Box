@@ -6,15 +6,6 @@ angular.module('BoxApp').factory 'Message', ['RailsResource', (RailsResource) ->
       pluralName: 'messages'
       serializer: 'MessageSerializer'
 
-    messageProcessor = (message) ->
-      message.createdAt = Date.create(message.createdAt).format('{dd}.{MM}.{yyyy}')
-
-    @afterResponse (data) ->
-      if Object.isArray data
-        data.each (message) -> messageProcessor message
-      else
-        messageProcessor data
-
     other: (user) ->
       if @user.id == user.id then @recipient else @user
 
