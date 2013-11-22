@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119204135) do
+ActiveRecord::Schema.define(version: 20131122152505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,13 +51,15 @@ ActiveRecord::Schema.define(version: 20131119204135) do
   add_index "friendships", ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true, using: :btree
 
   create_table "messages", force: true do |t|
-    t.integer  "user_id",         null: false
-    t.integer  "recipient_id",    null: false
+    t.integer  "user_id",                              null: false
+    t.integer  "recipient_id",                         null: false
     t.text     "body"
     t.datetime "read_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "conversation_id"
+    t.boolean  "deleted_by_user",      default: false
+    t.boolean  "deleted_by_recipient", default: false
   end
 
   add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree

@@ -19,7 +19,7 @@ Box::Application.routes.draw do
       resources :users, only: [] do
         scope module: :users do
           resources :conversations, only: [:index, :show, :create]
-          resources :messages, only: [:create]
+          resources :messages, only: [:create, :destroy]
           resource :friendships, only: [:create, :destroy]
           collection do
             resources :friends, only: [:index]

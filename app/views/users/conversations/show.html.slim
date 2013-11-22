@@ -7,5 +7,7 @@
         | {{message.user.name}} написал:
       div
         | {{message.body}}
+      div
+        a href="" ng-click="deleteMessage(message)" Удалить
 
   = render 'form'

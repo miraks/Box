@@ -16,6 +16,10 @@ angular.module('BoxApp').controller 'ConversationController', ['$scope', 'Conver
       $scope.conversation.messages.push message
       $scope.message = $scope.newMessage()
 
+  $scope.deleteMessage = (message) ->
+    message.remove().then (message) ->
+      $scope.conversation.messages.remove (mes) -> mes.equal message
+
   $scope.newMessage = ->
     new Message user: { id: CurrentUser.id }, recipientId: $scope.recipientId
 ]

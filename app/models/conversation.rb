@@ -15,7 +15,7 @@ class Conversation < Struct.new(:user1, :user2)
   end
 
   def self.of user
-    Message.last_in_conversations(user).with_users.map do |message|
+    Message.not_deleted_by(user).last_in_conversations(user).with_users.map do |message|
       conversation = Conversation.new(message.user, message.recipient)
       conversation.last_message = message
       conversation
@@ -29,8 +29,10 @@ class Conversation < Struct.new(:user1, :user2)
     end
   end
 
-  def messages
-    Message.where conversation_id: id
+  def messages user = nil
+    messages = Message.where conversation_id: id
+    messages = messages.not_deleted_by user if user
+    messages
   end
 
   def unread user

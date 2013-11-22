@@ -12,6 +12,11 @@ class Message < ActiveRecord::Base
   scope :of, -> user { where 'user_id = :user OR recipient_id = :user', user: user }
   scope :unread, -> { where read_at: nil }
   scope :unread_by, -> user { to(user).unread }
+  scope :not_deleted_by, -> user do
+    where '(user_id = :user AND deleted_by_user = false)
+           OR (recipient_id = :user AND deleted_by_recipient = false)',
+          user: user
+  end
   scope :last_in_conversations, -> user do
     ids = of(user).group(:conversation_id).select('max(messages.id)')
     where "id in (#{ids.to_sql})"
@@ -32,13 +37,20 @@ class Message < ActiveRecord::Base
     save
   end
 
+  def delete_by user
+    public_send "deleted_by_#{role user}=", true
+    save
+  end
+
   private
+
+  def role user
+    user == recipient ? :recipient : :user
+  end
 
   def cant_send_message_yourself
     errors.add :base, 'Нельзя отправить сообщение себе' if user == recipient
   end
-
-  private
 
   def set_conversation_id
     self.conversation_id ||= conversation.id
