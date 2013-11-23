@@ -22,7 +22,11 @@ Box::Application.routes.draw do
           resources :messages, only: [:create, :destroy]
           resource :friendships, only: [:create, :destroy]
           collection do
-            resources :friends, only: [:index]
+            resources :friends, only: [:index] do
+              collection do
+                get :online
+              end
+            end
             resources :search, only: [:index]
           end
         end

@@ -5,6 +5,9 @@ angular.module('BoxApp').factory 'Friend', ['RailsResource', (RailsResource) ->
       name: 'friend'
       pluralName: 'friends'
 
+    @online = ->
+      @$get @$url('online')
+
     equal: (other) ->
       @constructor? and other.constructor? and
       @constructor.name == other.constructor.name and

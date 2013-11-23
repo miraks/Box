@@ -28,6 +28,10 @@ module RedisConnection
       connection.hexists @name, key
     end
 
+    def all
+      connection.hgetall @name
+    end
+
     def delete key
       connection.hdel @name, key
     end

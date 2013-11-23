@@ -23,4 +23,11 @@ Friend = Struct.new(:user) do
     friendship = user.friendships.with(other_user)
     friendship.last ? friendship.last : friendship.new
   end
+
+  # TODO: подумать над оптимизацией
+  def online_friends
+    ids = user.friendships.pluck(:friend_id)
+    ids.select! { |id| Onliner.online? Onliner.last_online_time(id) }
+    User.where id: ids
+  end
 end

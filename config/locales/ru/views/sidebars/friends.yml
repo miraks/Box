@@ -2,6 +2,7 @@ ru:
   sidebars:
     friends:
       friends: Друзья
-      no_friends: У тебя нет друзей
-      friends_online: Друзья онлайн
+      online_friends: Друзья онлайн
       all_friends: Все друзья
+      no_online_friends: У тебя нет друзей онлайн
+      no_all_friends: У тебя нет друзей

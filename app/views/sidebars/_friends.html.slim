@@ -2,10 +2,9 @@ pane title=t('.friends')
   .block.users ng-controller="FriendsListController"
     search search-for="User"
     .users-filter
-      a.active href=''
-        = t '.friends_online'
-      a.inactive href=''
-        = t '.all_friends'
+      - %w(online all).each do |filter|
+        a href="" ng-click="changeFilter('#{filter}')" ng-class="currentFilter == '#{filter}' ? 'active' : 'inactive'"
+          = t ".#{filter}_friends"
     .clear
     div ng-show="hasFriends()"
       .user ng-repeat="friend in friends"
@@ -13,4 +12,6 @@ pane title=t('.friends')
           img src="http://placehold.it/30x30"
         user-link user="friend"
     div ng-hide="hasFriends()"
-      = t '.no_friends'
+      - %w(online all).each do |filter|
+        div ng-show="currentFilter == '#{filter}'"
+          = t ".no_#{filter}_friends"
