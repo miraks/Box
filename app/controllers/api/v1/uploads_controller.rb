@@ -7,7 +7,7 @@ class Api::V1::UploadsController < Api::V1::BaseController
   def create
     @upload = Upload.new user: current_user, file: params[:file], folder: @folder
     success = @upload.save
-    render json: @upload, meta: { success: success }
+    render json: @upload
   end
 
   def update

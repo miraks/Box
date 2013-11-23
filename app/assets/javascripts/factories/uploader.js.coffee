@@ -38,7 +38,7 @@ angular.module('BoxApp').factory 'Uploader', ['$rootScope', 'Upload', 'Storage',
         upload = @uploads.find (up) -> up.file.id == file.id
         @removeUpload upload
         $rootScope.$apply ->
-          Object.merge upload, resp.upload
+          Object.merge upload, JSON.parse(resp.response).upload
           Object.merge upload, state: 'uploaded', file: null
         @trigger 'fileUploaded', upload, resp
 
