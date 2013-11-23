@@ -1,0 +1,1 @@
+:host: <%= ENV['BOX_REDIS_ADDRESS'] %>
