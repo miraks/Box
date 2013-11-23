@@ -19,7 +19,7 @@ class Message < ActiveRecord::Base
   end
   scope :last_in_conversations, -> user do
     ids = of(user).group(:conversation_id).select('max(messages.id)')
-    where "id in (#{ids.to_sql})"
+    where id: ids
   end
 
   def conversation
