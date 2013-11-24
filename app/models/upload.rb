@@ -17,6 +17,14 @@ class Upload < ActiveRecord::Base
   role :secure_link_generator, methods: [:generate_download_link]
   role :manipulable, methods: [:move, :copy]
 
+  def access_for user
+    self.user.permissions.create user: user, upload: self
+  end
+
+  def access_for_group group
+    self.user.permissions.create upload: self, permission_type: group
+  end
+
   def name
     original_name
   end

@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :friendships
   has_many :friends, through: :friendships, source: :friend
+  has_many :permissions, foreign_key: 'owner_id'
 
   validates :name, presence: true
 
@@ -30,6 +31,10 @@ class User < ActiveRecord::Base
        :become_friend_with, :stop_being_friend_of, :friendship_with, :online_friends]
   role :babbler, methods: [:unread_messages_count]
   role :onliner, methods: [:online!, :online?, :last_online_time]
+
+  def shared
+    Permission.where(user_id: self.id)
+  end
 
   def to_s
     name
