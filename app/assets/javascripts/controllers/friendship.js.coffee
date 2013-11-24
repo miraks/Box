@@ -6,16 +6,14 @@ angular.module('BoxApp').controller 'FriendshipController', ['$scope', 'Friendsh
   $scope.becomeFriend = ->
     friendship = $scope.friendship.create().then (friendship) ->
       $scope.friendship = friendship
-      storage.push $scope.friendship.friend
+      $scope.$emit 'friendshipCreated', $scope.friendship
 
   $scope.stopBeingFriend = ->
     $scope.friendship.delete().then (friendship) ->
       $scope.friendship = friendship
-      storage.remove (friend) -> friendship.friend.equal friend
+      $scope.$emit 'friendshipDestroyed', $scope.friendship
       friendship.id = null
 
   $scope.isFriend = ->
     not $scope.friendship.isNew()
-
-  storage = Storage.get('friends', {}).query ||= []
 ]
