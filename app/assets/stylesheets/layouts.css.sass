@@ -112,19 +112,25 @@ section#main
         font-weight: bold
 
     .users-filter
-      a.active
-        color: #686464
-        background: #f3f3e7
-        padding: 3px
-        text-decoration: none
-        font-weight: bold
-        float: left
-      a.inactive
-        color: #66b7ef
-        text-decoration: none
-        font-weight: bold
-        border-bottom: 1px dashed
-        float: right
+      a
+        &.all, &.online
+          text-decoration: none
+          font-weight: bold
+          padding: 3px
+
+        &.all
+          float: left
+
+        &.online
+          float: right
+
+        &.active
+          color: #686464
+          background: #f3f3e7
+
+        &.inactive
+          color: #66b7ef
+          border-bottom: 1px dashed
 
   .block
     @extend .block-style

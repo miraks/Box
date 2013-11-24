@@ -3,7 +3,7 @@ pane title=t('.friends')
     search search-for="User" property="query"
     .users-filter
       - %w(online all).each do |filter|
-        a href="" ng-click="changeFilter('#{filter}')" ng-class="currentFilter == '#{filter}' ? 'active' : 'inactive'"
+        a href="" ng-click="changeFilter('#{filter}')" class=filter ng-class="currentFilter == '#{filter}' ? 'active' : 'inactive'"
           = t ".#{filter}_friends"
     .clear
     div ng-show="hasFriends()"
