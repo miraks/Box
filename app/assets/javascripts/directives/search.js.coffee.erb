@@ -22,7 +22,7 @@ angular.module('BoxApp').directive 'search', ['$timeout', '$injector', ($timeout
           scope.showResults = false
       , 600)
 
-  controller: ($scope, $element) ->
+  controller: ['$scope', '$element', ($scope, $element) ->
     $scope.search = ->
       $injector.get($scope.searchFor).search($scope.property).then (result) ->
         $scope.items = result
@@ -32,6 +32,7 @@ angular.module('BoxApp').directive 'search', ['$timeout', '$injector', ($timeout
       setupTimer = false
       $scope.showResults = false
       $scope.onSelect? item
+  ]
 
   templateUrl: '<%= asset_path "search.html" %>'
 ]
