@@ -1,0 +1,5 @@
+ru:
+  users:
+    profile:
+      online_now: Сейчас на сайте
+      was_online_at: Был онлайн %{time} назад

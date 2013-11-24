@@ -4,7 +4,10 @@
   .name
     = @user.slug
   .online-status
-    | был 40 минут назад
+    - if @user.online?
+      = t '.online_now'
+    - else
+      = t '.was_online_at', time: time_ago_in_words(@user.last_online_time)
   .rating
     | + 49
   .city
