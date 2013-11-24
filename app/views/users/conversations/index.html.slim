@@ -5,10 +5,10 @@
     .message ng-repeat="conversation in conversations" ng-class="{unread: conversation.unread}" ng-click="loadConversation(conversation)"
       img.avatar src="http://placehold.it/50x50"
       .author
-        .date
-          | {{conversation.lastMessage.createdAt | date:'HH:mm dd-MM-yyyy'}}
         .name
           | {{conversation.lastMessage.other(currentUser).name}}
+        .date
+          | {{conversation.lastMessage.createdAt | date:'HH:mm dd-MM-yyyy'}}
         .body-preview
           | {{conversation.lastMessage.body}}
       .clear

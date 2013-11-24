@@ -1,6 +1,6 @@
 pane title=t('.friends')
   .block.users ng-controller="FriendsListController"
-    search search-for="User"
+    search search-for="User" property="query"
     .users-filter
       - %w(online all).each do |filter|
         a href="" ng-click="changeFilter('#{filter}')" ng-class="currentFilter == '#{filter}' ? 'active' : 'inactive'"

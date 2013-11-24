@@ -3,5 +3,5 @@ form.message-form
     search on-select="recipientSelected" search-for="User" property="message.recipient_id" placeholder=t('.recipient')
   div
     = text_area_tag :body, nil, 'ng-model' => 'message.body', placeholder: t('.message_body'), rows: 5, required: ''
-  a.button href='' ng-click='sentMessage()'
+  .button ng-click='sentMessage()'
     = t '.sent_message'

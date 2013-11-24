@@ -1,19 +1,19 @@
-.block.messages ng-controller='ConversationController' ng-init='init(#{@conversation.other(current_user).id}, "#{@conversation.id}")'
+.block.conversations ng-controller='ConversationController' ng-init='init(#{@conversation.other(current_user).id}, "#{@conversation.id}")'
   h1 = "Переписка с #{@conversation.other(current_user)}"
 
   = render 'users/messages/form'
 
-  .messages
-    .message ng-repeat="message in conversation.messages"
-      .top
-        img.avatar src="http://placehold.it/50x50"
-        .author
-          .date
-            | {{message.createdAt | date:'HH:mm dd-MM-yyyy'}}
-          .name
-            | {{message.user.name}}
-          .actions
-            a.delete.action href="" ng-click="deleteMessage(message)" title="Удалить"
-        .clear
+  .message ng-repeat="message in conversation.messages"
+    .action.delete ng-click="deleteMessage(message)"
+      | &times;
+    img.avatar src="http://placehold.it/50x50"
+    .author
+      .name
+        | {{message.user.name}}
+      .date
+        | {{message.createdAt | date:'HH:mm dd-MM-yyyy'}}
+      /.actions
+        a.delete.action href="" ng-click="deleteMessage(message)" title="Удалить"
       .body
         | {{message.body}}
+    .clear

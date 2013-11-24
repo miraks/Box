@@ -3,11 +3,9 @@
 .search
   input.search type='text' ng-model='property' autocomplete='off' placeholder="{{placeholder}}"
   ul.results ng-show='showResults'
-    li.result ng-repeat="item in items"
-      a href='' ng-click='click(item)'
+    li ng-repeat="item in items"
+      .item ng-click='click(item)'
         img.avatar src="http://placehold.it/30x30"
-        span.name
-          | {{item.name}}
-        .clear
+        | {{item.name}}
     li.result ng-show="items.isEmpty()"
       | Ничего не найдено

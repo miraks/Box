@@ -1,3 +1,4 @@
+@import "compass/css3/transition"
 // delete
 #error_explanation
   color: red
@@ -5,3 +6,20 @@
   color: red
 .hidden
   display: none
+
+=awesome-hover
+  +transition(color .3s linear)
+
+  &:hover
+    color: #66B7EF
+
+.clear
+  clear: both
+
+.button
+  text-align: center
+  cursor: pointer
+  border: 1px solid #BAC3CB
+  border-radius: 3px
+  padding: 10px
+  +awesome-hover

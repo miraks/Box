@@ -26,9 +26,6 @@ section#main
   width: 1020px
   margin: auto
 
-  .clear
-    clear: both
-
   .block-style
     padding: 10px
     background: #fff
@@ -63,6 +60,32 @@ section#main
     .tab-content
       margin-top: -1px
 
+  input[type='text'], textarea
+    border: 1px solid #bac3cb
+    outline: none
+    padding: 5px 0
+    text-indent: 10px
+    width: 100%
+    border-radius: 3px
+    resize: none
+    margin-bottom: 5px
+
+  .search
+    position: relative
+    .results
+      @extend .block-style
+      padding: 0
+      width: 100%
+      position: absolute
+      li
+        margin: 3px
+        .item
+          line-height: 30px
+          cursor: pointer
+          img
+            float: left
+            margin-right: 10px
+
   .users
     max-height: 300px
     .user
@@ -89,7 +112,6 @@ section#main
         font-weight: bold
 
     .users-filter
-      margin: 10px 0
       a.active
         color: #686464
         background: #f3f3e7
