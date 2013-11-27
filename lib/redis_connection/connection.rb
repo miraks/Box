@@ -6,7 +6,8 @@ module RedisConnection
 
     # don't worry redis gem is thread-safe
     def initialize
-      @connection = Redis.new config
+      connection = Redis.new config
+      @connection = QueryProxy.new connection
     end
 
     private

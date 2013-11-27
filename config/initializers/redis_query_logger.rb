@@ -1,0 +1,1 @@
+RedisConnection::LogSubscriber.attach_to :redis
