@@ -14,7 +14,7 @@ module RedisConnection
     private
 
     def _process_query name, *args
-      query_data = { name: name, args: args[1..-1] }
+      query_data = { name: name, args: args }
       ::ActiveSupport::Notifications.instrument('query.redis', query_data) { yield }
     end
 
