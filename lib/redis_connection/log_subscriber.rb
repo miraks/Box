@@ -6,7 +6,7 @@ module RedisConnection
     end
 
     def query event
-      name, args = event.payload[:name]
+      name = event.payload[:name]
       args = event.payload[:args]
       duration = "(#{event.duration.round(1)}ms)"
 
