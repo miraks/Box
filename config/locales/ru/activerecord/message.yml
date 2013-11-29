@@ -1,0 +1,20 @@
+ru:
+  activerecord:
+    models:
+      message: Личное сообщение
+    attributes:
+      message:
+        user: Пользователь
+        user_id: Пользователь
+        recipient: Получатель
+        recipient_id: Получатель
+        body: Текст сообщения
+        read_at: Время прочтения
+        conversation: Переписка
+        conversation_id: Переписка
+    errors:
+      models:
+        message:
+          attributes:
+            base:
+              not_to_self: Нельзя отправить сообщение себе

@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   include CustomFinder
   include OnlineMarker
-  include AuthorizationErrorProcessor
+  include ErrorsProcessor
 
   protect_from_forgery with: :exception
 

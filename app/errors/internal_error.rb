@@ -5,5 +5,7 @@ class InternalError < BaseError
     @exception = exception
   end
 
-  delegate :message, to: :exception
+  def message
+    I18t.t 'errors.messages.internal'
+  end
 end

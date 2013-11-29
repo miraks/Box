@@ -3,15 +3,22 @@ class Api::V1::Users::MessagesController < Api::V1::BaseController
   before_filter :authenticate_user!
 
   def create
-    recipient = User.find params[:message][:recipient_id].to_s.to_slug.normalize! # TODO: change that when users search will work
+    recipient = User.find_by slug: params[:message][:recipient_id]
+    return render_error TextError.new('recipient_not_found'), 500
     @message = Message.new message_params.merge(user: current_user, recipient: recipient)
-    @message.save
-    render json: @message
+    if @message.save
+      render json: @message
+    else
+      render_error @message, 403
+    end
   end
 
   def destroy
-    @message.delete_by current_user
-    render json: @message
+    if @message.delete_by current_user
+      render json: @message
+    else
+      render_error @message, 403
+    end
   end
 
   private

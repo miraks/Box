@@ -1,17 +1,9 @@
-angular.module('BoxApp').factory 'Upload', ['RailsResource', 'AppError', (RailsResource, AppError) ->
+angular.module('BoxApp').factory 'Upload', ['RailsResource', (RailsResource) ->
   class Upload extends RailsResource
     @configure
       url: '/api/v1/uploads'
       name: 'upload'
       pluralName: 'uploads'
-      responseInterceptors: [
-        (promise) ->
-          # Sometimes it's not a promise
-          # should be fixed in RailsResource
-          promise.catch? (data) ->
-            AppError.create(data).show()
-          promise
-      ]
 
     @manipulate = (action, uploads, folder) ->
       uploads = [uploads] unless Object.isArray uploads

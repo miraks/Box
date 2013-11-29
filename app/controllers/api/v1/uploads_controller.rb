@@ -6,13 +6,19 @@ class Api::V1::UploadsController < Api::V1::BaseController
 
   def create
     @upload = Upload.new user: current_user, file: params[:file], folder: @folder
-    success = @upload.save
-    render json: @upload
+    if @upload.save
+      render json: @upload
+    else
+      render_error ValidationError.new(@upload), 403
+    end
   end
 
   def update
-    @upload.update_attributes! upload_params
-    render json: @upload
+    if @upload.update_attributes upload_params
+      render json: @upload
+    else
+      render_error ValidationError.new(@upload), 403
+    end
   end
 
   def download
@@ -26,17 +32,20 @@ class Api::V1::UploadsController < Api::V1::BaseController
 
   def move
     # TODO: это будет работать очень медленно при большом числе файлов
-    result = @uploads.all? { |upload| upload.move @folder }
-    if result
+    @uploads.all? { |upload| upload.move @folder }
+    if @uploads.all? { |upload| upload.move @folder }
       render json: @uploads, each_serializer: UploadSerializer
     else
-      render json: TextError.new(I18n.t('errors.move_fail')), status: 500
+      render_error TextError.new('move'), 500
     end
   end
 
   def copy
-    @uploads.each { |upload| upload.copy @folder }
-    render json: @uploads, each_serializer: UploadSerializer
+    if @uploads.all? { |upload| upload.copy @folder }
+      render json: @uploads, each_serializer: UploadSerializer
+    else
+      render_error TextError.new('copy'), 500
+    end
   end
 
   private

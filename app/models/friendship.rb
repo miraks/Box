@@ -11,6 +11,6 @@ class Friendship < ActiveRecord::Base
   private
 
   def not_same_user
-    errors.add :base, 'Нельзя подружится с самим собой' if user == friend
+    errors.add :base, :not_with_self if user == friend
   end
 end

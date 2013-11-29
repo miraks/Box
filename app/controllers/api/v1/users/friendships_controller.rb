@@ -4,12 +4,20 @@ class Api::V1::Users::FriendshipsController < Api::V1::BaseController
 
   def create
     @friendship = current_user.become_friend_with @user
-    render json: @friendship, meta: { success: @friendship.persisted? }
+    if @friendship.persisted?
+      render json: @friendship
+    else
+      render_error TextError.new('become_friend'), 500
+    end
   end
 
   def destroy
     @friendship = current_user.stop_being_friend_of @user
-    render json: @friendship, meta: { success: @friendship.destroyed? }
+    if @friendship.destroyed?
+      render json: @friendship
+    else
+      render_error TextError.new('stop_being_friend'), 500
+    end
   end
 
 end

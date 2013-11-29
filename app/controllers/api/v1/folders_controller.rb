@@ -7,8 +7,11 @@ class Api::V1::FoldersController < Api::V1::BaseController
   end
 
   def update
-    @folder.update_attributes! folder_params
-    render json: @folder
+    if @folder.update_attributes folder_params
+      render json: @folder
+    else
+      render_error ValidationError.new(@folder), 403
+    end
   end
 
   def permission
