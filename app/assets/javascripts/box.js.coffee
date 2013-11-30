@@ -31,3 +31,19 @@ boxApp.run ['$templateCache', 'Storage', ($templateCache, Storage) ->
     templates[key] = value
     oldPut.call @, key, value
 ]
+
+boxApp.run ['RailsResource', 'AppError', (RailsResource, AppError) ->
+  oldConfigure = RailsResource.configure
+
+  errorsInterceptor = (promise) ->
+    # Sometimes it's not a promise
+    # should be fixed in RailsResource
+    promise.catch? (data) ->
+      new AppError(data).show()
+    promise
+
+  RailsResource.configure = (cfg) ->
+    cfg.responseInterceptors ||= []
+    cfg.responseInterceptors.push errorsInterceptor
+    oldConfigure.call @, cfg
+]

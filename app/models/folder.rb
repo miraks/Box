@@ -9,7 +9,7 @@ class Folder < ActiveRecord::Base
   has_many :permissions, as: :item
   belongs_to :user
 
-  validates :name, presence: true
+  validates :user, :name, presence: true
   validate :not_set_password_on_root
 
   before_save :set_parent_folders, if: :parent
@@ -34,7 +34,7 @@ class Folder < ActiveRecord::Base
   private
 
   def not_set_password_on_root
-    errors.add :base, "Нельзя устанавливать пароль на корень" if root? && password?
+    errors.add :password, :not_on_root if root? && password?
   end
 
   def set_parent_folders

@@ -1,0 +1,14 @@
+ru:
+  activerecord:
+    models:
+      upload: Файл
+    attributes:
+      upload:
+        user: Пользователь
+        user_id: Пользователь
+        folder: Папка
+        folder_id: Папка
+        original_name: Название
+        file: Файл
+        locked: Приватная
+        password: Пароль

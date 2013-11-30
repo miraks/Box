@@ -1,2 +1,0 @@
-class AuthorizationErrorSerializer < BaseErrorSerializer
-end

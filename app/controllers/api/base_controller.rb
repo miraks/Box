@@ -21,15 +21,6 @@ class Api::BaseController < ActionController::Metal
 
   # Our modules
   include CustomFinder
-  include AuthorizationErrorProcessor
-
-  rescue_from StandardError, with: :error_processor
-
-  protected
-
-  def error_processor exception
-    @error = InternalError.new exception
-    render json: @error, status: 500
-  end
+  include ErrorsProcessor
 
 end

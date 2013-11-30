@@ -1,0 +1,10 @@
+ru:
+  errors:
+    messages:
+      not_found: %{name} не найден(а)
+      become_friend: Не удалось подружиться
+      stop_being_friend: Не удалось перестать дружить
+      move: Не удалось переместить
+      copy: Не удалось скопировать
+      recipient_not_found: Не удалось найти получателя сообщения
+      internal: Что-то пошло не так

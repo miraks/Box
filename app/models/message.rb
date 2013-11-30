@@ -49,7 +49,7 @@ class Message < ActiveRecord::Base
   end
 
   def cant_send_message_yourself
-    errors.add :base, 'Нельзя отправить сообщение себе' if user == recipient
+    errors.add :base, :not_to_self if user == recipient
   end
 
   def set_conversation_id

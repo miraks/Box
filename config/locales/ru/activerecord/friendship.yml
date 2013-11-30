@@ -1,0 +1,16 @@
+ru:
+  activerecord:
+    models:
+      friendship: Дружба
+    attributes:
+      friendship:
+        user: Пользователь
+        user_id: Пользователь
+        friend: Друг
+        friend_id: Друг
+    errors:
+      models:
+        friendship:
+          attributes:
+            base:
+              not_with_self: Нельзя подружится с самим собой

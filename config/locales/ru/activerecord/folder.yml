@@ -1,0 +1,17 @@
+ru:
+  activerecord:
+    models:
+      folder: Папка
+    attributes:
+      folder:
+        name: Название
+        user: Пользователь
+        user_id: Пользователь
+        locked: Приватная
+        password: Пароль
+    errors:
+      models:
+        folder:
+          attributes:
+            password:
+              not_on_root: нельзя установить на корневую директорию

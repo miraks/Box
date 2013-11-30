@@ -1,2 +1,0 @@
-class InternalErrorSerializer < BaseErrorSerializer
-end
