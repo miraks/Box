@@ -68,6 +68,9 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
 
   # Password manipulation
 
+  $scope.loadSettings = (objects) ->
+    $scope.showSettings = !$scope.showSettings
+
   $scope.setPassword = (object) ->
     password = prompt "Введи пароль"
     return unless password?

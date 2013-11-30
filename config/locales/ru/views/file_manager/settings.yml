@@ -1,0 +1,5 @@
+ru:
+  file_manager:
+    settings:
+      confirm: Подтвердить
+      cancel: Закрыть
