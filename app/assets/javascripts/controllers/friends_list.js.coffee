@@ -1,5 +1,6 @@
 angular.module('BoxApp').controller 'FriendsListController', ['$scope', '$rootScope', 'Friend', 'Storage', 'CurrentUser', ($scope, $rootScope, Friend, Storage, CurrentUser) ->
   $scope.loadFriends = (filter) ->
+    return unless CurrentUser.isLoggedIn()
     filter = $scope.currentFilter
     filter = 'query' if filter == 'all'
     return $scope.friends = $scope.storage[filter] if $scope.storage[filter]?
