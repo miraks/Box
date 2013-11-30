@@ -16,7 +16,7 @@ Onliner = Struct.new(:user) do
   end
 
   def self.online? time
-    (time and time > online_bound.ago) or false
+    #(time and time > online_bound.ago) or false
   end
 
   def self.last_online_time id

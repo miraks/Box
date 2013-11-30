@@ -67,10 +67,11 @@ ActiveRecord::Schema.define(version: 20131124141157) do
   add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "permissions", force: true do |t|
-    t.integer  "owner_id",                         null: false
+    t.integer  "owner_id",   null: false
     t.integer  "user_id"
-    t.integer  "upload_id",                        null: false
-    t.string   "permission_type", default: "user", null: false
+    t.integer  "item_id",    null: false
+    t.string   "item_type",  null: false
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -84,11 +85,11 @@ ActiveRecord::Schema.define(version: 20131124141157) do
   end
 
   create_table "uploads", force: true do |t|
+    t.string   "original_name",                 null: false
     t.integer  "user_id",                       null: false
     t.integer  "folder_id",                     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "original_name"
     t.string   "file"
     t.string   "password_hash"
     t.boolean  "locked",        default: false

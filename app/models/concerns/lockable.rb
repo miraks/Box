@@ -7,7 +7,7 @@ module Lockable
 
   def permission user
     case
-    when !password? || self.user == user then :yes
+    when self.user == user || !password? && user.has_access?(self) then :yes
     when password? then :password
     else :no
     end
@@ -16,7 +16,7 @@ module Lockable
   private
 
   def update_lock
-    self.locked = password? if password_changed?
+    self.locked = password? || permission_required?
     true
   end
 end

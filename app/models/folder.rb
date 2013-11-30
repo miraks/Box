@@ -1,10 +1,12 @@
 class Folder < ActiveRecord::Base
   include PasswordProtected
   include Lockable
+  include Permissions
 
   attr_accessor :parent
 
   has_many :uploads
+  has_many :permissions, as: :item
   belongs_to :user
 
   validates :name, presence: true

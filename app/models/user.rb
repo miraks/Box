@@ -36,6 +36,11 @@ class User < ActiveRecord::Base
     Permission.where(user_id: self.id)
   end
 
+  def has_access? item
+    # TODO: решить доступ к чужим папкам/файлам по умолчанию закрыт или открыт?
+    !item.permission_required? || shared.where(item: item).exists?
+  end
+
   def to_s
     name
   end
