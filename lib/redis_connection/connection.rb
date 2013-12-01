@@ -10,6 +10,10 @@ module RedisConnection
       @connection = QueryProxy.new connection
     end
 
+    def clear!
+      connection.flushall
+    end
+
     private
 
     def config

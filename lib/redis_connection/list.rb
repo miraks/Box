@@ -1,31 +1,23 @@
 module RedisConnection
-  class List
-    include Connector
-
-    attr_reader :name
-
-    def initialize name
-      @name = name
-    end
-
+  class List < Structure
     def push *values
-      connection.rpush @name, values
+      connection.rpush name, values
     end
 
     def unshift *values
-      connection.lpush @name, values
+      connection.lpush name, values
     end
 
     def shift
-      connection.lpop @name
+      connection.lpop name
     end
 
     def pop
-      connection.rpop @name
+      connection.rpop name
     end
 
     def length
-      connection.llen @name
+      connection.llen name
     end
   end
 end

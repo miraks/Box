@@ -28,14 +28,11 @@ class Upload < ActiveRecord::Base
   end
 
   def parents
-    folder.parents
+    ids = folder.parent_folder_ids.unshift folder.id
+    Folder.where id: ids
   end
 
   private
-
-  def upload_lock
-
-  end
 
   def copy_to_storage
     # TODO

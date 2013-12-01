@@ -20,7 +20,7 @@ module Box
     config.i18n.load_path = Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :ru
 
-    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += %W(#{config.root}/app/policies/concerns #{config.root}/lib)
 
     # Слимовские темплейты можно хранить в ассетах
     assets.register_engine '.slim', Slim::Template

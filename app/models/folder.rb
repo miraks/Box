@@ -1,4 +1,5 @@
 class Folder < ActiveRecord::Base
+  include Roleplayer
   include PasswordProtected
   include Lockable
   include Permissions
