@@ -1,6 +1,9 @@
 UploadPolicy = Struct.new(:user, :upload) do
+  include PermissionCheck
+
+  self.item = :upload
+
   def download? password = nil
-    permission = upload.permission user
-    permission == :yes or (permission == :password and upload.password == password)
+    has_permission? password
   end
 end

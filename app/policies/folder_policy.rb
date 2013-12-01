@@ -1,6 +1,9 @@
 FolderPolicy = Struct.new(:user, :folder) do
+  include PermissionCheck
+
+  self.item = :folder
+
   def show? password = nil
-    permission = folder.permission user
-    permission == :yes or (permission == :password and folder.password == password)
+    has_permission? password
   end
 end

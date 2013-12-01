@@ -28,7 +28,8 @@ class Upload < ActiveRecord::Base
   end
 
   def parents
-    folder.parents
+    ids = folder.parent_folder_ids.unshift folder.id
+    Folder.where id: ids
   end
 
   private
