@@ -32,7 +32,7 @@ class Api::V1::UploadsController < Api::V1::BaseController
 
   def set_permissions
     # TODO: remake
-    @folder.permissions.destroy_all
+    @upload.permissions.destroy_all
     params[:upload][:ids].each do |id|
       @upload.allow_access_for User.find(id)
     end
