@@ -1,39 +1,31 @@
 module RedisConnection
-  class Hash
-    include Connector
-
-    attr_reader :name
-
-    def initialize name
-      @name = name
-    end
-
+  class Hash < Struct
     def [] key
-      connection.hget @name, key
+      connection.hget name, key
     end
 
     def []= key, value
-      connection.hset @name, key, value
+      connection.hset name, key, value
     end
 
     def get *keys
-      connection.hmget @name, keys
+      connection.hmget name, keys
     end
 
     def set hash
-      connection.hmset @name, hash.to_a.flatten
+      connection.hmset name, hash.to_a.flatten
     end
 
     def has_key? key
-      connection.hexists @name, key
+      connection.hexists name, key
     end
 
     def all
-      connection.hgetall @name
+      connection.hgetall name
     end
 
     def delete key
-      connection.hdel @name, key
+      connection.hdel name, key
     end
   end
 end

@@ -1,32 +1,23 @@
 module RedisConnection
-  class Set
-    include Connector
-
-    attr_reader :name
-
-    def initialize name
-      @name = name
-    end
-
+  class Set < Struct
     def all
-      connection.smembers @name
+      connection.smembers name
     end
 
     def push *values
-      connection.sadd @name, values
+      connection.sadd name, values
     end
 
     def pop
-      connection.spop @name
+      connection.spop name
     end
 
     def include? value
-      connection.sismember @name, value
+      connection.sismember name, value
     end
 
     def remove *values
-      connection.srem @name, values
+      connection.srem name, values
     end
-
   end
 end
