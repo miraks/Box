@@ -30,6 +30,13 @@ angular.module('BoxApp').factory 'Upload', ['RailsResource', (RailsResource) ->
     permission: ->
       Upload.$get @$url('permission')
 
+    set_permissions: (users) ->
+      ids = users.map 'id'
+      Upload.$patch @$url('set_permissions'), ids: ids
+
+    get_permissions: ->
+      Upload.$get @$url('get_permissions')
+
     download: (params) ->
       Upload.$get @$url('download'), params
 ]

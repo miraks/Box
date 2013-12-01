@@ -1,5 +1,6 @@
 ru:
   file_manager:
     settings:
+      access_control: Управление доступом
       confirm: Подтвердить
       cancel: Закрыть

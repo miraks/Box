@@ -4,7 +4,7 @@
   input.search type='text' ng-model='property' autocomplete='off' placeholder="{{placeholder}}"
   ul.results ng-show='showResults'
     li ng-repeat="item in items"
-      .item ng-click='click(item)'
+      .search-item ng-click='click(item)'
         img.avatar src="http://placehold.it/30x30"
         | {{item.name}}
     li.result ng-show="items.isEmpty()"

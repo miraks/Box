@@ -74,12 +74,14 @@ section#main
     position: relative
     .results
       @extend .block-style
+      z-index: 3
       padding: 0
       width: 100%
       position: absolute
       li
         margin: 3px
-        .item
+        .search-item
+          text-align: left
           line-height: 30px
           cursor: pointer
           img

@@ -11,6 +11,9 @@
 $element_margin: 10px
 $element_padding: 10px
 
+=awesome-hover
+  +transition(color .3s linear)
+
 =font_icon($icon)
   &:before
     content: '\e8'+$icon
@@ -34,6 +37,17 @@ $element_padding: 10px
     border-radius: 2px
     background: rgba(255, 255, 255, .8)
     // TODO: show animation
+    .options
+      margin: 0 0 0 15px
+      width: 100%
+      text-align: left
+      .option-title
+        margin: 10px 0
+      .search
+        display: inline-block
+    .title
+      width: 100%
+      margin: 10px
     .menu
       width: 100%
       position: absolute

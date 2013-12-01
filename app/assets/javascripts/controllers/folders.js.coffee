@@ -10,6 +10,7 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
     currentFolderId = rootId # TODO: read folder id from location first
     $scope.setupUploader() if setupUploder
     $scope.setupClipboard()
+    $scope.usersList = []
     $scope.changeFolder new Folder(id: currentFolderId), false
 
   # Setup
@@ -66,10 +67,27 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
   $scope.cleanSelectedUploads = ->
     $scope.selectedUploads = []
 
-  # Password manipulation
-
-  $scope.loadSettings = (objects) ->
+  # Settings
+  # TODO: следует куда то вынести этот функционал
+  $scope.loadSettings = (object) ->
     $scope.showSettings = !$scope.showSettings
+    $scope.currentItem = object
+    $scope.currentItem.get_permissions().then (users) ->
+      $scope.usersList = users
+
+  $scope.userSelected = (user) ->
+    $scope.usersList.push user
+
+  $scope.removeUser = (user) ->
+    index = $scope.usersList.indexOf(user)
+    $scope.usersList.splice(index, 1)
+
+  $scope.confirmSettings = ->
+    $scope.currentItem.set_permissions($scope.usersList).then (object) ->
+      Notifier.show 'Изменения сохранены'
+      $scope.showSettings = !$scope.showSettings
+
+  # Password manipulation
 
   $scope.setPassword = (object) ->
     password = prompt "Введи пароль"

@@ -7,6 +7,7 @@ class Permission < ActiveRecord::Base
 
   private
 
+  #TODO: засунуть переводы в yml
   def already_have_access
     errors.add :base, 'У пользователя уже есть доступ' if user.shared.where(item: item).exists?
   end

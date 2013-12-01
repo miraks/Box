@@ -9,9 +9,13 @@ Box::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :folders, only: [:show, :update], concerns: [:lockable]
+      resources :folders, only: [:show, :update], concerns: [:lockable] do
+        patch :set_permissions
+        get :get_permissions
+      end
       resources :uploads, only: [:create, :update], concerns: [:lockable] do
-        get :download
+        get :download, :get_permissions
+        patch :set_permissions
         collection do
           patch :move, :copy
         end
