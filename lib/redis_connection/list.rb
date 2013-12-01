@@ -1,5 +1,5 @@
 module RedisConnection
-  class List < Struct
+  class List < Structure
     def push *values
       connection.rpush name, values
     end

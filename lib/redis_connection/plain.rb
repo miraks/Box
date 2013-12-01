@@ -1,5 +1,5 @@
 module RedisConnection
-  class Plain < Struct
+  class Plain < Structure
     def get
       connection.get name
     end

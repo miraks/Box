@@ -1,5 +1,5 @@
 module RedisConnection
-  class Set < Struct
+  class Set < Structure
     def all
       connection.smembers name
     end

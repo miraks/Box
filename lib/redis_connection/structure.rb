@@ -1,5 +1,5 @@
 module RedisConnection
-  class Struct
+  class Structure
     include Connector
 
     attr_reader :name

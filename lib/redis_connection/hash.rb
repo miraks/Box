@@ -1,5 +1,5 @@
 module RedisConnection
-  class Hash < Struct
+  class Hash < Structure
     def [] key
       connection.hget name, key
     end
