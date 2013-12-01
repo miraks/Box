@@ -33,10 +33,6 @@ class Upload < ActiveRecord::Base
 
   private
 
-  def upload_lock
-
-  end
-
   def copy_to_storage
     # TODO
   end
