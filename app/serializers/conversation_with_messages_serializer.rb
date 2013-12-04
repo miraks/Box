@@ -6,4 +6,7 @@ class ConversationWithMessagesSerializer < ConversationSerializer
   end
 
   has_many :messages
+
+  has_one :user1
+  has_one :user2
 end

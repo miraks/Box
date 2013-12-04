@@ -1,4 +1,4 @@
-.block.conversations ng-controller='ConversationController' ng-init='init(#{@conversation.other(current_user).id}, "#{@conversation.id}")'
+.block.conversations ng-controller='ConversationController' ng-init='init(#{@conversation.other(current_user).id})'
   h1 = "Переписка с #{@conversation.other(current_user)}"
 
   = render 'users/messages/form'

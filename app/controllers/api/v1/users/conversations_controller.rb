@@ -1,5 +1,4 @@
 class Api::V1::Users::ConversationsController < Api::V1::BaseController
-  find :conversation, only: [:show]
   before_filter :authenticate_user!
 
   def index
@@ -9,6 +8,8 @@ class Api::V1::Users::ConversationsController < Api::V1::BaseController
   end
 
   def show
+    other_user = User.find params[:id]
+    @conversation = Conversation.new current_user, other_user
     @conversation.read current_user
     render json: @conversation, serializer: ConversationWithMessagesSerializer
   end

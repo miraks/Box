@@ -1,13 +1,12 @@
 angular.module('BoxApp').controller 'ConversationController', ['$scope', 'Conversation', 'Message', 'CurrentUser', ($scope, Conversation, Message, CurrentUser) ->
-  $scope.init = (recipientId, conversationId) ->
+  $scope.init = (recipientId) ->
     $scope.recipientId = recipientId
-    $scope.conversationId = conversationId
     $scope.hideRecipientField = true
     $scope.message = $scope.newMessage()
     $scope.loadConversation()
 
   $scope.loadConversation = ->
-    Conversation.get(user: { id: CurrentUser.id }, id: $scope.conversationId).then (conversation) ->
+    Conversation.get(user1: { id: CurrentUser.id }, user2: { id: $scope.recipientId }).then (conversation) ->
       $scope.conversation = conversation
 
   $scope.sentMessage = ->

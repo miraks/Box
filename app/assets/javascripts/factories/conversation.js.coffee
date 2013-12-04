@@ -1,7 +1,7 @@
 angular.module('BoxApp').factory 'Conversation', ['RailsResource', (RailsResource) ->
   class Conversation extends RailsResource
     @configure
-      url: '/api/v1/users/{{user.id}}/conversations/{{id}}'
+      url: '/api/v1/users/{{user1.id}}/conversations/{{user2.id}}'
       name: 'conversation'
       pluralName: 'conversations'
       serializer: 'ConversationSerializer'
@@ -15,4 +15,6 @@ angular.module('BoxApp').factory 'Conversation', ['RailsResource', (RailsResourc
       else
         conversationProcessor data
 
+    other: (user) ->
+      if @user1.id == user.id then @user2 else @user1
 ]

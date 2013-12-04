@@ -5,7 +5,7 @@ angular.module('BoxApp').controller 'ConversationsController', ['$scope', 'Conve
     $scope.loadConversations()
 
   $scope.loadConversations = ->
-    Conversation.get(user: { id: CurrentUser.id }).then (conversations) ->
+    Conversation.get(user1: { id: CurrentUser.id }).then (conversations) ->
       $scope.conversations = conversations
 
   $scope.sentMessage = ->
@@ -25,7 +25,7 @@ angular.module('BoxApp').controller 'ConversationsController', ['$scope', 'Conve
     $scope.conversations.unshift conversation
 
   $scope.loadConversation = (conversation) ->
-    Turbolinks.visit "/users/#{CurrentUser.slug}/conversations/#{conversation.id}"
+    Turbolinks.visit "/users/#{CurrentUser.slug}/conversations/#{conversation.lastMessage.other(CurrentUser).slug}"
 
   $scope.newMessage = ->
     new Message user: { id: CurrentUser.id }

@@ -9,11 +9,6 @@ class Conversation < Struct.new(:user1, :user2)
     self.id = generate_id
   end
 
-  def self.find id
-    users = id.split('_').map { |slug| User.find slug }
-    new *users
-  end
-
   def self.of user
     Message.not_deleted_by(user).last_in_conversations(user).order('messages.id desc').with_users.map do |message|
       conversation = Conversation.new(message.user, message.recipient)

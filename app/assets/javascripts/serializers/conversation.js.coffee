@@ -2,4 +2,6 @@ angular.module('rails').factory 'ConversationSerializer', ['railsSerializer', (r
   railsSerializer ->
     @resource 'messages', 'Message'
     @resource 'lastMessage', 'Message'
+    @resource 'user1', 'User'
+    @resource 'user2', 'User'
 ]
