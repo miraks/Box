@@ -3,8 +3,7 @@ class Api::V1::Users::MessagesController < Api::V1::BaseController
   before_filter :authenticate_user!
 
   def create
-    recipient = User.find_by slug: params[:message][:recipient_id]
-    return render_error TextError.new('recipient_not_found'), 500
+    recipient = User.find params[:message][:recipient_id]
     @message = Message.new message_params.merge(user: current_user, recipient: recipient)
     if @message.save
       render json: @message
