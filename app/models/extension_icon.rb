@@ -1,6 +1,4 @@
 class ExtensionIcon
-  extend MonitorMixin
-
   attr_reader :extension
   attr_accessor :file
 
