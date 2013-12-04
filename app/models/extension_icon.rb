@@ -37,6 +37,7 @@ class ExtensionIcon
     @icons_cache ||= storage.keys.each_with_object({}) { |extension, res| res[extension] = new extension }
   end
 
+  # TODO: drop cache across different processes
   def self.drop_cache!
     @icons_cache = nil
   end

@@ -37,11 +37,7 @@ class Upload < ActiveRecord::Base
   end
 
   def icon_url type = nil
-    # TODO: проверять на наличие иконки у самого файла,
-    #       когда это будет сделано
-    extension_icon = ExtensionIcon.for(extension)
-    return extension_icon.url(type) if extension_icon
-    nil
+    (file.previewable? and file.url(type)) or ExtensionIcon.for(extension).try(:url, type)
   end
 
   private
