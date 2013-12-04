@@ -1,10 +1,3 @@
-# TODO: Хорошо бы в файловом менеджере на стороне
-#       клиента запоминать введенный пароль пока пользователь бродит
-#       по запароленной директории, что бы каждый раз его не спрашивать.
-#       Возможно стоит использовать localstorage для хранения паролей,
-#       тогда их можно будет вводить всего один раз, но тут проблема,
-#       они будут хранится в открытом виде.
-
 angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'Uploader', 'Upload', 'Clipboard', 'Notifier', 'Downloader', 'CurrentUser', ($scope, Folder, Uploader, Upload, Clipboard, Notifier, Downloader, CurrentUser) ->
   $scope.init = (rootId, setupUploder) ->
     currentFolderId = rootId # TODO: read folder id from location first
