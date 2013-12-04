@@ -27,6 +27,13 @@ angular.module('BoxApp').factory 'Upload', ['RailsResource', (RailsResource) ->
       ((@id? and @id == other.id) or
       (@file? and other.file and @file.id == other.file.id))
 
+    icon: (type) ->
+      return unless @iconUrl?
+      return @iconUrl unless type?
+      filename = @iconUrl.split('/').last()
+      newFilename = "#{type}_#{filename}"
+      @iconUrl.replace filename, newFilename
+
     permission: ->
       Upload.$get @$url('permission')
 

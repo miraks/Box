@@ -161,7 +161,7 @@ $element_padding: 10px
   .folder
     +font_icon('22')
 
-  .upload
+  .upload:not(.has-icon)
     +font_icon('23')
 
   &.small
@@ -173,6 +173,9 @@ $element_padding: 10px
       clear: both
       &:before
         font-size: 30px
+
+      .icon
+        display: inline
 
       .menu
         float: right

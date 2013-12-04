@@ -60,6 +60,8 @@ GEM
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
       json (>= 1.7)
+    carrierwave-processing (0.0.2)
+      carrierwave
     celluloid (0.15.2)
       timers (~> 1.1.0)
     chunky_png (1.2.9)
@@ -118,6 +120,8 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.25)
+    mini_magick (3.7.0)
+      subexec (~> 0.2.1)
     minitest (4.7.5)
     multi_json (1.8.2)
     net-scp (1.1.2)
@@ -403,6 +407,7 @@ GEM
       net-scp
       net-ssh
       term-ansicolor
+    subexec (0.2.3)
     temple (0.6.7)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
@@ -449,6 +454,7 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-rails
   carrierwave
+  carrierwave-processing
   coffee-rails
   compass-rails (~> 2.0.alpha.0)
   custom_configuration
@@ -461,6 +467,7 @@ DEPENDENCIES
   foreigner
   friendly_id
   kaminari
+  mini_magick
   oj
   pg
   pry-rails

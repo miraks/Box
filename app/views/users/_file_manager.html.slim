@@ -3,7 +3,7 @@
   = render 'file_manager/buttons'
   = render 'file_manager/path'
   = render 'file_manager/folders'
-  = render 'file_manager/uploads'
+  = render 'file_manager/uploads', icon_type: :normal
   - if self? @user
     .clear
     #upload_button.button = t '.upload'

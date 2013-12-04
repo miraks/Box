@@ -24,6 +24,14 @@ module RedisConnection
       connection.hgetall name
     end
 
+    def keys
+      connection.hkeys name
+    end
+
+    def values
+      connection.hvals name
+    end
+
     def delete key
       connection.hdel name, key
     end

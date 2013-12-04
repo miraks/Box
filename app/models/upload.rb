@@ -32,6 +32,18 @@ class Upload < ActiveRecord::Base
     Folder.where id: ids
   end
 
+  def extension
+    file.file.extension
+  end
+
+  def icon_url type = nil
+    # TODO: проверять на наличие иконки у самого файла,
+    #       когда это будет сделано
+    extension_icon = ExtensionIcon.for(extension)
+    return extension_icon.url(type) if extension_icon
+    nil
+  end
+
   private
 
   def copy_to_storage

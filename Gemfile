@@ -41,6 +41,10 @@ gem 'slim'
 # Files upload
 gem 'carrierwave'
 
+# Uploads processing
+gem 'carrierwave-processing'
+gem 'mini_magick'
+
 # Localization
 gem 'russian'
 gem 'devise-i18n'
