@@ -4,7 +4,7 @@ Onliner = Struct.new(:user) do
   self.online_bound = 10.minutes.freeze
 
   def online!
-    connection[user.id] = Time.now.to_i
+    storage[user.id] = Time.now.to_i
   end
 
   def online?
@@ -20,16 +20,16 @@ Onliner = Struct.new(:user) do
   end
 
   def self.last_online_time id
-    value = connection[id]
+    value = storage[id]
     return nil unless value.present?
     Time.at value.to_i
   end
 
   private
 
-  def self.connection
-    @connection ||= RedisConnection::Hash.new 'online_users'
+  def self.storage
+    @storage ||= Redisstorage::Hash.new 'online_users'
   end
-  delegate :connection, to: :class
+  delegate :storage, to: :class
 
 end
