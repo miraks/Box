@@ -24,10 +24,10 @@ Friend = Struct.new(:user) do
     friendship.last ? friendship.last : friendship.new
   end
 
-  # TODO: подумать над оптимизацией
   def online_friends
     ids = user.friendships.pluck(:friend_id)
-    ids.select! { |id| Onliner.online? Onliner.last_online_time(id) }
+    times = Onliner.last_online_time ids
+    ids = ids.zip(times).select { |(id, time)| Onliner.online? time }.map(&:first)
     User.where id: ids
   end
 end

@@ -19,16 +19,16 @@ Onliner = Struct.new(:user) do
     (time and time > online_bound.ago.to_time) or false
   end
 
-  def self.last_online_time id
-    value = storage[id]
-    return nil unless value.present?
-    Time.at value.to_i
+  def self.last_online_time ids
+    times = storage.get *ids
+    times.map! { |time| time ? Time.at(time.to_i) : nil }
+    times.one? ? times.first : times
   end
 
   private
 
   def self.storage
-    @storage ||= Redisstorage::Hash.new 'online_users'
+    @storage ||= RedisConnection::Hash.new 'online_users'
   end
   delegate :storage, to: :class
 
