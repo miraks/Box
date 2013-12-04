@@ -6,6 +6,7 @@ class Api::V1::UploadsController < Api::V1::BaseController
 
   def create
     @upload = Upload.new user: current_user, file: params[:file], folder: @folder
+    authorize @upload
     if @upload.save
       render json: @upload
     else
@@ -14,6 +15,7 @@ class Api::V1::UploadsController < Api::V1::BaseController
   end
 
   def update
+    authorize @upload
     if @upload.update_attributes upload_params
       render json: @upload
     else

@@ -4,5 +4,6 @@
   = render 'file_manager/path'
   = render 'file_manager/folders'
   = render 'file_manager/uploads'
-  .clear
-  #upload_button.button = t '.upload'
+  - if self? @user
+    .clear
+    #upload_button.button = t '.upload'
