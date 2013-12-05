@@ -1,4 +1,4 @@
-angular.module('BoxApp').factory 'Folder', ['RailsResource', (RailsResource) ->
+angular.module('BoxApp').factory 'Folder', ['RailsResource', 'FolderPermission', (RailsResource, FolderPermission) ->
   class Folder extends RailsResource
     @configure
       url: '/api/v1/folders'
@@ -6,13 +6,6 @@ angular.module('BoxApp').factory 'Folder', ['RailsResource', (RailsResource) ->
       pluralName: 'folders'
       serializer: 'FolderSerializer'
 
-    permission: ->
-      Folder.$get @$url('permission')
-
-    set_permissions: (users) ->
-      ids = users.map 'id'
-      Folder.$patch @$url('set_permissions'), ids: ids
-
-    get_permissions: ->
-      Folder.$get @$url('get_permissions')
+    permission: (params) ->
+      new FolderPermission Object.merge(params, folder: @)
 ]

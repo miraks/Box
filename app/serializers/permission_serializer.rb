@@ -2,6 +2,7 @@ class PermissionSerializer < ActiveModel::Serializer
   attributes :permission
 
   def permission
-    object.permission scope
+    # TODO: fixit
+    object.permission scope if object.respond_to? :permission
   end
 end

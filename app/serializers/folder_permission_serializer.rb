@@ -1,3 +1,3 @@
 class FolderPermissionSerializer < PermissionSerializer
-  self.root = 'folder'
+  self.root = 'folder_permission'
 end

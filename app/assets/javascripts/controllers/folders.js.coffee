@@ -1,4 +1,4 @@
-angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'Uploader', 'Upload', 'Clipboard', 'Notifier', 'Downloader', 'CurrentUser', ($scope, Folder, Uploader, Upload, Clipboard, Notifier, Downloader, CurrentUser) ->
+angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'Uploader', 'Upload', 'Clipboard', 'Notifier', 'Downloader', 'CurrentUser', 'FolderPermission', 'UploadPermission', ($scope, Folder, Uploader, Upload, Clipboard, Notifier, Downloader, CurrentUser, FolderPermissions, UploadPermissions) ->
   $scope.init = (rootId, setupUploder) ->
     currentFolderId = rootId # TODO: read folder id from location first
     $scope.setupUploader() if setupUploder
@@ -19,7 +19,7 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
   # Move around
 
   $scope.checkPermission = (object, callback) ->
-    object.permission().then (obj) ->
+    object.permission().check().then (obj) ->
       return Notifier.show "Доступ запрещен" if obj.permission == 'no'
       params = {}
       if obj.permission == 'password'
@@ -65,18 +65,22 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
   $scope.loadSettings = (object) ->
     $scope.showSettings = !$scope.showSettings
     $scope.currentItem = object
-    $scope.currentItem.get_permissions().then (users) ->
-      $scope.usersList = users
+    context = {}
+    context[object.constructor.config.name] = object
+    $scope.currentItem.permission().constructor.query(null, context).then (permissions) ->
+      $scope.usersList = permissions.map 'user'
 
   $scope.userSelected = (user) ->
-    $scope.usersList.push user
+    $scope.currentItem.permission(user: user).create().then ->
+      $scope.usersList.push user
 
   $scope.removeUser = (user) ->
-    index = $scope.usersList.indexOf(user)
-    $scope.usersList.splice(index, 1)
+    $scope.currentItem.permission(user: user).destroy().then ->
+      $scope.usersList.remove (u) ->
+        u.equal user
 
   $scope.confirmSettings = ->
-    $scope.currentItem.set_permissions($scope.usersList).then (object) ->
+    $scope.currentItem.set_permission($scope.usersList).then (object) ->
       Notifier.show 'Изменения сохранены'
       $scope.showSettings = !$scope.showSettings
 

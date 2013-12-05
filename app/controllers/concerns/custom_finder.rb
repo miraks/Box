@@ -55,12 +55,16 @@ module CustomFinder
 
     def method_name model_name, opts
       name = "find_#{model_name}"
-      name << "_in_#{opts[:in]}" if opts.has_key? :in
+      if opts.has_key? :in
+        postfix = Array.wrap(opts[:in]).join('_')
+        name = "#{name}_#{postfix}"
+      end
       name
     end
 
     def params_prefix opts
-      opts.has_key?(:in) ? "[:#{opts[:in]}]" : ''
+      return '' unless opts.has_key?(:in)
+      Array.wrap(opts[:in]).map{|name| "[:#{name}]"}.join
     end
   end
 end

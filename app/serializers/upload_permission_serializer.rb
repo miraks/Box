@@ -1,3 +1,3 @@
 class UploadPermissionSerializer < PermissionSerializer
-  self.root = 'upload'
+  self.root = 'upload_permission'
 end

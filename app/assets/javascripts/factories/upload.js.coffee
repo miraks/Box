@@ -1,4 +1,4 @@
-angular.module('BoxApp').factory 'Upload', ['RailsResource', (RailsResource) ->
+angular.module('BoxApp').factory 'Upload', ['RailsResource', 'UploadPermission', (RailsResource, UploadPermission) ->
   class Upload extends RailsResource
     @configure
       url: '/api/v1/uploads'
@@ -34,15 +34,8 @@ angular.module('BoxApp').factory 'Upload', ['RailsResource', (RailsResource) ->
       newFilename = "#{type}_#{filename}"
       @iconUrl.replace filename, newFilename
 
-    permission: ->
-      Upload.$get @$url('permission')
-
-    set_permissions: (users) ->
-      ids = users.map 'id'
-      Upload.$patch @$url('set_permissions'), ids: ids
-
-    get_permissions: ->
-      Upload.$get @$url('get_permissions')
+    permission: (params) ->
+      new UploadPermission Object.merge(params, upload: @)
 
     download: (params) ->
       Upload.$get @$url('download'), params

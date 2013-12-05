@@ -1,6 +1,6 @@
 class Api::V1::UploadsController < Api::V1::BaseController
   find :folder, only: [:create]
-  find :upload, only: [:update, :download, :permission, :get_permissions, :set_permissions]
+  find :upload, only: [:update, :download]#, :permission, :get_permissions, :set_permissions]
   find :folder, in: :upload, only: [:move, :copy]
   find :uploads, in: :upload, only: [:move, :copy]
 
@@ -26,24 +26,6 @@ class Api::V1::UploadsController < Api::V1::BaseController
   def download
     authorize @upload, args: params[:password]
     render json: @upload, serializer: UploadUrlSerializer
-  end
-
-  def permission
-    render json: @upload, serializer: UploadPermissionSerializer
-  end
-
-  def set_permissions
-    # TODO: remake
-    @upload.permissions.destroy_all
-    params[:upload][:ids].each do |id|
-      @upload.allow_access_for User.find(id)
-    end
-    render json: @upload
-  end
-
-  def get_permissions
-    # TODO: remake
-    render json: @upload.permissions.map(&:user)
   end
 
   def move
