@@ -1,3 +1,3 @@
 class FolderPermissionWithUsersSerializer < PermissionSerializer
-  has_many :users
+  has_one :user
 end

@@ -5,8 +5,7 @@
     .option-title =t '.access_control'
     search search-for="User" property="accessQuery" on-select="userSelected"
     ul.permission-list
-      li ng-repeat="user in usersList"
-        a href="" ng-click="removeUser(user)" {{user.name}}
+      li ng-repeat="permission in permissions"
+        a href="" ng-click="removePermission(permission)" {{permission.user.name}}
   .menu
-    .button ng-click="confirmSettings()" = t '.confirm'
     .button ng-click="showSettings = !showSettings" = t '.cancel'

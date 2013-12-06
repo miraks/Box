@@ -8,12 +8,16 @@ class Api::V1::Folders::PermissionsController < Api::V1::BaseController
   end
 
   def create
-    @folder.allow_access_for @user
-    render json: @folder
+    permission = @folder.allow_access_for @user
+    render json: permission
   end
 
   def index
-    render json: @folder.permissions.includes(:users).map(&:user), serializer: FolderPermissionWithUserSerializer
+    render json: @folder.permissions, each_serializer: FolderPermissionWithUsersSerializer, root: 'folder_permission'
+  end
+
+  def destroy
+    render json: @folder.permissions.find(params[:id]).destroy
   end
 
 end

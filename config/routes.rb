@@ -4,7 +4,7 @@ Box::Application.routes.draw do
   root to: "users#index"
 
   concern :permissions do
-    resources :permissions, only: [:index, :create] do
+    resources :permissions, only: [:index, :create, :destroy] do
       collection do
         get :check
       end
