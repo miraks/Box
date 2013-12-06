@@ -60,29 +60,23 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
   $scope.cleanSelectedUploads = ->
     $scope.selectedUploads = []
 
-  # Settings
-  # TODO: следует куда то вынести этот функционал
-  $scope.loadSettings = (object) ->
+  # Permissions
+  $scope.loadPermissions = (object) ->
     $scope.showSettings = !$scope.showSettings
     $scope.currentItem = object
     context = {}
     context[object.constructor.config.name] = object
     $scope.currentItem.permission().constructor.query(null, context).then (permissions) ->
-      $scope.usersList = permissions.map 'user'
+      $scope.permissions = permissions
 
   $scope.userSelected = (user) ->
-    $scope.currentItem.permission(user: user).create().then ->
-      $scope.usersList.push user
+    $scope.currentItem.permission(user: user).create().then (permission) ->
+      $scope.permissions.push permission
 
-  $scope.removeUser = (user) ->
-    $scope.currentItem.permission(user: user).destroy().then ->
-      $scope.usersList.remove (u) ->
-        u.equal user
-
-  $scope.confirmSettings = ->
-    $scope.currentItem.set_permission($scope.usersList).then (object) ->
-      Notifier.show 'Изменения сохранены'
-      $scope.showSettings = !$scope.showSettings
+  $scope.removePermission = (permission) ->
+    $scope.currentItem.permission(permission).delete().then ->
+      $scope.permissions.remove (p) ->
+        p == permission
 
   # Password manipulation
 

@@ -3,6 +3,6 @@
     | {{folder.name}}
   - if self? @user
     .menu stop-propagation="click"
-      a.action.item-settings href="" ng-click="loadSettings(folder)" title=t('.settings')
+      a.action.item-settings href="" ng-click="loadPermissions(folder)" title=t('.settings')
       a.action.lock href="" ng-click="setPassword(folder)" title=t('.set_password')
       a.action.unlock href="" ng-click="deletePassword(folder)" ng-show="folder.locked" title=t('.delete_password')

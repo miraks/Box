@@ -16,4 +16,8 @@ class Api::V1::Uploads::PermissionsController < Api::V1::BaseController
     render json: @upload.permissions, each_serializer: UploadPermissionWithUsersSerializer, root: 'upload_permission'
   end
 
+  def destroy
+    render json: @upload.permissions.find(params[:id]).destroy
+  end
+
 end

@@ -6,7 +6,7 @@
   .menu stop-propagation="click"
     a.action.download href="" ng-click="download(upload)" title=t('.download')
     - if self? @user
-      a.action.item-settings href="" ng-click="loadSettings(upload)" title=t('.settings')
+      a.action.item-settings href="" ng-click="loadPermissions(upload)" title=t('.settings')
       a.action.lock href="" ng-click="setPassword(upload)" title=t('.set_password')
       a.action.unlock href="" ng-click="deletePassword(upload)" ng-show="upload.locked" title=t('.delete_password')
   .progress ng-show="upload.isUploading()" = "#{t '.progress'}: {{upload.percent}}"

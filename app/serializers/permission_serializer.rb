@@ -1,5 +1,5 @@
 class PermissionSerializer < ActiveModel::Serializer
-  attributes :permission
+  attributes :permission, :id
 
   def permission
     # TODO: fixit
