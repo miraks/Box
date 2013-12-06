@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131124141157) do
+ActiveRecord::Schema.define(version: 20131206130123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,11 +85,11 @@ ActiveRecord::Schema.define(version: 20131124141157) do
   end
 
   create_table "uploads", force: true do |t|
-    t.string   "original_name",                 null: false
     t.integer  "user_id",                       null: false
     t.integer  "folder_id",                     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "original_name"
     t.string   "file"
     t.string   "password_hash"
     t.boolean  "locked",        default: false
@@ -99,8 +99,8 @@ ActiveRecord::Schema.define(version: 20131124141157) do
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 20131124141157) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+    t.boolean  "is_admin",               default: false, null: false
   end
 
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
@@ -124,6 +125,9 @@ ActiveRecord::Schema.define(version: 20131124141157) do
 
   add_foreign_key "messages", "users", name: "messages_recipient_id_fk", column: "recipient_id"
   add_foreign_key "messages", "users", name: "messages_user_id_fk"
+
+  add_foreign_key "permissions", "users", name: "permissions_owner_id_fk", column: "owner_id"
+  add_foreign_key "permissions", "users", name: "permissions_user_id_fk"
 
   add_foreign_key "purchases", "uploads", name: "purchases_upload_id_fk"
   add_foreign_key "purchases", "users", name: "purchases_user_id_fk"
