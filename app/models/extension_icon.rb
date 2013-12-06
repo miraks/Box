@@ -1,14 +1,22 @@
 class ExtensionIcon
+  include ActiveModel::SerializerSupport
+
   attr_reader :extension
-  attr_accessor :file
+  attr_accessor :icon
 
   def initialize extension
     @extension = normalize extension
   end
 
   def save
-    uploader.store! file
+    uploader.store! icon
     storage[extension] = uploader.filename
+    drop_cache!
+    true
+  end
+
+  def destroy
+    storage.delete extension
     drop_cache!
     true
   end
@@ -19,6 +27,10 @@ class ExtensionIcon
 
   def self.for extension
     icons_cache[normalize(extension)]
+  end
+
+  def self.all
+    icons_cache.values
   end
 
   private

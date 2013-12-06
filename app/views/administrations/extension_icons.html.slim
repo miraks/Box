@@ -1,0 +1,13 @@
+.block.extension-icons ng-controller="ExtensionIconsController"
+  h1 Редактирование иконок расширений
+
+  .extension-icon ng-repeat="icon in icons"
+    .extension
+      | {{icon.extension}}
+    img.icon ng-src="{{icon.url}}"
+    a.delete ng-click="deleteIcon(icon)" href="" = t '.delete'
+    .clear
+
+  = text_field_tag :body, nil, 'ng-model' => 'newIcon.extension', placeholder: t('.icon_extension')
+  = file_field_tag :icon, file: 'newIcon.icon', accept: 'image/png,image/gif,image/jpeg'
+  = button_tag t('.save'), 'ng-click' => 'saveNewIcon()'

@@ -42,6 +42,9 @@ Box::Application.routes.draw do
           end
         end
       end
+      namespace :administration do
+        resources :extension_icons, only: [:index, :create, :destroy]
+      end
     end
   end
 
@@ -49,6 +52,12 @@ Box::Application.routes.draw do
     scope module: :users do
       resources :purchases, only: [:index]
       resources :conversations, only: [:index, :show]
+    end
+  end
+
+  resource :administration, only: [:show] do
+    collection do
+      get :extension_icons
     end
   end
 end

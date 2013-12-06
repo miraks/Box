@@ -15,6 +15,8 @@
       li
         = link_to t('.messages'), user_conversations_path(current_user)
         | (#{current_user.unread_messages_count})
+      - if current_user.is_admin?
+        = link_to t('.administration'), administration_path
     - else
       li
         = link_to t('.sign_in'), new_user_session_path
