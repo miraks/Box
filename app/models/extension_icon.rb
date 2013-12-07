@@ -1,24 +1,32 @@
 class ExtensionIcon
   include ActiveModel::SerializerSupport
+  extend ActiveModel::Callbacks
 
   attr_reader :extension
   attr_accessor :icon
+
+  define_model_callbacks :save, :destroy
+
+  after_save  :notify_about_update
+  after_destroy :notify_about_update
 
   def initialize extension
     @extension = normalize extension
   end
 
   def save
-    uploader.store! icon
-    storage[extension] = uploader.filename
-    drop_cache!
-    true
+    run_callbacks :save do
+      uploader.store! icon
+      storage[extension] = uploader.filename
+      true
+    end
   end
 
   def destroy
-    storage.delete extension
-    drop_cache!
-    true
+    run_callbacks :destroy do
+      storage.delete extension
+      true
+    end
   end
 
   def persisted?
@@ -43,17 +51,20 @@ class ExtensionIcon
   end
   delegate :url, :path, to: :uploader
 
-  def self.icons_cache
-    @icons_cache ||= storage.keys.each_with_object({}) { |extension, res| res[extension] = new extension }
-  end
-
-  # TODO: drop cache across different processes
-  def self.drop_cache!
-    @icons_cache = nil
+  def notify_about_update
+    channel.publish extension
   end
 
   def self.storage
     @storage ||= RedisConnection::Hash.new 'ext_icons'
+  end
+
+  def self.channel
+    @channel ||= RedisConnection::Channel.new 'ext_icons'
+  end
+
+  def self.icons_cache
+    @icons_cache ||= storage.keys.each_with_object({}) { |extension, res| res[extension] = new extension }
   end
 
   def self.normalize extension
@@ -61,6 +72,13 @@ class ExtensionIcon
     extension = extension[1..-1] if extension.start_with? '.'
     extension
   end
+  delegate :storage, :channel, :icons_cache, :normalize, to: :class
 
-  delegate :drop_cache!, :storage, :normalize, to: :class
+  def self.drop_cache!
+    @icons_cache = nil
+  end
+
+  channel.subscribe do |message|
+    drop_cache!
+  end
 end

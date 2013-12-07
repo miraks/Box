@@ -1,7 +1,5 @@
 module RedisConnection
   module Connector
-    def connection
-      Connection.instance.connection
-    end
+    delegate :connection, :create_connection, to: 'RedisConnection::Connection.instance'
   end
 end
