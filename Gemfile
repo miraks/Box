@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 #ruby=rbx-2.2.1@box
 ruby '2.1.0', engine: 'rbx', engine_version: '2.2.1'
 
-gem 'rails', '4.0.1'
+gem 'rails', '4.0.2'
 
 # Ruby standart library
 gem 'rubysl', require: false
