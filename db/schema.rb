@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131206130123) do
+ActiveRecord::Schema.define(version: 20131207200353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,18 +93,19 @@ ActiveRecord::Schema.define(version: 20131206130123) do
     t.string   "file"
     t.string   "password_hash"
     t.boolean  "locked",        default: false
+    t.integer  "size",                          null: false
   end
 
   add_index "uploads", ["folder_id"], name: "index_uploads_on_folder_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "email",                            default: "",    null: false
+    t.string   "encrypted_password",               default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0
+    t.integer  "sign_in_count",                    default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -113,7 +114,9 @@ ActiveRecord::Schema.define(version: 20131206130123) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
-    t.boolean  "is_admin",               default: false, null: false
+    t.boolean  "is_admin",                         default: false, null: false
+    t.integer  "space_limit",            limit: 8,                 null: false
+    t.integer  "used_space",             limit: 8, default: 0,     null: false
   end
 
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree

@@ -12,3 +12,10 @@ ru:
         file: Файл
         locked: Приватная
         password: Пароль
+        size: Размер
+    errors:
+      models:
+        upload:
+          attributes:
+            base:
+              not_enough_space: Недостаточно места для сохранения файла

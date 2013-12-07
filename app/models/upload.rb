@@ -9,9 +9,11 @@ class Upload < ActiveRecord::Base
   has_many :purchases
   has_many :permissions, as: :item
 
-  validates :original_name, :file, :user_id, :folder_id, presence: true
+  validates :original_name, :file, :size, :user_id, :folder_id, presence: true
+  validate :check_limit
 
-  before_save :update_lock
+  before_validation :set_size, on: :create
+  after_create :notify_user
   before_destroy :copy_to_storage, if: :has_purchases?
 
   mount_uploader :file, FileUploader
@@ -41,6 +43,18 @@ class Upload < ActiveRecord::Base
   end
 
   private
+
+  def check_limit
+    errors.add :base, :not_enough_space unless user.has_space_for? self
+  end
+
+  def set_size
+    self.size ||= file.size
+  end
+
+  def notify_user
+    user.uploaded! self
+  end
 
   def copy_to_storage
     # TODO

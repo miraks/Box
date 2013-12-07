@@ -19,9 +19,10 @@ class User < ActiveRecord::Base
   has_many :friends, through: :friendships, source: :friend
   has_many :permissions, foreign_key: 'owner_id'
 
-  validates :name, presence: true
+  validates :name, :email, :is_admin, :space_limit, :used_space, presence: true
 
-  before_validation :generate_name
+  before_validation :generate_name, on: :create
+  before_validation :set_space_limit, on: :create
   after_create :create_default_folders
 
   extend FriendlyId
@@ -31,6 +32,8 @@ class User < ActiveRecord::Base
        :become_friend_with, :stop_being_friend_of, :friendship_with, :online_friends]
   role :babbler, methods: [:unread_messages_count]
   role :onliner, methods: [:online!, :online?, :last_online_time]
+  role :uploader, methods: [:uploaded!, :update_used_space!, :calculate_used_space,
+       :has_space_for?]
 
   def shared
     Permission.where(user_id: self.id)
@@ -54,7 +57,11 @@ class User < ActiveRecord::Base
   private
 
   def generate_name
-    self.name = email.split('@')[0]
+    self.name ||= email.split('@')[0]
+  end
+
+  def set_space_limit
+    self.space_limit ||= 2.gigabytes
   end
 
   def create_default_folders

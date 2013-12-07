@@ -7,3 +7,5 @@ ru:
         name: Никнейм
         email: Email
         password: Пароль
+        space_limit: Доступное место
+        used_space: Использованое место
