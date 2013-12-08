@@ -30,6 +30,9 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name
 
+  scope :companies, -> { where is_company: true }
+  scope :not_companies, -> { where is_company: false }
+
   role :friend, methods: [:friend_of?, :considered_friend_by?, :has_friends?,
        :become_friend_with, :stop_being_friend_of, :friendship_with, :online_friends]
   role :babbler, methods: [:unread_messages_count]

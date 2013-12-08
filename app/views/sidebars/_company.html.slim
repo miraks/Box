@@ -1,2 +1,8 @@
 pane title='Компании'
-  .block
+  .block.users
+    - if companies
+      - companies.each do |company|
+        .user
+          .avatar
+            img src="http://placehold.it/30x30"
+          = link_to company, user_path(company)
