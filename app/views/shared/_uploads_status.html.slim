@@ -1,4 +1,4 @@
-#uploads_status ng-controller="UploadsStatusController"
+#uploads_status ng-show="uploads.length > 0" ng-controller="UploadsStatusController"
   | Всего загружется: {{uploads.length}}
   .upload-status ng-repeat="upload in uploads"
     | {{upload.name}} - {{upload.percent}}%
