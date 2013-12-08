@@ -9,15 +9,15 @@ class Permission < ActiveRecord::Base
 
   #TODO: засунуть переводы в yml
   def already_have_access
-    errors.add :base, 'У пользователя уже есть доступ' if user.shared.where(item: item).exists?
+    errors.add :base, :already_have_access if user.shared.where(item: item).exists?
   end
 
   def can_share_this
-    errors.add :base, 'Нельзя давать доступ чужим файлам/папкам' unless owner == item.user
+    errors.add :base, :can_share_this unless owner == item.user
   end
 
   def not_with_yourself
-    errors.add :base, 'Нельзя дать доступ самому себе' if owner == user
+    errors.add :base, :not_with_yourself if owner == user
   end
 
 end
