@@ -1,0 +1,16 @@
+ru:
+  activerecord:
+    models:
+      permission: Разрешение
+    attributes:
+      permission:
+        owner: Владелец
+        user: Пользователь
+    errors:
+      models:
+        permission:
+          attributes:
+            base:
+              already_have_access: У пользователя уже есть доступ
+              can_share_this: Нельзя давать доступ чужим файлам/папкам
+              not_with_yourself: Нельзя дать доступ самому себе
