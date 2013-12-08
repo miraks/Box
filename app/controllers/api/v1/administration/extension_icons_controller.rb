@@ -8,6 +8,7 @@ class Api::V1::Administration::ExtensionIconsController < Api::V1::BaseControlle
 
   def create
     @icon = ExtensionIcon.new params[:extension_icon][:extension]
+    authorize @icon
     @icon.icon = params[:extension_icon][:icon]
     @icon.save
     render json: @icon
@@ -15,6 +16,7 @@ class Api::V1::Administration::ExtensionIconsController < Api::V1::BaseControlle
 
   def destroy
     @icon = ExtensionIcon.for params[:id]
+    authorize @icon
     @icon.destroy
     render json: @icon
   end
