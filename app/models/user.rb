@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
+  DEFAULT_SPACE_LIMIT = 2.gigabytes
+
   mapping do
     indexes :name, type: 'string', boost: 10, analyzer: 'snowball'
     indexes :slug, type: 'string', analyzer: 'snowball'
@@ -19,7 +21,7 @@ class User < ActiveRecord::Base
   has_many :friends, through: :friendships, source: :friend
   has_many :permissions, foreign_key: 'owner_id'
 
-  validates :name, :email, :is_admin, :space_limit, :used_space, presence: true
+  validates :name, :email, :space_limit, :used_space, presence: true
 
   before_validation :generate_name, on: :create
   before_validation :set_space_limit, on: :create
@@ -34,6 +36,7 @@ class User < ActiveRecord::Base
   role :onliner, methods: [:online!, :online?, :last_online_time]
   role :uploader, methods: [:uploaded!, :update_used_space!, :calculate_used_space,
        :has_space_for?]
+  role :company, methods: []
 
   def shared
     Permission.where(user_id: self.id)
@@ -61,7 +64,7 @@ class User < ActiveRecord::Base
   end
 
   def set_space_limit
-    self.space_limit ||= 2.gigabytes
+    self.space_limit ||= is_company? ? Company::DEFAULT_SPACE_LIMIT : DEFAULT_SPACE_LIMIT
   end
 
   def create_default_folders

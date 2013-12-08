@@ -2,13 +2,13 @@
   h2
     = t '.sign_up'
 
-  = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+  = form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
     = devise_error_messages!
 
     div
       = f.label :email, t('.email')
       br
-      = f.email_field :email, :autofocus => true
+      = f.email_field :email, autofocus: true
 
     div
       = f.label :password, t('.password')
@@ -19,6 +19,19 @@
       = f.label :password_confirmation, t('.password_confirmation')
       br
       = f.password_field :password_confirmation
+
+    div
+      = f.label :is_company, t('.is_company')
+      br
+      = f.check_box :is_company, 'ng-model' => 'isCompany'
+
+    div ng-if="isCompany"
+      = f.fields_for :company_data do |ff|
+        - %w(name activities site_link address phone_number).each do |field|
+          div
+            = ff.label field, t(".company_data.#{field}")
+            br
+            = ff.text_field field
 
     div
       = f.submit t('.sign_up')

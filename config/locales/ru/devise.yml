@@ -23,7 +23,13 @@ ru:
         email: Почта
         password: Пароль
         password_confirmation: 'Еще раз пароль, на всякий случай'
-
+        is_company: Организация
+        company_data:
+          name: Название
+          activities: Деятельность
+          site_link: Сайт
+          address: Адрес
+          phone_number: Телефон
     shared:
       links:
         sign_up: Зарегистрироваться

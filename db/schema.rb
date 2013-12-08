@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131207200353) do
+ActiveRecord::Schema.define(version: 20131208114826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "folders", force: true do |t|
     t.string   "name",                              null: false
@@ -117,8 +118,11 @@ ActiveRecord::Schema.define(version: 20131207200353) do
     t.boolean  "is_admin",                         default: false, null: false
     t.integer  "space_limit",            limit: 8,                 null: false
     t.integer  "used_space",             limit: 8, default: 0,     null: false
+    t.boolean  "is_company",                       default: false, null: false
+    t.hstore   "company_data"
   end
 
+  add_index "users", ["is_company"], name: "index_users_on_is_company", using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
 
   add_foreign_key "folders", "users", name: "folders_user_id_fk"
