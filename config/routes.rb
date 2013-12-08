@@ -29,6 +29,7 @@ Box::Application.routes.draw do
       end
       resources :users, only: [] do
         scope module: :users do
+          resources :permissions, only: :index
           resources :conversations, only: [:index, :show, :create]
           resources :messages, only: [:create, :destroy]
           resource :friendships, only: [:create, :destroy]
@@ -50,6 +51,7 @@ Box::Application.routes.draw do
 
   resources :users, only: [:show, :index] do
     scope module: :users do
+      resources :permissions, only: :index
       resources :purchases, only: [:index]
       resources :conversations, only: [:index, :show]
     end
