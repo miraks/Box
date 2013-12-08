@@ -11,7 +11,8 @@ config = {
 }
 
 threads config.fetch(:min_threads_count, 4).to_i, config.fetch(:max_threads_count, 8).to_i
-workers config.fetch(:workers_count, 4).to_i
+# TODO: закомменченно из-за странной ошибки при загрузке файлов
+# workers config.fetch(:workers_count, 4).to_i
 bind "unix://#{File.join(app_root, 'tmp/sockets/puma.sock')}"
 pidfile File.join(app_root, 'tmp/pids/puma.pid')
 state_path File.join(app_root, 'tmp/pids/puma.state')
