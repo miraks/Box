@@ -27,7 +27,7 @@ Friend = Struct.new(:user) do
   def online_friends
     ids = user.friendships.pluck(:friend_id)
     return User.none if ids.empty?
-    times = Onliner.last_online_time ids
+    times = Array.wrap Onliner.last_online_time(ids)
     ids = ids.zip(times).select { |(id, time)| Onliner.online? time }.map(&:first)
     User.where id: ids
   end
