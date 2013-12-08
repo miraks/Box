@@ -6,6 +6,6 @@ angular.module('BoxApp').factory 'Folder', ['RailsResource', 'FolderPermission',
       pluralName: 'folders'
       serializer: 'FolderSerializer'
 
-    permission: (params) ->
+    permission: (params={}) ->
       new FolderPermission Object.merge(params, folder: @)
 ]

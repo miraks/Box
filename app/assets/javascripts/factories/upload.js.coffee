@@ -34,7 +34,7 @@ angular.module('BoxApp').factory 'Upload', ['RailsResource', 'UploadPermission',
       newFilename = "#{type}_#{filename}"
       @iconUrl.replace filename, newFilename
 
-    permission: (params) ->
+    permission: (params={}) ->
       new UploadPermission Object.merge(params, upload: @)
 
     download: (params) ->
