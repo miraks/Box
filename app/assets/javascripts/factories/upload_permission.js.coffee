@@ -3,7 +3,7 @@ angular.module('BoxApp').factory 'UploadPermission', ['RailsResource', (RailsRes
     @configure
       url: '/api/v1/uploads/{{upload.id}}/permissions/{{id}}'
       name: 'upload_permission'
-      serializer: 'UserPermissionSerializer'
+      serializer: 'UploadPermissionSerializer'
       pluralName: 'upload_permissions'
 
     check: ->

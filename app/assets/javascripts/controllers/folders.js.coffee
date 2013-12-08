@@ -18,15 +18,6 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
 
   # Move around
 
-  $scope.checkPermission = (object, callback) ->
-    object.permission().check().then (obj) ->
-      return Notifier.show "Доступ запрещен" if obj.permission == 'no'
-      params = {}
-      if obj.permission == 'password'
-        params.password = prompt "Введи пароль"
-        return unless params.password?
-      callback params
-
   $scope.changeFolder = (folder, checkPermission = true) ->
     actions = (params) ->
       $scope.currentFolder = folder
@@ -61,6 +52,15 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
     $scope.selectedUploads = []
 
   # Permissions
+  $scope.checkPermission = (object, callback) ->
+    object.permission().check().then (obj) ->
+      return Notifier.show "Доступ запрещен" if obj.permission == 'no'
+      params = {}
+      if obj.permission == 'password'
+        params.password = prompt "Введи пароль"
+        return unless params.password?
+      callback params
+
   $scope.loadPermissions = (object) ->
     $scope.showSettings = !$scope.showSettings
     $scope.currentItem = object
@@ -74,9 +74,9 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
       $scope.permissions.push permission
 
   $scope.removePermission = (permission) ->
-    $scope.currentItem.permission(permission).delete().then ->
+    permission.delete().then ->
       $scope.permissions.remove (p) ->
-        p == permission
+        p.id == permission.id
 
   # Password manipulation
 

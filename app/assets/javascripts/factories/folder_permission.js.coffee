@@ -3,8 +3,8 @@ angular.module('BoxApp').factory 'FolderPermission', ['RailsResource', (RailsRes
     @configure
       url: '/api/v1/folders/{{folder.id}}/permissions/{{id}}'
       name: 'folder_permission'
-      serializer: 'UserPermissionSerializer'
       pluralName: 'folder_permissions'
+      serializer: 'FolderPermissionSerializer'
 
     check: ->
       FolderPermissions.$get @$url('check')
