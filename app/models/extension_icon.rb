@@ -64,7 +64,7 @@ class ExtensionIcon
   end
 
   def self.icons_cache
-    @icons_cache ||= storage.keys.each_with_object({}) { |extension, res| res[extension] = new extension }
+    @icons_cache = storage.keys.each_with_object({}) { |extension, res| res[extension] = new extension }
   end
 
   def self.normalize extension
@@ -78,7 +78,7 @@ class ExtensionIcon
     @icons_cache = nil
   end
 
-  channel.subscribe do |message|
-    drop_cache!
-  end
+  # channel.subscribe do |message|
+  #   drop_cache!
+  # end
 end
