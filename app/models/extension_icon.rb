@@ -64,6 +64,8 @@ class ExtensionIcon
   end
 
   def self.icons_cache
+    return @icons_cache if @icons_cache
+    subscribe_on_icon_changes!
     @icons_cache = storage.keys.each_with_object({}) { |extension, res| res[extension] = new extension }
   end
 
@@ -74,11 +76,15 @@ class ExtensionIcon
   end
   delegate :storage, :channel, :icons_cache, :normalize, to: :class
 
+  def self.subscribe_on_icon_changes!
+    return if @subscribed_on_icon_changes
+    channel.subscribe do |message|
+      drop_cache!
+    end
+    @subscribed_on_icon_changes = true
+  end
+
   def self.drop_cache!
     @icons_cache = nil
   end
-
-  # channel.subscribe do |message|
-  #   drop_cache!
-  # end
 end
