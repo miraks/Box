@@ -1,0 +1,68 @@
+$player_height: 50px
+$bars_height: 10px
+
+=font_icon($icon)
+  &:before
+    content: '\e8'+$icon
+
+=fontello
+  font-family: 'fontello'
+
+=bar($width, $height)
+  width: $width
+  height: $height
+  float: left
+  height: $height
+  margin-top: $player_height / 2 - $height / 2
+  background: black
+  position: relative
+  cursor: pointer
+
+.audio-player
+  position: fixed
+  bottom: 0
+  right: 0
+  width: 350px
+  height: $player_height
+  background: white
+  border: 1px solid #BAC3CB
+
+  .icon
+    +fontello
+    font-family: 'fontello'
+    font-size: 20px
+    cursor: pointer
+    display: inline
+    float: left
+    line-height: $player_height
+    margin-right: 5px
+
+    &.play
+      +font_icon('27')
+    &.pause
+      +font_icon('29')
+    &.stop
+      +font_icon('28')
+    &.volume
+      +font_icon('2c')
+      &.muted
+        +font_icon('2e')
+
+  .progress-bar
+    +bar(180px, $bars_height)
+    margin-right: 15px
+
+  .volume-bar
+    +bar(50px, $bars_height)
+
+  .point
+    +fontello
+    +font_icon('2b')
+    font-size: 16px
+    position: absolute
+    left: 0
+    bottom: -$bars_height / 2
+    background: transparent
+    color: #aaa
+    pointer-events: none
+    margin-left: -7px

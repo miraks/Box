@@ -9,7 +9,6 @@ class ExtensionIconUploader < CarrierWave::Uploader::Base
       process :strip
       process resize_to_fill: size
       process quality: 80
-      process convert: 'jpg'
     end
   end
 

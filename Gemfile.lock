@@ -62,6 +62,8 @@ GEM
       json (>= 1.7)
     carrierwave-processing (0.0.2)
       carrierwave
+    carrierwave_backgrounder (0.3.0)
+      carrierwave (~> 0.5)
     celluloid (0.15.2)
       timers (~> 1.1.0)
     chunky_png (1.2.9)
@@ -407,6 +409,7 @@ GEM
       net-scp
       net-ssh
       term-ansicolor
+    streamio-ffmpeg (1.0.0)
     subexec (0.2.3)
     temple (0.6.7)
     term-ansicolor (1.2.2)
@@ -455,6 +458,7 @@ DEPENDENCIES
   capistrano-rails
   carrierwave
   carrierwave-processing
+  carrierwave_backgrounder
   coffee-rails
   compass-rails (~> 2.0.alpha.0)
   custom_configuration
@@ -483,6 +487,7 @@ DEPENDENCIES
   sass-rails
   sidekiq
   slim
+  streamio-ffmpeg
   timecop
   tire
   turbolinks

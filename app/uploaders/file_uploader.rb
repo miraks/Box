@@ -1,17 +1,31 @@
 class FileUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
+  include CarrierWave::Backgrounder::Delay
   include CarrierWave::Processing::MiniMagick
+  include CarrierWave::Processors::Audio
+
+  IMAGE_FORMATS = { normal: [50, 50], thumb: [25, 25] }.freeze
+  AUDIO_FORMATS = { ogg: 'libvorbis' }.freeze
 
   storage :file
 
   before :cache, :save_original_filename
 
-  {normal: [50, 50], thumb: [25, 25]}.each do |name, size|
+  IMAGE_FORMATS.each do |name, size|
     version name, if: :image? do
       process :strip
       process resize_to_fill: size
       process quality: 80
-      process convert: 'jpg'
+    end
+  end
+
+  AUDIO_FORMATS.each do |format, codec|
+    version format, if: :audio? do
+      def full_filename filename
+        super.split('.').tap(&:pop).push(version_name).join('.')
+      end
+
+      process encode_audio: [format, codec]
     end
   end
 
@@ -23,8 +37,20 @@ class FileUploader < CarrierWave::Uploader::Base
     "#{secure_token}.#{file.extension}" if original_filename.present?
   end
 
+  def sources
+    return [] unless playable?
+    type = [:audio].find { |type| send "#{type}?", file }
+    formats = self.class.const_get("#{type.upcase}_FORMATS").keys
+    formats.map { |format| url format }
+  end
+
+  # TODO: cache file type in database on creation
   def previewable?
     image? file
+  end
+
+  def playable?
+    audio? file
   end
 
   private
@@ -32,6 +58,11 @@ class FileUploader < CarrierWave::Uploader::Base
   def image? file
     (file.content_type and file.content_type.start_with? 'image') or
       file.extension.in? %w(jpg jpeg gif png webp)
+  end
+
+  def audio? file
+    (file.content_type and file.content_type.start_with? 'audio') or
+      file.extension.in? %w(mp3 ogg aac flac wav m4a m4b)
   end
 
   def save_original_filename file

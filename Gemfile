@@ -42,8 +42,10 @@ gem 'slim'
 gem 'carrierwave'
 
 # Uploads processing
+gem 'carrierwave_backgrounder'
 gem 'carrierwave-processing'
 gem 'mini_magick'
+gem 'streamio-ffmpeg'
 
 # Localization
 gem 'russian'

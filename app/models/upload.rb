@@ -17,6 +17,7 @@ class Upload < ActiveRecord::Base
   before_destroy :copy_to_storage, if: :has_purchases?
 
   mount_uploader :file, FileUploader
+  process_in_background :file
 
   role :secure_link_generator, methods: [:generate_download_link]
   role :manipulable, methods: [:move, :copy]

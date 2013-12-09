@@ -1,0 +1,8 @@
+.audio-player ng-show="show"
+  .icon ng-class="{play: !playing, pause: playing}" ng-click="player.playToggle()"
+  .stop.icon ng-click="player.stop()"
+  .progress-bar.bar
+    .point
+  .volume.icon ng-class="{muted: muted}" ng-click="player.volumeToggle()"
+  .volume-bar.bar
+    .point

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131208114826) do
+ActiveRecord::Schema.define(version: 20131209142357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,15 +86,16 @@ ActiveRecord::Schema.define(version: 20131208114826) do
   end
 
   create_table "uploads", force: true do |t|
-    t.string   "original_name",                 null: false
-    t.integer  "user_id",                       null: false
-    t.integer  "folder_id",                     null: false
+    t.integer  "user_id",                         null: false
+    t.integer  "folder_id",                       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "original_name"
     t.string   "file"
     t.string   "password_hash"
-    t.boolean  "locked",        default: false
-    t.integer  "size",                          null: false
+    t.boolean  "locked",          default: false
+    t.integer  "size",                            null: false
+    t.boolean  "file_processing"
   end
 
   add_index "uploads", ["folder_id"], name: "index_uploads_on_folder_id", using: :btree

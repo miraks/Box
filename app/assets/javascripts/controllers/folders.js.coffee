@@ -1,4 +1,4 @@
-angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'Uploader', 'Upload', 'Clipboard', 'Notifier', 'Downloader', 'CurrentUser', 'FolderPermission', 'UploadPermission', ($scope, Folder, Uploader, Upload, Clipboard, Notifier, Downloader, CurrentUser, FolderPermissions, UploadPermissions) ->
+angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'Uploader', 'Upload', 'Clipboard', 'Notifier', 'Downloader', 'CurrentUser', 'FolderPermission', 'UploadPermission', 'AudioPlayer', ($scope, Folder, Uploader, Upload, Clipboard, Notifier, Downloader, CurrentUser, FolderPermissions, UploadPermissions, AudioPlayer) ->
   $scope.init = (rootId, setupUploder) ->
     currentFolderId = rootId # TODO: read folder id from location first
     $scope.setupUploader() if setupUploder
@@ -115,4 +115,10 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
     Upload.move(upload, folder).then (uploads) ->
       upload = uploads[0]
       $scope.folder.uploads.remove (up) -> up.equal upload
+
+  $scope.playAudio = (upload) ->
+    $scope.checkPermission upload, ->
+      upload.download().then (upload) ->
+        AudioPlayer.setSrc upload.sources
+        AudioPlayer.play()
 ]

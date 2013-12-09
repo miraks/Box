@@ -1,0 +1,52 @@
+angular.module('BoxApp').directive 'audioplayer', [->
+  restrict: 'E'
+  replace: true
+
+  controller: ['$scope', '$element', '$rootScope', 'AudioPlayer', ($scope, $element, $rootScope, AudioPlayer) ->
+    $scope.player = AudioPlayer
+
+    $scope.bindOnClicks = ->
+      $scope.progress.bind 'click', (event) ->
+        percent = event.layerX / $scope.progress.prop('offsetWidth')
+        $scope.player.currentTime percent * $scope.player.duration()
+
+      $scope.volume.bind 'click', (event) ->
+        percent = event.layerX / $scope.volume.prop('offsetWidth')
+        $scope.player.volume percent
+
+    $scope.bindOnPlayerEvents = ->
+      $rootScope.$on 'audioplayer.sourceschanged', ->
+        $scope.show = true
+
+      $scope.player.bind 'play', ->
+        $scope.$apply ->
+          $scope.playing = true
+
+      $scope.player.bind 'pause', ->
+        $scope.$apply ->
+          $scope.playing = false
+
+      $scope.player.bind 'timeupdate', ->
+        $scope.$apply ->
+          $scope.progressPoint.css left: "#{$scope.player.progressPercent()}%"
+
+      $scope.player.bind 'volumechange', ->
+        $scope.$apply ->
+          $scope.muted = $scope.player.muted()
+          $scope.volumePoint.css left: "#{$scope.player.volumePercent()}%"
+
+    $scope.show = !!$scope.player.currentSrc()
+    $scope.playing = !$scope.player.paused()
+    $scope.progress = $scope.player.progressPercent()
+    $scope.muted = $scope.player.muted()
+    $scope.progress = angular.element document.querySelector(".#{$element.attr('class')} .progress-bar")
+    $scope.progressPoint = angular.element document.querySelector(".#{$scope.progress.attr('class').replace(new RegExp(' ', 'g'), '.')} .point")
+    $scope.volume = angular.element document.querySelector(".#{$element.attr('class')} .volume-bar")
+    $scope.volumePoint = angular.element document.querySelector(".#{$scope.volume.attr('class').replace(new RegExp(' ', 'g'), '.')} .point")
+    $scope.volumePoint.css left: "#{$scope.player.volumePercent()}%"
+    $scope.bindOnClicks()
+    $scope.bindOnPlayerEvents()
+  ]
+
+  templateUrl: '<%= asset_path "audio_player.html" %>'
+]

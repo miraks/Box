@@ -9,4 +9,5 @@
       a.action.item-settings href="" ng-click="loadPermissions(upload)" title=t('.settings')
       a.action.lock href="" ng-click="setPassword(upload)" title=t('.set_password')
       a.action.unlock href="" ng-click="deletePassword(upload)" ng-show="upload.locked" title=t('.delete_password')
+      a.action.play href="" ng-click="playAudio(upload)" ng-show="upload.playable" title=t('.play')
   .progress ng-show="upload.isUploading()" = "#{t '.progress'}: {{upload.percent}}"
