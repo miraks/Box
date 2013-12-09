@@ -1,7 +1,24 @@
-angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', ($rootScope, Storage) ->
+angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID', ($rootScope, Storage, UUID) ->
+  player = null
+
+  class Track
+    constructor: (@name, sources) ->
+      @id = UUID.generate()
+      @source = @findPlayableSource sources
+
+    equal: (other) ->
+      @id == other.id
+
+    findPlayableSource: (sources) ->
+      return sources unless Object.isArray sources
+      sources.find (source) -> player.playerEl.canPlayType "audio/#{source.split('.').last()}"
+
   class AudioPlayer
     constructor: ->
+      # TODO: move playlist to class
+      @playlist = []
       @createDOMElement()
+      @bindCallbacks()
 
     ['play', 'pause', 'load'].each (method) =>
       @::[method] = ->
@@ -34,13 +51,45 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', ($root
     volumePercent: ->
       @volume() * 100
 
-    setSrc: (sources) ->
-      @src = sources.find (source) => @playerEl.canPlayType "audio/#{source.split('.').last()}"
-      @playerEl.src = @src
-      $rootScope.$emit 'audioplayer.sourceschanged', @src
+    playNow: (nameOrTrack, sources) ->
+      @currentTrack = @createTrack nameOrTrack, sources
+      @addToPlayList @currentTrack unless @isInPlaylist @currentTrack
+      @playerEl.src = @currentTrack.source
+      @play()
+      $rootScope.$emit 'audioplayer.trackchanged', @currentTrack
+
+    addToPlayList: (nameOrTrack, sources) ->
+      track = @createTrack nameOrTrack, sources
+      @playlist.push track
+      $rootScope.$emit 'audioplayer.playlistupdated', @playlist
+
+    removeFromPlayList: (track) ->
+      @playlist.remove (tr) -> track.equal tr
+
+    isInPlaylist: (track) ->
+      @playlist.any (tr) => track.equal tr
+
+    nextTrack: ->
+      index = @playlist.findIndex (track) => @currentTrack.equal track
+      @playlist[index + 1]
+
+    switchToNextTrack: =>
+      next = @nextTrack()
+      return @currentTrack = next unless next?
+      @playNow next
+
+    createTrack: (nameOrTrack, sources) ->
+      if nameOrTrack.constructor == Track
+        nameOrTrack
+      else
+        new Track nameOrTrack, sources
 
     createDOMElement: ->
       @playerEl = document.createElement 'audio'
 
-  new AudioPlayer
+    bindCallbacks: ->
+      @bind 'ended', @switchToNextTrack
+
+
+  player = new AudioPlayer
 ]

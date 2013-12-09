@@ -18,51 +18,69 @@ $bars_height: 10px
   position: relative
   cursor: pointer
 
-.audio-player
+.audio-player-wrapper
   position: fixed
   bottom: 0
   right: 0
-  width: 350px
-  height: $player_height
   background: white
   border: 1px solid #BAC3CB
 
-  .icon
-    +fontello
-    font-family: 'fontello'
-    font-size: 20px
-    cursor: pointer
-    display: inline
-    float: left
-    line-height: $player_height
-    margin-right: 5px
+  .playlist
+    .track
+      margin: 5px
+      padding: 5px
+      border-bottom: 1px dotted black
 
-    &.play
-      +font_icon('27')
-    &.pause
-      +font_icon('29')
-    &.stop
-      +font_icon('28')
-    &.volume
-      +font_icon('2c')
-      &.muted
-        +font_icon('2e')
+      .name
+        float: left
 
-  .progress-bar
-    +bar(180px, $bars_height)
-    margin-right: 15px
+      .remove
+        float: right
+        cursor: pointer
 
-  .volume-bar
-    +bar(50px, $bars_height)
+      &.current .name
+        color: #66B7EF
 
-  .point
-    +fontello
-    +font_icon('2b')
-    font-size: 16px
-    position: absolute
-    left: 0
-    bottom: -$bars_height / 2
-    background: transparent
-    color: #aaa
-    pointer-events: none
-    margin-left: -7px
+  .audio-player
+    width: 350px
+    height: $player_height
+
+    .icon
+      +fontello
+      font-family: 'fontello'
+      font-size: 20px
+      cursor: pointer
+      display: inline
+      float: left
+      line-height: $player_height
+      margin-right: 5px
+
+      &.play
+        +font_icon('27')
+      &.pause
+        +font_icon('29')
+      &.stop
+        +font_icon('28')
+      &.volume
+        +font_icon('2c')
+        &.muted
+          +font_icon('2e')
+
+    .progress-bar
+      +bar(180px, $bars_height)
+      margin-right: 15px
+
+    .volume-bar
+      +bar(50px, $bars_height)
+
+    .point
+      +fontello
+      +font_icon('2b')
+      font-size: 16px
+      position: absolute
+      left: 0
+      bottom: -$bars_height / 2
+      background: transparent
+      color: #aaa
+      pointer-events: none
+      margin-left: -7px

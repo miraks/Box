@@ -116,9 +116,10 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
       upload = uploads[0]
       $scope.folder.uploads.remove (up) -> up.equal upload
 
+  # AudioPlayer
+
   $scope.playAudio = (upload) ->
     $scope.checkPermission upload, ->
       upload.download().then (upload) ->
-        AudioPlayer.setSrc upload.sources
-        AudioPlayer.play()
+        AudioPlayer.playNow upload.name, upload.sources
 ]

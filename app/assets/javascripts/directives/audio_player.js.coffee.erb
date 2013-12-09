@@ -15,7 +15,10 @@ angular.module('BoxApp').directive 'audioplayer', [->
         $scope.player.volume percent
 
     $scope.bindOnPlayerEvents = ->
-      $rootScope.$on 'audioplayer.sourceschanged', ->
+      $rootScope.$on 'audioplayer.trackchanged', ->
+        $scope.show = true
+
+      $rootScope.$on 'audioplayer.playlistupdated', ->
         $scope.show = true
 
       $scope.player.bind 'play', ->

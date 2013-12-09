@@ -1,8 +1,15 @@
-.audio-player ng-show="show"
-  .icon ng-class="{play: !playing, pause: playing}" ng-click="player.playToggle()"
-  .stop.icon ng-click="player.stop()"
-  .progress-bar.bar
-    .point
-  .volume.icon ng-class="{muted: muted}" ng-click="player.volumeToggle()"
-  .volume-bar.bar
-    .point
+.audio-player-wrapper
+  .playlist
+    .track ng-repeat="track in player.playlist" ng-class="{current: player.currentTrack == track}" ng-dblclick="player.playNow(track)"
+      .name
+        | {{track.name}}
+      .remove ng-click="player.removeFromPlayList(track)" x
+      .clear
+  .audio-player ng-show="show"
+    .icon ng-class="{play: !playing, pause: playing}" ng-click="player.playToggle()"
+    .stop.icon ng-click="player.stop()"
+    .progress-bar.bar
+      .point
+    .volume.icon ng-class="{muted: muted}" ng-click="player.volumeToggle()"
+    .volume-bar.bar
+      .point
