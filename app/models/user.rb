@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
     indexes :created_at, type: 'date'
   end
 
+  mount_uploader :avatar, AvatarUploader
+
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
   has_many :uploads
