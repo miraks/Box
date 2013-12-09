@@ -30,7 +30,6 @@ class Api::V1::UploadsController < Api::V1::BaseController
 
   def move
     # TODO: это будет работать очень медленно при большом числе файлов
-    @uploads.all? { |upload| upload.move @folder }
     if @uploads.all? { |upload| upload.move @folder }
       render json: @uploads, each_serializer: UploadSerializer
     else
