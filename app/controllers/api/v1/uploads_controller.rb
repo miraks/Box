@@ -1,6 +1,6 @@
 class Api::V1::UploadsController < Api::V1::BaseController
   find :folder, only: [:create]
-  find :upload, only: [:update, :download]#, :permission, :get_permissions, :set_permissions]
+  find :upload, only: [:update, :download]
   find :folder, in: :upload, only: [:move, :copy]
   find :uploads, in: :upload, only: [:move, :copy]
 
