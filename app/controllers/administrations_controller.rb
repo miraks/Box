@@ -4,4 +4,7 @@ class AdministrationsController < ApplicationController
 
   def extension_icons
   end
+
+  def space_limits
+  end
 end

@@ -1,0 +1,10 @@
+.block.space-limits ng-controller="SpaceLimitsController"
+  h1 = t 'administrations.show.space_limits'
+
+  .user ng-repeat="user in users"
+    img.avatar src="http://placehold.it/30x30"
+    .name
+      | {{user.name}}
+    = number_field_tag :space_limit, nil, "ng-model" => 'user.spaceLimit', placeholder: t('.available_space'), class: 'space-limit'
+    a.save href="" ng-click="saveUser(user)" = t '.save'
+    .clear

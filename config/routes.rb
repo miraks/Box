@@ -27,7 +27,7 @@ Box::Application.routes.draw do
           concerns :permissions
         end
       end
-      resources :users, only: [] do
+      resources :users, only: [:index, :update] do
         scope module: :users do
           resources :permissions, only: :index
           resources :conversations, only: [:index, :show, :create]
@@ -59,7 +59,7 @@ Box::Application.routes.draw do
 
   resource :administration, only: [:show] do
     collection do
-      get :extension_icons
+      get :extension_icons, :space_limits
     end
   end
 end
