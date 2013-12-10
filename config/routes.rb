@@ -1,5 +1,11 @@
+require 'sidekiq/web'
+
 Box::Application.routes.draw do
   devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
+
+  authenticate :user, -> user { user.is_admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   root to: "users#index"
 
@@ -18,7 +24,7 @@ Box::Application.routes.draw do
           concerns :permissions
         end
       end
-      resources :uploads, only: [:create, :update] do
+      resources :uploads, only: [:create, :update, :destroy] do
         get :download
         collection do
           patch :move, :copy

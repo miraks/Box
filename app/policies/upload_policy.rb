@@ -1,12 +1,15 @@
 UploadPolicy = Struct.new(:user, :upload) do
   include PermissionCheck
 
-  self.item = :upload
-
-  def create?
+  def owner?
     user == upload.folder.user
   end
-  alias :update? :create?
+
+  self.item = :upload
+
+  alias :create?  :owner?
+  alias :update?  :owner?
+  alias :destroy? :owner?
 
   def download? password = nil
     has_permission? password

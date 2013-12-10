@@ -7,7 +7,7 @@ class Upload < ActiveRecord::Base
   belongs_to :user
   belongs_to :folder
   has_many :purchases
-  has_many :permissions, as: :item
+  has_many :permissions, as: :item, dependent: :destroy
 
   validates :original_name, :file, :size, :user_id, :folder_id, presence: true
   validate :check_limit

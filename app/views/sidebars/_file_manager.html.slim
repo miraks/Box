@@ -1,6 +1,8 @@
 .file-manager.small ng-controller="FoldersController" ng-init="init(#{current_user.folders.root.id}, false)"
-  = render 'file_manager/settings'
-  = render 'file_manager/buttons'
-  = render 'file_manager/path'
-  = render 'file_manager/folders'
-  = render 'file_manager/uploads', icon_type: :thumb
+  .folder-drop-zone ddropable="folder" on-drop="dropped"
+    = render 'file_manager/settings'
+    = render 'file_manager/buttons'
+    = render 'file_manager/path'
+    = render 'file_manager/folders'
+    = render 'file_manager/uploads', icon_type: :thumb
+    .clear

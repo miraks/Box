@@ -23,6 +23,13 @@ $element_padding: 10px
   position: relative
   display: inline-block
 
+  .folder-drop-zone
+    +transition(box-shadow .3s linear)
+    &.drag-target
+      box-shadow: 0 0 5px black
+    &.drag-over
+      box-shadow: 0 0 5px #66b7ef
+
   .settings
     text-align: center
     position: absolute
@@ -106,6 +113,10 @@ $element_padding: 10px
           +font_icon('07')
         &.play
           +font_icon('27')
+        &.add-to-playlist
+          +font_icon('31')
+        &.delete
+          +font_icon('0c')
 
     &:before
       +transition(color .3s linear)
@@ -163,10 +174,15 @@ $element_padding: 10px
   .folder
     +font_icon('22')
 
-  .upload:not(.has-icon)
-    +font_icon('23')
+  .upload
+    min-height: 80px
+    &:not(.has-icon)
+      +font_icon('23')
 
   &.small
+    .upload
+      min-height: inherit
+
     .item
       +box-sizing(border-box)
       width: 100%

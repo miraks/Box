@@ -1,6 +1,6 @@
 class Api::V1::UploadsController < Api::V1::BaseController
   find :folder, only: [:create]
-  find :upload, only: [:update, :download]
+  find :upload, only: [:update, :destroy, :download]
   find :folder, in: :upload, only: [:move, :copy]
   find :uploads, in: :upload, only: [:move, :copy]
 
@@ -20,6 +20,15 @@ class Api::V1::UploadsController < Api::V1::BaseController
       render json: @upload
     else
       render_error ValidationError.new(@upload), 403
+    end
+  end
+
+  def destroy
+    authorize @upload
+    if @upload.destroy
+      render json: @upload
+    else
+      render_error TextError.new('destroy_failed'), 500
     end
   end
 

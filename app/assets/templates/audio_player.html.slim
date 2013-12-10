@@ -3,11 +3,13 @@
     .track ng-repeat="track in player.playlist" ng-class="{current: player.currentTrack == track}" ng-dblclick="player.playNow(track)"
       .name
         | {{track.name}}
-      .remove ng-click="player.removeFromPlayList(track)" x
+      .remove ng-click="player.removeFromPlaylist(track)" x
       .clear
   .audio-player ng-show="show"
+    .prev-track.icon ng-click="player.switchToPrevTrack()"
     .icon ng-class="{play: !playing, pause: playing}" ng-click="player.playToggle()"
     .stop.icon ng-click="player.stop()"
+    .next-track.icon ng-click="player.switchToNextTrack()"
     .progress-bar.bar
       .point
     .volume.icon ng-class="{muted: muted}" ng-click="player.volumeToggle()"

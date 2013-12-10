@@ -26,6 +26,9 @@ $bars_height: 10px
   border: 1px solid #BAC3CB
 
   .playlist
+    max-height: 500px
+    overflow-y: auto
+
     .track
       margin: 5px
       padding: 5px
@@ -33,6 +36,7 @@ $bars_height: 10px
 
       .name
         float: left
+        pointer-events: none
 
       .remove
         float: right
@@ -65,6 +69,10 @@ $bars_height: 10px
         +font_icon('2c')
         &.muted
           +font_icon('2e')
+      &.prev-track
+        +font_icon('30')
+      &.next-track
+        +font_icon('2f')
 
     .progress-bar
       +bar(180px, $bars_height)

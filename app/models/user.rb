@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :friendships
   has_many :friends, through: :friendships, source: :friend
   has_many :permissions, foreign_key: 'owner_id'
+  has_many :shared, class_name: 'Permission'
 
   validates :name, :email, :space_limit, :used_space, presence: true
 

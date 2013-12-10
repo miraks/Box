@@ -7,6 +7,7 @@ module PasswordProtected
     role :password_manager, methods: [:know_password, :know_password?, :know_password!]
 
     before_save :clear_password_manager, if: :password_changed?
+    after_destroy :clear_password_manager
   end
 
   def password
