@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
-  PROFILE_FIELD = [:birthday, :city].freeze
-  COMPANY_DATA_FIELD = [:name, :activities, :site_link, :address, :phone_number]
+  PROFILE_FIELDS = [:birthday, :city].freeze
+  COMPANY_DATA_FIELDS = [:name, :activities, :site_link, :address, :phone_number].freeze
   DEFAULT_SPACE_LIMIT = 2.gigabytes
 
   mapping do

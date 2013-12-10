@@ -32,14 +32,14 @@ span ng-if="isEditable"
     input type="text" ng-model="user.name"
 
     ul
-      - User::PROFILE_FIELD.each do |name|
+      - User::PROFILE_FIELDS.each do |name|
         li
           label
             | #{name}
           input type="text" ng-model="user.profile.#{name}"
     span ng-if="user.isCompany"
       ul
-        - User::COMPANY_DATA_FIELD.each do |name, _|
+        - User::COMPANY_DATA_FIELDS.each do |name, _|
           li
             label
               | #{name}

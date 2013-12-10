@@ -18,9 +18,9 @@ class Api::V1::UsersController < Api::V1::BaseController
   private
 
   def user_params
-    allowed_params = [:name, :email, :avatar, { profile: User::PROFILE_FIELD }]
+    allowed_params = [:name, :email, :avatar, { profile: User::PROFILE_FIELDS }]
     allowed_params << :space_limit if current_user.try(:is_admin?)
-    allowed_params << { company_data: User::COMPANY_DATA_FIELD } if current_user.try(:is_company?)
+    allowed_params << { company_data: User::COMPANY_DATA_FIELDS } if current_user.try(:is_company?)
     params.require(:user).permit(allowed_params)
   end
 end
