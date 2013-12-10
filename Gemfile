@@ -53,6 +53,7 @@ gem 'devise-i18n'
 
 # Jobs
 gem 'sidekiq'
+gem 'sinatra', require: false
 
 # Configuration
 gem 'custom_configuration'
