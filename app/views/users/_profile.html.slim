@@ -14,14 +14,14 @@ span ng-if="!isEditable"
         = t '.was_online_at', time: time_ago_in_words(@user.last_online_time)
 
     ul
-      - @user.profile_info.each do |name,_|
+      - @user.profile.each do |name, _|
         li
-          | #{name}: {{user.profileInfo.#{name}}}
+          | #{name}: {{user.profile.#{name}}}
     span ng-if="user.isCompany"
       ul
-        - @user.company_info.each do |name,_|
+        - @user.company_data.each do |name, _|
           li
-            | #{name}: {{user.companyInfo.#{name}}}
+            | #{name}: {{user.companyData.#{name}}}
 
 span ng-if="isEditable"
   .avatar
@@ -29,20 +29,20 @@ span ng-if="isEditable"
   .details
     label
       | Имя
-      input type="text" ng-model="user.name"
+    input type="text" ng-model="user.name"
 
     ul
-      - @user.profile_info.each do |name,_|
+      - User::PROFILE_FIELD.each do |name|
         li
           label
             | #{name}
-            input type="text" ng-model="user.profileInfo.#{name}"
+          input type="text" ng-model="user.profile.#{name}"
     span ng-if="user.isCompany"
       ul
-        - @user.company_info.each do |name,_|
+        - User::COMPANY_DATA_FIELD.each do |name, _|
           li
             label
               | #{name}
-              input type="text" ng-model="user.companyInfo.#{name}"
+            input type="text" ng-model="user.companyData.#{name}"
     .button ng-click="submit()" submit
 

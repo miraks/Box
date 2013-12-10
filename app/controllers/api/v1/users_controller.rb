@@ -8,7 +8,6 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def update
-    @user.profile, @user.company_data = profile_params, company_params
     if @user.update_attributes user_params
       render json: @user
     else
@@ -19,17 +18,9 @@ class Api::V1::UsersController < Api::V1::BaseController
   private
 
   def user_params
-    allowed_params = %w{ name email profile_info avatar}
+    allowed_params = [:name, :email, :avatar, { profile: User::PROFILE_FIELD }]
     allowed_params << :space_limit if current_user.try(:is_admin?)
-    allowed_params << :company_info if current_user.try(:is_company?)
+    allowed_params << { company_data: User::COMPANY_DATA_FIELD } if current_user.try(:is_company?)
     params.require(:user).permit(allowed_params)
-  end
-
-  def company_params
-    params.require(:user).require(:company_info)
-  end
-
-  def profile_params
-    params.require(:user).require(:profile_info)
   end
 end
