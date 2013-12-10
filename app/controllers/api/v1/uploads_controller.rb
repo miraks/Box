@@ -3,6 +3,7 @@ class Api::V1::UploadsController < Api::V1::BaseController
   find :upload, only: [:update, :destroy, :download]
   find :folder, in: :upload, only: [:move, :copy]
   find :uploads, in: :upload, only: [:move, :copy]
+  find :uploads, only: [:processing_status]
 
   def create
     @upload = Upload.new user: current_user, file: params[:file], folder: @folder
@@ -52,6 +53,10 @@ class Api::V1::UploadsController < Api::V1::BaseController
     else
       render_error TextError.new('copy'), 500
     end
+  end
+
+  def processing_status
+    render json: @uploads, each_serializer: UploadProcessingStatusSerializer
   end
 
   private

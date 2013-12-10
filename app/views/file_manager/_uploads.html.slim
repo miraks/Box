@@ -1,6 +1,9 @@
 .item.upload ng-repeat="upload in folder.uploads" ng-click="toggleUploadSelection(upload)" ng-class="{selected: isSelectedUpload(upload), 'has-icon': upload.iconUrl}" ddragable="upload"
   .icon ng-show="upload.iconUrl"
     img ng-src="{{upload.icon('#{icon_type}')}}"
+  .marks
+    .locked.mark ng-show="upload.locked"
+    .processing.mark ng-show="upload.isProcessing()"
   .name
     | {{upload.name}}
   .menu stop-propagation="click"

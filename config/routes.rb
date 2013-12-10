@@ -27,6 +27,7 @@ Box::Application.routes.draw do
       resources :uploads, only: [:create, :update, :destroy] do
         get :download
         collection do
+          get :processing_status
           patch :move, :copy
         end
         scope module: :uploads do

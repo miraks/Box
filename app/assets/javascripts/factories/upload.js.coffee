@@ -16,10 +16,15 @@ angular.module('BoxApp').factory 'Upload', ['RailsResource', 'UploadPermission',
     @copy = (uploads, folder) ->
       @manipulate 'copy', uploads, folder
 
-    constructor: (state) ->
-      @state = state || "uploaded"
+    @processingStatus = (ids) ->
+      @$get @$url('processing_status'), ids: ids
 
-    ["uploaded", "uploading"].each (state) =>
+    constructor: (data) ->
+      super data
+      return @state = 'uploaded' unless @fileProcessing?
+      @state = if @fileProcessing then 'processing' else 'uploaded'
+
+    ["uploaded", "processing", "uploading"].each (state) =>
       @::["is#{state.camelize()}"] = -> @state == state
 
     equal: (other) ->

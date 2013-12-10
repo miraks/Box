@@ -21,7 +21,7 @@ angular.module('BoxApp').factory 'Uploader', ['$rootScope', 'Upload', 'Storage',
     bindCallbacks: ->
       @uploader.bind 'filesAdded', (uploader, files) =>
         files.each (file) =>
-          upload = new Upload 'uploading'
+          upload = new Upload state: 'uploading'
           @addUpload upload
           $rootScope.$apply ->
             Object.merge upload, file: file, name: file.name, percent: 0
@@ -38,8 +38,8 @@ angular.module('BoxApp').factory 'Uploader', ['$rootScope', 'Upload', 'Storage',
         upload = @uploads.find (up) -> up.file.id == file.id
         @removeUpload upload
         $rootScope.$apply ->
-          Object.merge upload, JSON.parse(resp.response).upload
-          Object.merge upload, state: 'uploaded', file: null
+          Object.merge upload, new Upload(JSON.parse(resp.response))
+          Object.merge upload, file: null
         @trigger 'fileUploaded', upload, resp
 
     bindUploadsStatusUpdate: ->

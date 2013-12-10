@@ -83,6 +83,23 @@ $element_padding: 10px
       display: block
       opacity: 1
 
+    .marks
+      position: absolute
+      top: 0
+      left: 0
+      width: 20px
+
+      .mark
+        display: inline-block
+        color: #555
+        &:before
+          font-family: 'fontello'
+          font-size: 20px
+        &.locked
+          +font_icon('26')
+        &.processing
+          +font_icon('32')
+
     .menu
       +transition(opacity .6s linear)
       opacity: 0
@@ -194,6 +211,9 @@ $element_padding: 10px
 
       .icon
         display: inline
+
+      .marks .mark:before
+        font-size: 15px
 
       .menu
         float: right

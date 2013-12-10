@@ -1,5 +1,6 @@
 .file-manager ng-controller="FoldersController" ng-init="init(#{@user.folders.root.id}, true)"
   .folder-drop-zone ddropable="folder" on-drop="dropped"
+    div ng-controller="ProcessingStatusController"
     = render 'file_manager/settings'
     = render 'file_manager/space_usage'
     = render 'file_manager/buttons'
