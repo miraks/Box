@@ -52,10 +52,15 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID'
       @volume() * 100
 
     playNow: (nameOrTrack, sources) ->
-      @currentTrack = @createTrack nameOrTrack, sources
-      @addToPlayList @currentTrack unless @isInPlaylist @currentTrack
-      @playerEl.src = @currentTrack.source
-      @play()
+      if nameOrTrack?
+        @currentTrack = @createTrack nameOrTrack, sources
+        @addToPlayList @currentTrack unless @isInPlaylist @currentTrack
+        @playerEl.src = @currentTrack.source
+        @play()
+      else
+        @currentTrack = null
+        @playerEl.src = null
+        @stop()
       $rootScope.$emit 'audioplayer.trackchanged', @currentTrack
 
     addToPlayList: (nameOrTrack, sources) ->
@@ -69,14 +74,25 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID'
     isInPlaylist: (track) ->
       @playlist.any (tr) => track.equal tr
 
-    nextTrack: ->
-      index = @playlist.findIndex (track) => @currentTrack.equal track
-      @playlist[index + 1]
+    currentTrackIndex: ->
+      return unless @currentTrack
+      @playlist.findIndex (track) => @currentTrack.equal(track)
 
-    switchToNextTrack: =>
-      next = @nextTrack()
-      return @currentTrack = next unless next?
-      @playNow next
+    prevTrack: ->
+      index = @currentTrackIndex()
+      index = if index? then index - 1 else @playlist.length - 1
+      @playlist[index]
+
+    nextTrack: ->
+      index = @currentTrackIndex()
+      index = if index? then index + 1 else 0
+      @playlist[index]
+
+    switchToPrevTrack: ->
+      @playNow @prevTrack()
+
+    switchToNextTrack: ->
+      @playNow @nextTrack()
 
     createTrack: (nameOrTrack, sources) ->
       if nameOrTrack.constructor == Track
@@ -88,7 +104,7 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID'
       @playerEl = document.createElement 'audio'
 
     bindCallbacks: ->
-      @bind 'ended', @switchToNextTrack
+      @bind 'ended', => @switchToNextTrack()
 
 
   player = new AudioPlayer
