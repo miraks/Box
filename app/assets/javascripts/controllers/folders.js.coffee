@@ -1,8 +1,9 @@
-angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'Uploader', 'Upload', 'Clipboard', 'Notifier', 'Downloader', 'CurrentUser', 'FolderPermission', 'UploadPermission', 'AudioPlayer', ($scope, Folder, Uploader, Upload, Clipboard, Notifier, Downloader, CurrentUser, FolderPermissions, UploadPermissions, AudioPlayer) ->
+angular.module('BoxApp').controller 'FoldersController', ['$scope', '$rootScope', 'Folder', 'Uploader', 'Upload', 'Clipboard', 'Notifier', 'Downloader', 'CurrentUser', 'FolderPermission', 'UploadPermission', 'AudioPlayer', ($scope, $rootScope, Folder, Uploader, Upload, Clipboard, Notifier, Downloader, CurrentUser, FolderPermissions, UploadPermissions, AudioPlayer) ->
   $scope.init = (rootId, setupUploder) ->
     currentFolderId = rootId # TODO: read folder id from location first
     $scope.setupUploader() if setupUploder
     $scope.setupClipboard()
+    $scope.bindDropCallbacks()
     $scope.usersList = []
     $scope.changeFolder new Folder(id: currentFolderId), false
 
@@ -117,9 +118,24 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
   # Drag and drop
 
   $scope.dropped = (upload, folder) ->
-    Upload.move(upload, folder).then (uploads) ->
+    return if upload.folderId == folder.id
+    action = if upload.userId == $scope.folder.userId then 'move' else 'copy'
+    Upload[action](upload, folder).then (uploads) ->
       upload = uploads[0]
-      $scope.folder.uploads.remove (up) -> up.equal upload
+      $rootScope.$emit "folders.upload#{action}", [upload, folder]
+
+  $scope.bindDropCallbacks = ->
+    addUpload = (upload, folder) ->
+      $scope.folder.uploads.push upload if $scope.folder.id == folder.id
+
+    $rootScope.$on 'folders.uploadmove', (event, data) ->
+      [upload, folder] = data
+      addUpload upload, folder
+      $scope.folder.uploads.remove((up) -> up.equal(upload)) unless $scope.folder.id == folder.id
+
+    $rootScope.$on 'folders.uploadcopy', (event, data) ->
+      [upload, folder] = data
+      addUpload upload, folder
 
   # AudioPlayer
 
