@@ -43,6 +43,14 @@ class Upload < ActiveRecord::Base
     (file.previewable? and file.url(type)) or ExtensionIcon.for(extension).try(:url, type)
   end
 
+  alias :old_file= :file=
+
+  def file= file
+    filename = file.kind_of?(File) ? File.basename(file.path) : file.original_filename
+    self.process_file_upload = true unless File.extname(filename)[1..-1].in? FileUploader::MEDIA_EXTENSIONS
+    self.old_file = file
+  end
+
   private
 
   def check_limit

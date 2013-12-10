@@ -7,6 +7,11 @@ class FileUploader < CarrierWave::Uploader::Base
   IMAGE_FORMATS = { normal: [50, 50], thumb: [25, 25] }.freeze
   AUDIO_FORMATS = { ogg: 'libvorbis' }.freeze
 
+  IMAGE_EXTENSIONS = %w(jpg jpeg gif png webp).freeze
+  AUDIO_EXTENSIONS = %w(mp3 ogg aac flac wav m4a m4b).freeze
+  VIDEO_EXTENSIONS = %w().freeze
+  MEDIA_EXTENSIONS = (AUDIO_EXTENSIONS + VIDEO_EXTENSIONS).freeze
+
   storage :file
 
   before :cache, :save_original_filename
@@ -57,12 +62,12 @@ class FileUploader < CarrierWave::Uploader::Base
 
   def image? file
     (file.content_type and file.content_type.start_with? 'image') or
-      file.extension.in? %w(jpg jpeg gif png webp)
+      file.extension.in? IMAGE_EXTENSIONS
   end
 
   def audio? file
     (file.content_type and file.content_type.start_with? 'audio') or
-      file.extension.in? %w(mp3 ogg aac flac wav m4a m4b)
+      file.extension.in? AUDIO_EXTENSIONS
   end
 
   def save_original_filename file
