@@ -1,19 +1,48 @@
-.avatar
-  img src="http://placehold.it/150x150"
-.details
-  .name
-    = @user.slug
-  .online-status
-    - if @user.online?
-      = t '.online_now'
-    - else
-      = t '.was_online_at', time: time_ago_in_words(@user.last_online_time)
-  .rating
-    | + 49
-  .city
-    | Город: Москва
-  .birthday
-    | День рождения: 12 апреля
-  .company
-    | Компания: 1С Битрикс
-.files-by-category
+- if logged_in? and self? @user
+  input type="checkbox" ng-model="isEditable"
+
+span ng-if="!isEditable"
+  .avatar
+    img ng-src="{{user.avatar.normal.url}}"
+  .details
+    .name
+      | {{user.name}}
+    .online-status
+      - if @user.online?
+        = t '.online_now'
+      - else
+        = t '.was_online_at', time: time_ago_in_words(@user.last_online_time)
+
+    ul
+      - @user.profile_info.each do |name,_|
+        li
+          | #{name}: {{user.profileInfo.#{name}}}
+    span ng-if="user.isCompany"
+      ul
+        - @user.company_info.each do |name,_|
+          li
+            | #{name}: {{user.companyInfo.#{name}}}
+
+span ng-if="isEditable"
+  .avatar
+    img ng-src="{{user.avatar.normal.url}}"
+  .details
+    label
+      | Имя
+      input type="text" ng-model="user.name"
+
+    ul
+      - @user.profile_info.each do |name,_|
+        li
+          label
+            | #{name}
+            input type="text" ng-model="user.profileInfo.#{name}"
+    span ng-if="user.isCompany"
+      ul
+        - @user.company_info.each do |name,_|
+          li
+            label
+              | #{name}
+              input type="text" ng-model="user.companyInfo.#{name}"
+    .button ng-click="submit()" submit
+

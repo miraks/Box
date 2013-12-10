@@ -17,6 +17,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
     "system/#{model.class.to_s.underscore}/#{split_id(model.id)}"
   end
 
+  def default_url
+    "/assets/fallback/#{model.class.to_s.underscore}/" + [version_name, "default.gif"].compact.join('_')
+  end
+
   private
 
   def split_id id

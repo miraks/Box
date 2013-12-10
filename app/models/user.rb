@@ -43,6 +43,15 @@ class User < ActiveRecord::Base
        :has_space_for?]
   role :company, methods: []
 
+  # why ?
+  def profile_info
+    { birthday: nil, city: nil }.with_indifferent_access.merge(profile || {})
+  end
+
+  def company_info
+    { name: nil, activities: nil, site_link: nil, address: nil, phone_number: nil }.with_indifferent_access.merge(company_data || {})
+  end
+
   def shared
     Permission.where(user_id: self.id)
   end

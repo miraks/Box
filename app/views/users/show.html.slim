@@ -1,4 +1,4 @@
-.block.profile ng-controller="ProfilesController"
+.block.profile ng-controller="ProfilesController" ng-init="init(#{UserSerializer.new(@user).to_json(root: false)})"
   = render 'profile'
 .block
   = render 'friendship'
