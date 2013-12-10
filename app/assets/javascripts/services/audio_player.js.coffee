@@ -54,7 +54,7 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID'
     playNow: (nameOrTrack, sources) ->
       if nameOrTrack?
         @currentTrack = @createTrack nameOrTrack, sources
-        @addToPlayList @currentTrack unless @isInPlaylist @currentTrack
+        @addToPlaylist @currentTrack unless @isInPlaylist @currentTrack
         @playerEl.src = @currentTrack.source
         @play()
       else
@@ -63,12 +63,12 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID'
         @stop()
       $rootScope.$emit 'audioplayer.trackchanged', @currentTrack
 
-    addToPlayList: (nameOrTrack, sources) ->
+    addToPlaylist: (nameOrTrack, sources) ->
       track = @createTrack nameOrTrack, sources
       @playlist.push track
       $rootScope.$emit 'audioplayer.playlistupdated', @playlist
 
-    removeFromPlayList: (track) ->
+    removeFromPlaylist: (track) ->
       @playlist.remove (tr) -> track.equal tr
 
     isInPlaylist: (track) ->

@@ -3,7 +3,7 @@
     .track ng-repeat="track in player.playlist" ng-class="{current: player.currentTrack == track}" ng-dblclick="player.playNow(track)"
       .name
         | {{track.name}}
-      .remove ng-click="player.removeFromPlayList(track)" x
+      .remove ng-click="player.removeFromPlaylist(track)" x
       .clear
   .audio-player ng-show="show"
     .prev-track.icon ng-click="player.switchToPrevTrack()"
