@@ -8,7 +8,8 @@
     a.action.play href="" ng-click="playAudio(upload)" ng-show="upload.playable" title=t('.play')
     a.action.add-to-playlist href="" ng-click="addToPlaylist(upload)" ng-show="upload.playable" title=t('.add_to_playlist')
     - if self? @user
-      a.action.item-settings href="" ng-click="loadPermissions(upload)" title=t('.settings')
       a.action.lock href="" ng-click="setPassword(upload)" title=t('.set_password')
       a.action.unlock href="" ng-click="deletePassword(upload)" ng-show="upload.locked" title=t('.delete_password')
+      a.action.delete href="" ng-click="deleteUpload(upload)" title=t('.delete_upload')
+      a.action.item-settings href="" ng-click="loadPermissions(upload)" title=t('.settings')
   .progress ng-show="upload.isUploading()" = "#{t '.progress'}: {{upload.percent}}"

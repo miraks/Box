@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :friendships
   has_many :friends, through: :friendships, source: :friend
   has_many :permissions, foreign_key: 'owner_id'
+  has_many :shared, class_name: 'Permission'
 
   validates :name, :email, :space_limit, :used_space, presence: true
 
@@ -42,10 +43,6 @@ class User < ActiveRecord::Base
   role :uploader, methods: [:uploaded!, :update_used_space!, :calculate_used_space,
        :has_space_for?]
   role :company, methods: []
-
-  def shared
-    Permission.where(user_id: self.id)
-  end
 
   def has_access? item
     # TODO: решить доступ к чужим папкам/файлам по умолчанию закрыт или открыт?

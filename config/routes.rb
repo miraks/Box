@@ -24,7 +24,7 @@ Box::Application.routes.draw do
           concerns :permissions
         end
       end
-      resources :uploads, only: [:create, :update] do
+      resources :uploads, only: [:create, :update, :destroy] do
         get :download
         collection do
           patch :move, :copy

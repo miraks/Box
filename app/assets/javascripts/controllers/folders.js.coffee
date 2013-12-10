@@ -30,12 +30,16 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
     Folder.get($scope.currentFolder.id, params).then (folder) ->
       $scope.folder = folder
 
-  # Downloading
+  # Actions with upload
 
   $scope.download = (upload) ->
     $scope.checkPermission upload, (params) ->
       upload.download(params).then (upload) ->
         Downloader.download upload.url
+
+  $scope.deleteUpload = (upload) ->
+    upload.delete().then ->
+      $scope.folder.uploads.remove (up) -> up.equal upload
 
   # Uploads selection
 
@@ -52,6 +56,7 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', 'Folder', 'U
     $scope.selectedUploads = []
 
   # Permissions
+
   $scope.checkPermission = (object, callback) ->
     object.permission().check().then (obj) ->
       return Notifier.show "Доступ запрещен" if obj.permission == 'no'
