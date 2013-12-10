@@ -167,8 +167,10 @@ $element_padding: 10px
   .folder
     +font_icon('22')
 
-  .upload:not(.has-icon)
-    +font_icon('23')
+  .upload
+    min-height: 80px
+    &:not(.has-icon)
+      +font_icon('23')
 
   &.small
     .item
