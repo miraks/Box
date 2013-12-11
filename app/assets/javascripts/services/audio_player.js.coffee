@@ -5,7 +5,7 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID'
     constructor: (@name, sources) ->
       @id = UUID.generate()
       @source = @findPlayableSource sources
-      @loadDuration()
+      # @loadDuration()
 
     equal: (other) ->
       @id == other.id
