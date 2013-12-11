@@ -23,7 +23,7 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID'
     constructor: ->
       # TODO: move playlist to class
       @playlist = []
-      @playerEl = new Audio
+      @playerEl = document.createElement 'audio'
       @bindCallbacks()
 
     ['play', 'pause', 'load'].each (method) =>
