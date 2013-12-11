@@ -1,11 +1,12 @@
-angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID', ($rootScope, Storage, UUID) ->
+angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', '$timeout', 'Storage', 'UUID', ($rootScope, $timeout, Storage, UUID) ->
   player = null
 
   class Track
     constructor: (@name, sources) ->
       @id = UUID.generate()
       @source = @findPlayableSource sources
-      @loadDuration()
+      # hack for chrome
+      $timeout @loadDuration, 10
 
     equal: (other) ->
       @id == other.id
@@ -14,10 +15,14 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID'
       return sources unless Object.isArray sources
       sources.find (source) -> player.playerEl.canPlayType "audio/#{source.split('.').last()}"
 
-    loadDuration: ->
-      audio = document.createElement 'audio'
-      audio.preload = 'metadata'
-      audio.src = @source
+    loadDuration: =>
+      audio = if @equal player.currentTrack
+        player.playerEl
+      else
+        audioEl = document.createElement 'audio'
+        audioEl.preload = 'metadata'
+        audioEl.src = @source
+        audioEl
       audio.addEventListener 'loadedmetadata', =>
         @duration = audio.duration
 
@@ -26,7 +31,6 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID'
       # TODO: move playlist to class
       @playlist = []
       @playerEl = document.createElement 'audio'
-      @playerEl.preload = 'none'
       @bindCallbacks()
 
     ['play', 'pause', 'load'].each (method) =>
