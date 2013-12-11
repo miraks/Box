@@ -140,12 +140,12 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', '$rootScope'
   # AudioPlayer
 
   $scope.playAudio = (upload) ->
-    $scope.checkPermission upload, ->
-      upload.download().then (upload) ->
+    $scope.checkPermission upload, (params) ->
+      upload.download(params).then (upload) ->
         AudioPlayer.playNow upload.name, upload.sources
 
   $scope.addToPlaylist = (upload) ->
-    $scope.checkPermission upload, ->
-      upload.download().then (upload) ->
+    $scope.checkPermission upload, (params) ->
+      upload.download(params).then (upload) ->
         AudioPlayer.addToPlaylist upload.name, upload.sources
 ]
