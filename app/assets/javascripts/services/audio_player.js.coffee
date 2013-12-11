@@ -26,6 +26,7 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID'
       # TODO: move playlist to class
       @playlist = []
       @playerEl = document.createElement 'audio'
+      @playerEl.preload = 'none'
       @bindCallbacks()
 
     ['play', 'pause', 'load'].each (method) =>
