@@ -5,7 +5,7 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID'
     constructor: (@name, sources) ->
       @id = UUID.generate()
       @source = @findPlayableSource sources
-      # @loadDuration()
+      @loadDuration()
 
     equal: (other) ->
       @id == other.id
@@ -15,7 +15,9 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID'
       sources.find (source) -> player.playerEl.canPlayType "audio/#{source.split('.').last()}"
 
     loadDuration: ->
-      audio = new Audio @source
+      audio = document.createElement 'audio'
+      audio.preload = 'metadata'
+      audio.src = @source
       audio.addEventListener 'loadedmetadata', =>
         @duration = audio.duration
 
