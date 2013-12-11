@@ -6,12 +6,13 @@
       .remove ng-click="player.removeFromPlaylist(track)" x
       .clear
   .audio-player ng-show="show"
-    .prev-track.icon ng-click="player.switchToPrevTrack()"
-    .icon ng-class="{play: !playing, pause: playing}" ng-click="player.playToggle()"
-    .stop.icon ng-click="player.stop()"
-    .next-track.icon ng-click="player.switchToNextTrack()"
     .progress-bar.bar
       .point
-    .volume.icon ng-class="{muted: muted}" ng-click="player.volumeToggle()"
-    .volume-bar.bar
-      .point
+    .controls
+      .prev-track.icon ng-click="player.switchToPrevTrack()"
+      .icon ng-class="{play: !playing, pause: playing}" ng-click="player.playToggle()"
+      .stop.icon ng-click="player.stop()"
+      .next-track.icon ng-click="player.switchToNextTrack()"
+      .volume-bar.bar
+        .point
+      .volume.icon ng-class="{muted: muted}" ng-click="player.volumeToggle()"

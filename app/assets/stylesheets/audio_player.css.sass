@@ -1,5 +1,6 @@
+@import "compass/css3/transition"
+
 $player_height: 50px
-$bars_height: 10px
 
 =font_icon($icon)
   &:before
@@ -13,10 +14,15 @@ $bars_height: 10px
   height: $height
   float: left
   height: $height
-  margin-top: $player_height / 2 - $height / 2
-  background: black
-  position: relative
+  margin-top: $player_height / 2 + $height / 2
+  background: #555555
   cursor: pointer
+  position: relative
+
+  .point
+    background: #66B7EF
+    height: $height
+    width: 0
 
 .audio-player-wrapper
   position: fixed
@@ -33,6 +39,7 @@ $bars_height: 10px
       margin: 5px
       padding: 5px
       border-bottom: 1px dotted black
+      cursor: pointer
 
       .name
         float: left
@@ -52,20 +59,27 @@ $bars_height: 10px
     .icon
       +fontello
       font-family: 'fontello'
-      font-size: 20px
+      font-size: 25px
       cursor: pointer
       display: inline
       float: left
       line-height: $player_height
-      margin-right: 5px
+      margin: 10px
+      +transition(color .3s linear)
+
+      &:hover
+        color: #66B7EF
 
       &.play
+        font-size: 35px
         +font_icon('27')
       &.pause
+        font-size: 30px
         +font_icon('29')
       &.stop
         +font_icon('28')
       &.volume
+        float: right
         +font_icon('2c')
         &.muted
           +font_icon('2e')
@@ -75,20 +89,12 @@ $bars_height: 10px
         +font_icon('2f')
 
     .progress-bar
-      +bar(180px, $bars_height)
-      margin-right: 15px
+      +bar(330px, 15px)
+      margin: 10px
 
     .volume-bar
-      +bar(50px, $bars_height)
+      +bar(75px, 10px)
+      float: right
 
-    .point
-      +fontello
-      +font_icon('2b')
-      font-size: 16px
-      position: absolute
-      left: 0
-      bottom: -$bars_height / 2
-      background: transparent
-      color: #aaa
-      pointer-events: none
-      margin-left: -7px
+    .controls
+      margin: 10px

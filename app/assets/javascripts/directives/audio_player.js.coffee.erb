@@ -8,10 +8,12 @@ angular.module('BoxApp').directive 'audioplayer', [->
     $scope.bindOnClicks = ->
       $scope.progress.bind 'click', (event) ->
         percent = event.layerX / $scope.progress.prop('offsetWidth')
+        console.log percent
         $scope.player.currentTime percent * $scope.player.duration()
 
       $scope.volume.bind 'click', (event) ->
         percent = event.layerX / $scope.volume.prop('offsetWidth')
+        console.log percent
         $scope.player.volume percent
 
     $scope.bindOnPlayerEvents = ->
@@ -31,12 +33,12 @@ angular.module('BoxApp').directive 'audioplayer', [->
 
       $scope.player.bind 'timeupdate', ->
         $scope.$apply ->
-          $scope.progressPoint.css left: "#{$scope.player.progressPercent()}%"
+          $scope.progressPoint.css width: "#{$scope.player.progressPercent()}%"
 
       $scope.player.bind 'volumechange', ->
         $scope.$apply ->
           $scope.muted = $scope.player.muted()
-          $scope.volumePoint.css left: "#{$scope.player.volumePercent()}%"
+          $scope.volumePoint.css width: "#{$scope.player.volumePercent()}%"
 
     $scope.show = !!$scope.player.currentSrc()
     $scope.playing = !$scope.player.paused()
@@ -46,7 +48,7 @@ angular.module('BoxApp').directive 'audioplayer', [->
     $scope.progressPoint = angular.element document.querySelector(".#{$scope.progress.attr('class').replace(new RegExp(' ', 'g'), '.')} .point")
     $scope.volume = angular.element document.querySelector(".#{$element.attr('class')} .volume-bar")
     $scope.volumePoint = angular.element document.querySelector(".#{$scope.volume.attr('class').replace(new RegExp(' ', 'g'), '.')} .point")
-    $scope.volumePoint.css left: "#{$scope.player.volumePercent()}%"
+    $scope.volumePoint.css width: "#{$scope.player.volumePercent()}%"
     $scope.bindOnClicks()
     $scope.bindOnPlayerEvents()
   ]
