@@ -25,6 +25,8 @@ $player_height: 50px
     width: 0
 
 .audio-player-wrapper
+  width: 350px
+  overflow: hidden
   position: fixed
   bottom: 0
   right: 0
@@ -34,6 +36,7 @@ $player_height: 50px
   .playlist
     max-height: 500px
     overflow-y: auto
+    font-size: 14px
 
     .track
       margin: 5px
@@ -43,6 +46,10 @@ $player_height: 50px
 
       .name
         float: left
+        width: 200px
+        overflow: hidden
+        text-overflow: ellipsis
+        white-space: nowrap
         pointer-events: none
 
       .remove
@@ -51,6 +58,13 @@ $player_height: 50px
 
       &.current .name
         color: #66B7EF
+
+      .duration
+        float: right
+        margin: 0 10px
+
+        div
+          display: inline
 
   .audio-player
     width: 350px

@@ -1,9 +1,14 @@
 .audio-player-wrapper
   .playlist
-    .track ng-repeat="track in player.playlist" ng-class="{current: player.currentTrack == track}" ng-dblclick="player.playNow(track)"
+    .track ng-repeat="track in player.playlist" ng-class="{current: player.currentTrack.equal(track)}" ng-dblclick="player.playNow(track)"
       .name
         | {{track.name}}
       .remove ng-click="player.removeFromPlaylist(track)" x
+      .duration
+        div ng-show="player.currentTrack.equal(track)"
+          ' {{player.currentTime().seconds() | date:'mm:ss'}} /
+        div
+          | {{track.duration.seconds() | date:'mm:ss'}}
       .clear
   .audio-player ng-show="show"
     .progress-bar.bar

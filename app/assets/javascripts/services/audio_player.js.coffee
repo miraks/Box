@@ -5,6 +5,7 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID'
     constructor: (@name, sources) ->
       @id = UUID.generate()
       @source = @findPlayableSource sources
+      @loadDuration()
 
     equal: (other) ->
       @id == other.id
@@ -13,11 +14,16 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID'
       return sources unless Object.isArray sources
       sources.find (source) -> player.playerEl.canPlayType "audio/#{source.split('.').last()}"
 
+    loadDuration: ->
+      audio = new Audio @source
+      audio.addEventListener 'loadedmetadata', =>
+        @duration = audio.duration
+
   class AudioPlayer
     constructor: ->
       # TODO: move playlist to class
       @playlist = []
-      @createDOMElement()
+      @playerEl = new Audio
       @bindCallbacks()
 
     ['play', 'pause', 'load'].each (method) =>
@@ -99,9 +105,6 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID'
         nameOrTrack
       else
         new Track nameOrTrack, sources
-
-    createDOMElement: ->
-      @playerEl = document.createElement 'audio'
 
     bindCallbacks: ->
       @bind 'ended', => @switchToNextTrack()
