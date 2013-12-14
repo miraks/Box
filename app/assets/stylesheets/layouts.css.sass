@@ -152,7 +152,11 @@ section#main
       font-weight: bold
 
     &.profile
-      height: 275px
+      position: relative
+      .edit-switch
+        position: absolute
+        top: 10px
+        right: 10px
       .avatar
         width: 150px
         height: 150px
@@ -160,7 +164,7 @@ section#main
         img
           border-radius: 5px
       .details
-        margin: 5px 25px
+        margin: 5px 0 0 10px
         float: left
         .name
           font-size: 18px

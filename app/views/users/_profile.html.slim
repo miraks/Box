@@ -1,5 +1,5 @@
 - if self? @user
-  input type="checkbox" ng-model="isEditable"
+  input.edit-switch type="checkbox" ng-model="isEditable"
 
 span ng-if="!isEditable"
   .avatar
@@ -16,33 +16,39 @@ span ng-if="!isEditable"
     ul
       - @user.profile.each do |name, _|
         li
-          | #{name}: {{user.profile.#{name}}}
+          = t (".#{name}")
+          |: {{user.profile.#{name.camelize(:lower)}}}
     span ng-if="user.isCompany"
       ul
         - @user.company_data.each do |name, _|
           li
-            | #{name}: {{user.companyData.#{name}}}
+            = t (".company.#{name}")
+            |: {{user.companyData.#{name.camelize(:lower)}}}
 
 span ng-if="isEditable"
   .avatar
     img ng-src="{{user.avatar.normal.url}}"
   .details
     label
-      | Имя
+      = t ".name"
     input type="text" ng-model="user.name"
 
     ul
-      - User::PROFILE_FIELDS.each do |name|
+      li
+        label
+          = t ".birthday"
+          input type="date" ng-model="user.profile.birthday"
+      - except(User::PROFILE_FIELDS, :birthday).each do |name|
         li
           label
-            | #{name}
-          input type="text" ng-model="user.profile.#{name}"
+            = t ".#{name}"
+          input type="text" ng-model="user.profile.#{name.to_s.camelize(:lower)}"
     span ng-if="user.isCompany"
       ul
         - User::COMPANY_DATA_FIELDS.each do |name, _|
           li
             label
-              | #{name}
-            input type="text" ng-model="user.companyData.#{name}"
-    .button ng-click="submit()" submit
+              = t ".company.#{name}"
+            input type="text" ng-model="user.companyData.#{name.to_s.camelize(:lower)}"
+    .button ng-click="submit()" = t ".submit"
 
