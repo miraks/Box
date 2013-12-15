@@ -1,4 +1,4 @@
-angular.module('BoxApp').controller 'ProfilesController', ['$scope', 'User', ($scope, User) ->
+angular.module('BoxApp').controller 'ProfilesController', ['$scope', '$http', 'User', ($scope, $http, User) ->
   $scope.init = (params) ->
     $scope.user = new User params
 

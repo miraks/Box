@@ -27,6 +27,9 @@ span ng-if="!isEditable"
 
 span ng-if="isEditable"
   .avatar
+    .fake-button
+      | Загрузить
+    input#avatar.avatar-upload-button type="file"
     img ng-src="{{user.avatar.normal.url}}"
   .details
     label
