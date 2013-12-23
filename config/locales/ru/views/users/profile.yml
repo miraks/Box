@@ -3,3 +3,13 @@ ru:
     profile:
       online_now: Сейчас на сайте
       was_online_at: Был онлайн %{time} назад
+      birthday: День рождения
+      city: Город
+      name: Имя
+      submit: Отправить
+      company:
+        name: Компания
+        address: Адрес
+        site_link: Сайт
+        activities: Деятельность
+        phone_number: Телефон

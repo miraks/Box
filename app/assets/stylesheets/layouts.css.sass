@@ -7,6 +7,14 @@ $header_height: 30px
     &:hover
       text-decoration: underline
 
+.middle
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  margin: auto
+
 header
   @extend .header-text
   background: #333
@@ -152,15 +160,38 @@ section#main
       font-weight: bold
 
     &.profile
-      height: 275px
+      position: relative
+      .edit-switch
+        position: absolute
+        top: 10px
+        right: 10px
       .avatar
+        position: relative
         width: 150px
         height: 150px
         float: left
         img
           border-radius: 5px
+        .avatar-upload-button
+          width: 85px
+          height: 30px
+          opacity: 0
+          @extend .middle
+          // temp
+        .fake-button
+          pointer-events: none
+          @extend .middle
+          width: 85px
+          height: 30px
+          background: #fff
+          color: #66b7ef
+          text-align: center
+          line-height: 30px
+          border: 1px solid #bac3cb
+          border-radius: 3px
+
       .details
-        margin: 5px 25px
+        margin: 5px 0 0 10px
         float: left
         .name
           font-size: 18px
