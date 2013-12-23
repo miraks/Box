@@ -13,7 +13,11 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', '$timeout', 'Stor
 
     findPlayableSource: (sources) ->
       return sources unless Object.isArray sources
-      sources.find (source) -> player.playerEl.canPlayType "audio/#{source.split('.').last()}"
+      source = if player.playerEl.canPlayType?
+        sources.find (source) -> player.playerEl.canPlayType "audio/#{source.split('.').last()}"
+      else
+        # больше шансов, что это старье поддерживает mp3
+        sources.find (source) -> source.split('.').last() == 'mp3'
 
     loadDuration: =>
       audio = if @equal player.currentTrack
