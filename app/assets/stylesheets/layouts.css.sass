@@ -1,9 +1,20 @@
-$header_height: 30px
+$header_height: 106px
+
+$site_width: 1200px
+
+$left_column: 20%
+$middle_column: 60%
+$right_column: 20%
+
+$rainbow_menu: 100
+$rainbow_color: #00305a
+
 .header-text
   *
     color: white
     font-weight: bold
     text-decoration: none
+    font-size: 18px
     &:hover
       text-decoration: underline
 
@@ -15,15 +26,30 @@ $header_height: 30px
   right: 0
   margin: auto
 
+.margin-bottom
+  margin-bottom: 10px
+
 header
+  width: $site_width
+  display: block
+  margin: auto
   @extend .header-text
-  background: #333
+  background: #000
   height: $header_height
 
+  .logo
+    display: block
+    float: left
+    img
+      max-width: 100%
+      max-height: 100%
+
   .menu
+    li:not(:last-child):after
+      content: '\00a0\00a0/'
+      color: #7abaf2
     display: block
     margin: auto
-    width: 600px
     height: $header_height
     line-height: $header_height
     ul > li
@@ -31,39 +57,53 @@ header
       margin: 0 5px
 
 section#main
-  width: 1020px
-  margin: auto
+  width: $site_width
+  margin: -4px auto
+  background: #ccc
+
+  .rainbow-shit
+    ul
+      li
+        height: 30px
+        background: $rainbow_color
+        color: #fff
+        line-height: 30px
+        padding-left: 10px
+        a
+          color: inherit
+
+      $prev_color: $rainbow_color
+      @for $i from 1 through $rainbow_menu
+        li:nth-child(#{$i})
+          background: $prev_color
+          $prev_color: lighten($prev_color, 10%)
+
 
   .block-style
-    padding: 10px
-    background: #fff
-    border: 1px solid #bac3cb
-    border-radius: 3px
+    background: #333
 
   .tabs
-    margin-bottom: 10px
     li.pane
       @extend .block-style
+      width: 50%
+      height: 30px
+      line-height: 30px
+      text-align: center
       display: inline-block
-      border-bottom-left-radius: 0px
-      border-bottom-right-radius: 0px
-      border-bottom: 1px solid #fff
       z-index: 2
-      &:first-child
-        margin-left: 10px
+      background: #00305a
       &:not(:first-child)
         border-left: none
       &:not(.active)
-        border-bottom: inherit
+        background: #012240
         a
-          color: #66b7ef
+          color: #fff
       a
         text-decoration: none
-        color: #686464
+        color: #fff
         font-size: 15px
         font-weight: bold
     .block
-      margin: 0 10px
       border-top-left-radius: 0px
     .tab-content
       margin-top: -1px
@@ -80,6 +120,14 @@ section#main
 
   .search
     position: relative
+    background: #000
+    padding: 5px 10px
+    input
+      width: 60%
+      float: right
+      padding: 0
+      background: #ccc
+      margin-top: -1px
     .results
       @extend .block-style
       z-index: 3
@@ -98,13 +146,14 @@ section#main
 
   .users
     max-height: 300px
+    padding-bottom: 10px
+    .title
+      padding: 3px 10px
     .user
       float: left
       margin-top: 5px
-      border: 1px solid #e7e7e7
       width: 100%
-      padding: 3px 0
-      border-radius: 3px
+      padding: 3px 10px
       .avatar
         float: left
         display: inline-block
@@ -118,8 +167,7 @@ section#main
         margin-left: 10px
         line-height: 30px
         text-decoration: none
-        color: #686464
-        font-weight: bold
+        color: #fff
 
     .users-filter
       a
@@ -135,17 +183,16 @@ section#main
           float: right
 
         &.active
-          color: #686464
-          background: #f3f3e7
+          color: #fff
 
         &.inactive
-          color: #66b7ef
+          color: #686464
           border-bottom: 1px dashed
 
   .block
     @extend .block-style
     height: auto
-    margin: 10px
+    //margin: 10px
     // clearfix
     &:after
       content: ''
@@ -159,8 +206,14 @@ section#main
       color: #fff
       font-weight: bold
 
+    &.file-manager-wrapper
+      background: #fff
+      color: #333
+
     &.profile
       position: relative
+      background: #fff
+      color: #333
       .edit-switch
         position: absolute
         top: 10px
@@ -170,8 +223,6 @@ section#main
         width: 150px
         height: 150px
         float: left
-        img
-          border-radius: 5px
         .avatar-upload-button
           width: 85px
           height: 30px
@@ -212,15 +263,21 @@ section#main
 
   section#content
     float: left
-    width: 460px
+    width: $middle_column
+
+    .profile-control-panel
+      color: #333
+      background: #fff
+      .friendship
+        background: inherit
 
   aside
     float: left
-    width: 260px
+    width: $left_column
 
   nav
     float: left
-    width: 300px
+    width: $right_column
 
 *
   margin: 0
@@ -231,5 +288,5 @@ section#main
 body
   font-family: Verdana,sans-serif
   font-size: 13px
-  color: #312f2f
-  background: #e2e8ec
+  color: #fff
+  background: url(/assets/bg.png)

@@ -24,5 +24,5 @@ angular.module('BoxApp').controller 'FriendsListController', ['$scope', '$rootSc
       $scope.storage[filter]?.remove (friend) -> friend.equal friendship.friend
 
   $scope.storage = Storage.get 'friends', {}
-  $scope.changeFilter 'online'
+  $scope.changeFilter 'all'
 ]

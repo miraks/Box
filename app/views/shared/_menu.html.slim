@@ -6,15 +6,11 @@
       a href='#' Новости
     li
       a href='#' Группы
-    li |
     - if logged_in?
       li
         = link_to current_user, current_user
       li
         = link_to t('.sign_out'), destroy_user_session_path, data: { method: :delete }
-      li
-        = link_to t('.messages'), user_conversations_path(current_user)
-        | (#{current_user.unread_messages_count})
       - if current_user.is_admin?
         = link_to t('.administration'), administration_path
     - else
