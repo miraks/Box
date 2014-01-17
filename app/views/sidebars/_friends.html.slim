@@ -6,5 +6,6 @@
       .avatar
         img src="http://placehold.it/30x30"
       user-link user="friend"
+      .online ng-show="friend.online"
   div ng-hide="hasFriends()"
     .title = t ".no_all_friends"

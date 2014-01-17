@@ -72,7 +72,6 @@ section#main
           background: $prev_color
           $prev_color: lighten($prev_color, 10%)
 
-
   .block-style
     background: #333
 
@@ -115,13 +114,20 @@ section#main
   .search
     position: relative
     background: #000
-    padding: 5px 10px
+    padding: 10px
     input
       width: 60%
       float: right
       padding: 0
       background: #ccc
       margin-top: -1px
+      background-image: url(/svgs/search.svg)
+      background-repeat: no-repeat
+      background-size: 16px
+      background-position: right 3px top
+      &:focus
+        background-image: none
+
     .results
       @extend .block-style
       z-index: 3
@@ -148,6 +154,13 @@ section#main
       margin-top: 5px
       width: 100%
       padding: 3px 10px
+      .online
+        width: 5px
+        height: 5px
+        background: lime
+        border-radius: 50%
+        display: inline-block
+        margin: 13px 0 0 5px
       .avatar
         float: left
         display: inline-block
