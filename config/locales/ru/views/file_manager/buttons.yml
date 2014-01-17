@@ -8,11 +8,11 @@ ru:
       itemSettings: 'Настройки'
       lock: Установить пароль
       unlock: Снять пароль
-      download: Скачать
+      downloadItem: Скачать
       delete: Удалить
       play: Воспроизвести
-      addToPlaylist: 'Добавить в плейлист'
       addFolder: Добавить папку
       deleteFolder: Удалить папку
       renameFolder: Переименовать папку
       moveFolder: Переместить папку
+      toPlaylist: 'Добавить в плейлист'

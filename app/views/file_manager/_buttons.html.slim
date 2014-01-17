@@ -1,4 +1,4 @@
 .action-buttons
   = t('.files')
-  - %w(copy cut paste itemSettings lock unlock download delete play addToPlaylist addFolder deleteFolder renameFolder moveFolder).each do |button|
+  - %w(copy cut paste itemSettings lock unlock downloadItem delete play toPlaylist addFolder deleteFolder renameFolder moveFolder).each do |button|
     a href="" class=['action-button', button] ng-click="#{button}()" title=t(".#{button}")

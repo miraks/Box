@@ -33,10 +33,10 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', '$rootScope'
 
   # Actions with upload
 
-  # $scope.download = (upload) ->
-  #   $scope.checkPermission upload, (params) ->
-  #     upload.download(params).then (upload) ->
-  #       Downloader.download upload.url
+  $scope.download = (upload) ->
+    $scope.checkPermission upload, (params) ->
+      upload.download(params).then (upload) ->
+        Downloader.download upload.url
 
   $scope.deleteUpload = (upload) ->
     upload.delete().then ->
@@ -107,18 +107,18 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', '$rootScope'
 
   # Password manipulation
 
-  # $scope.setPassword = (object) ->
-  #   password = prompt "Введи пароль"
-  #   return unless password?
-  #   object.password = password
-  #   object.update().then (object) ->
-  #     delete object.password
-  #     Notifier.show 'Пароль установлен'
+  $scope.setPassword = (object) ->
+    password = prompt "Введи пароль"
+    return unless password?
+    object.password = password
+    object.update().then (object) ->
+      delete object.password
+      Notifier.show 'Пароль установлен'
 
-  # $scope.deletePassword = (object) ->
-  #   object.password = null
-  #   object.update().then (object) ->
-  #     Notifier.show 'Пароль удален'
+  $scope.deletePassword = (object) ->
+    object.password = null
+    object.update().then (object) ->
+      Notifier.show 'Пароль удален'
 
   # Actions with clipboard
 
@@ -145,10 +145,22 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', '$rootScope'
     $scope.loadPermissions object if object?
 
   $scope.lock = ->
+    $scope.setPassword $scope.selectedUploads.last()
+
   $scope.unlock = ->
-  $scope.download = ->
+    $scope.selectedUploads.map (upload) ->
+      $scope.deletePassword upload
+
+  $scope.downloadItem = ->
+    $scope.download $scope.selectedUploads.last()
+
   $scope.play = ->
-  $scope.addToPlaylist = ->
+    $scope.playAudio $scope.selectedUploads.last()\
+
+  $scope.toPlaylist = ->
+    $scope.selectedUploads.map (upload) ->
+      $scope.addToPlaylist upload
+
   $scope.addFolder = ->
   $scope.deleteFolder = ->
   $scope.renameFolder = ->
