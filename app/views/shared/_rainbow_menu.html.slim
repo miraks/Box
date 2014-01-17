@@ -10,4 +10,5 @@ ul
   li
     - if logged_in?
       = link_to t('.messages'), user_conversations_path(current_user)
-      | (#{current_user.unread_messages_count})
+      .messages-count
+        = current_user.unread_messages_count
