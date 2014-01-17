@@ -1,0 +1,85 @@
+@font-face {
+  font-family: 'fontello';
+  src: url('../font/fontello.eot?54057777');
+  src: url('../font/fontello.eot?54057777#iefix') format('embedded-opentype'),
+       url('../font/fontello.woff?54057777') format('woff'),
+       url('../font/fontello.ttf?54057777') format('truetype'),
+       url('../font/fontello.svg?54057777#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('../font/fontello.svg?54057777#fontello') format('svg');
+  }
+}
+*/
+ 
+ [class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+     
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+ 
+.icon-all_files_count:before { content: '\e800'; } /* '' */
+.icon-nonsos_title:before { content: '\e820'; } /* '' */
+.icon-attach:before { content: '\e802'; } /* '' */
+.icon-delete_folder:before { content: '\e803'; } /* '' */
+.icon-add_folder:before { content: '\e804'; } /* '' */
+.icon-download_file:before { content: '\e805'; } /* '' */
+.icon-edit_folder:before { content: '\e806'; } /* '' */
+.icon-move_folder:before { content: '\e807'; } /* '' */
+.icon-next_track:before { content: '\e808'; } /* '' */
+.icon-move_file:before { content: '\e809'; } /* '' */
+.icon-file:before { content: '\e80a'; } /* '' */
+.icon-for_peoples:before { content: '\e80b'; } /* '' */
+.icon-play:before { content: '\e80c'; } /* '' */
+.icon-prev_track:before { content: '\e80d'; } /* '' */
+.icon-for_work:before { content: '\e80e'; } /* '' */
+.icon-private_folder:before { content: '\e80f'; } /* '' */
+.icon-delete_file:before { content: '\e801'; } /* '' */
+.icon-for_files:before { content: '\e811'; } /* '' */
+.icon-public_folder:before { content: '\e812'; } /* '' */
+.icon-search:before { content: '\e813'; } /* '' */
+.icon-public_files_count:before { content: '\e814'; } /* '' */
+.icon-sound:before { content: '\e815'; } /* '' */
+.icon-stop:before { content: '\e816'; } /* '' */
+.icon-settings:before { content: '\e817'; } /* '' */
+.icon-upload_file:before { content: '\e818'; } /* '' */
+.icon-private_files_count:before { content: '\e819'; } /* '' */
+.icon-fullscreen_file:before { content: '\e81a'; } /* '' */
+.icon-repeat:before { content: '\e81b'; } /* '' */
+.icon-filter:before { content: '\e81c'; } /* '' */
+.icon-show_lines:before { content: '\e81d'; } /* '' */
+.icon-show_cells:before { content: '\e81e'; } /* '' */
+.icon-track:before { content: '\e81f'; } /* '' */
+.icon-nonsos:before { content: '\e810'; } /* '' */
