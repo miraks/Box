@@ -163,13 +163,13 @@ $element_padding: 10px
       +font_icon('16')
     .unlock
       +font_icon('16')
-    .download
+    .downloadItem
       +font_icon('05')
     .itemSettings
       +font_icon('17')
     .play
       +font_icon('0c')
-    .addToPlaylist
+    .toPlaylist
       +font_icon('18')
     .delete
       +font_icon('16')
@@ -191,7 +191,8 @@ $element_padding: 10px
 
   .folder
     +font_icon('12')
-
+    &.locked
+      +font_icon('0f')
   .upload
     min-height: 80px
     &:not(.has-icon)

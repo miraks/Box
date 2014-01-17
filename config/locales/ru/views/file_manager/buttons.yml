@@ -8,7 +8,7 @@ ru:
       itemSettings: 'Настройки'
       lock: Установить пароль
       unlock: Снять пароль
-      download: Скачать
+      downloadItem: Скачать
       delete: Удалить
       play: Воспроизвести
-      addToPlaylist: 'Добавить в плейлист'
+      toPlaylist: 'Добавить в плейлист'
