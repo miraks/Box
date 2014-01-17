@@ -1,7 +1,7 @@
 .audio-player-wrapper
   .audio-player
     .controls
-      .icon ng-class="{play: !playing, pause: playing}" ng-click="player.playToggle()"
+      .icon ng-class="{play: playing, pause: !playing}" ng-click="player.playToggle()"
       .stop.icon ng-click="player.stop()"
       .prev-track.icon ng-click="player.switchToPrevTrack()"
       .next-track.icon ng-click="player.switchToNextTrack()"
@@ -25,3 +25,4 @@
         div
           | {{track.duration.seconds() | date:'mm:ss'}}
       .clear
+    .clear
