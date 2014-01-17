@@ -11,18 +11,12 @@ angular.module('BoxApp').directive 'audioplayer', [->
         console.log percent
         $scope.player.currentTime percent * $scope.player.duration()
 
-      $scope.volume.bind 'click', (event) ->
-        percent = event.layerX / $scope.volume.prop('offsetWidth')
-        console.log percent
-        $scope.player.volume percent
+      # $scope.volume.bind 'click', (event) ->
+      #   percent = event.layerX / $scope.volume.prop('offsetWidth')
+      #   console.log percent
+      #   $scope.player.volume percent
 
     $scope.bindOnPlayerEvents = ->
-      $rootScope.$on 'audioplayer.trackchanged', ->
-        $scope.show = true
-
-      $rootScope.$on 'audioplayer.playlistupdated', ->
-        $scope.show = true
-
       $scope.player.bind 'play', ->
         $scope.$apply ->
           $scope.playing = true
@@ -38,17 +32,16 @@ angular.module('BoxApp').directive 'audioplayer', [->
       $scope.player.bind 'volumechange', ->
         $scope.$apply ->
           $scope.muted = $scope.player.muted()
-          $scope.volumePoint.css width: "#{$scope.player.volumePercent()}%"
+          # $scope.volumePoint.css width: "#{$scope.player.volumePercent()}%"
 
-    $scope.show = !!$scope.player.currentSrc()
     $scope.playing = !$scope.player.paused()
     $scope.progress = $scope.player.progressPercent()
     $scope.muted = $scope.player.muted()
     $scope.progress = angular.element document.querySelector(".#{$element.attr('class')} .progress-bar")
     $scope.progressPoint = angular.element document.querySelector(".#{$scope.progress.attr('class').replace(new RegExp(' ', 'g'), '.')} .point")
-    $scope.volume = angular.element document.querySelector(".#{$element.attr('class')} .volume-bar")
-    $scope.volumePoint = angular.element document.querySelector(".#{$scope.volume.attr('class').replace(new RegExp(' ', 'g'), '.')} .point")
-    $scope.volumePoint.css width: "#{$scope.player.volumePercent()}%"
+    # $scope.volume = angular.element document.querySelector(".#{$element.attr('class')} .volume-bar")
+    # $scope.volumePoint = angular.element document.querySelector(".#{$scope.volume.attr('class').replace(new RegExp(' ', 'g'), '.')} .point")
+    # $scope.volumePoint.css width: "#{$scope.player.volumePercent()}%"
     $scope.bindOnClicks()
     $scope.bindOnPlayerEvents()
   ]

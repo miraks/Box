@@ -1,23 +1,27 @@
 .audio-player-wrapper
+  .audio-player
+    .controls
+      .icon ng-class="{play: !playing, pause: playing}" ng-click="player.playToggle()"
+      .stop.icon ng-click="player.stop()"
+      .prev-track.icon ng-click="player.switchToPrevTrack()"
+      .next-track.icon ng-click="player.switchToNextTrack()"
+      .repeat.icon
+      .progress-bar.bar
+        .point
+      .volume.icon ng-class="{muted: muted}" ng-click="player.volumeToggle()"
+      .settings.icon
   .playlist
     .track ng-repeat="track in player.playlist" ng-class="{current: player.currentTrack.equal(track)}" ng-dblclick="player.playNow(track)"
-      .name
-        | {{track.name}}
-      .remove ng-click="player.removeFromPlaylist(track)" x
-      .duration
+      .title-artist
+        .title
+          | {{track.title}}
+        .clear
+        .artist
+          | {{track.artist}}
+      / .remove ng-click="player.removeFromPlaylist(track)" x
+      / .duration
         div ng-show="player.currentTrack.equal(track)"
           ' {{player.currentTime().seconds() | date:'mm:ss'}} /
         div
           | {{track.duration.seconds() | date:'mm:ss'}}
       .clear
-  .audio-player ng-show="show"
-    .progress-bar.bar
-      .point
-    .controls
-      .prev-track.icon ng-click="player.switchToPrevTrack()"
-      .icon ng-class="{play: !playing, pause: playing}" ng-click="player.playToggle()"
-      .stop.icon ng-click="player.stop()"
-      .next-track.icon ng-click="player.switchToNextTrack()"
-      .volume-bar.bar
-        .point
-      .volume.icon ng-class="{muted: muted}" ng-click="player.volumeToggle()"

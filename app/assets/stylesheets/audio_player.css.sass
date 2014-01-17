@@ -1,114 +1,215 @@
 @import "compass/css3/transition"
-
-$player_height: 50px
-
-=font_icon($icon)
-  &:before
-    content: '\e8'+$icon
-
-=fontello
-  font-family: 'fontello'
-
-=bar($width, $height)
-  width: $width
-  height: $height
-  float: left
-  height: $height
-  margin-top: $player_height / 2 + $height / 2
-  background: #555555
-  cursor: pointer
-  position: relative
-
-  .point
-    background: #66B7EF
-    height: $height
-    width: 0
+@import "variables"
 
 .audio-player-wrapper
-  width: 350px
-  overflow: hidden
-  position: fixed
-  bottom: 0
-  right: 0
-  background: #525251
-  border: 1px solid #BAC3CB
-
-  .playlist
-    max-height: 500px
-    overflow-y: auto
-    font-size: 14px
-
-    .track
-      margin: 5px
-      padding: 5px
-      border-bottom: 1px dotted black
-      cursor: pointer
-
-      .name
-        float: left
-        width: 200px
-        overflow: hidden
-        text-overflow: ellipsis
-        white-space: nowrap
-        pointer-events: none
-
-      .remove
-        float: right
-        cursor: pointer
-
-      &.current .name
-        color: #66B7EF
-
-      .duration
-        float: right
-        margin: 0 10px
-
-        div
-          display: inline
-
   .audio-player
-    width: 350px
-    height: $player_height
-
-    .icon
-      +fontello
-      font-family: 'fontello'
-      font-size: 25px
-      cursor: pointer
-      display: inline
-      float: left
-      line-height: $player_height
-      margin: 10px
-      +transition(color .3s linear)
-
-      &:hover
-        color: #66B7EF
-
-      &.play
-        font-size: 35px
-        +font_icon('0c')
-      &.pause
-        font-size: 30px
-        +font_icon('16')
-      &.stop
-        +font_icon('16')
-      &.volume
-        float: right
-        +font_icon('15')
-        &.muted
-          +font_icon('16')
-      &.prev-track
-        +font_icon('0d')
-      &.next-track
-        +font_icon('08')
-
-    .progress-bar
-      +bar(330px, 15px)
-      margin: 10px
-
-    .volume-bar
-      +bar(75px, 10px)
-      float: right
+    width: 100%
+    height: 40px
+    background: #525251
+    position: relative
 
     .controls
-      margin: 10px
+      position: absolute
+      top: 0
+      bottom: 0
+      left: 0
+      right: 0
+      margin: auto
+      height: 20px
+      padding: 0 10px
+
+    .icon
+      float: left
+      margin: 0 3px
+      cursor: pointer
+
+      &:before
+        font-family: fontello
+
+    .play, .pause
+      +font_icon('0c')
+    .pause
+      color: #aaaaaa
+    .stop
+      +font_icon('16')
+    .prev-track
+      +font_icon('0d')
+    .next-track
+      +font_icon('08')
+    .repeat
+      +font_icon('1b')
+    .volume
+      +font_icon('15')
+      &.muted
+        color: #aaaaaa
+    .settings
+      +font_icon('17')
+
+    .bar
+      width: 87px
+      height: 8px
+      float: left
+      cursor: pointer
+      position: relative
+      background: #cccccc
+      margin: 5px 5px 0 7px
+      border-radius: 3px
+
+      .point
+        background: #33cc33
+        height: 8px
+        width: 0
+        position: relative
+
+        &:after
+          content: " "
+          width: 10px
+          height: 10px
+          background: #33cc33
+          color: #33cc33
+          border: 1px solid white
+          border-radius: 50%
+          position: absolute
+          top: -2px
+          right: -5px
+
+  .playlist
+    .track
+      min-height: 40px
+      float: left
+      background: #e6e6e6
+      padding: 5px 12px
+      +font_icon('1f')
+
+      &:before
+        font-family: fontello
+        font-size: 40px
+        color: #9d9e9e
+
+      &:nth-child(even)
+        background: #cccccc
+
+    .title-artist
+      float: right
+      width: 170px
+      padding-left: 10px
+
+    .title, .artist
+      float: left
+      color: black
+
+    .title
+      font-weight: bold
+
+// $player_height: 50px
+
+// =font_icon($icon)
+//   &:before
+//     content: '\e8'+$icon
+
+// =fontello
+//   font-family: 'fontello'
+
+// =bar($width, $height)
+//   width: $width
+//   height: $height
+//   float: left
+//   height: $height
+//   margin-top: $player_height / 2 + $height / 2
+//   background: #555555
+//   cursor: pointer
+//   position: relative
+
+//   .point
+//     background: #66B7EF
+//     height: $height
+//     width: 0
+
+// .audio-player-wrapper
+//   width: 350px
+//   overflow: hidden
+//   position: fixed
+//   bottom: 0
+//   right: 0
+//   background: #525251
+//   border: 1px solid #BAC3CB
+
+//   .playlist
+//     max-height: 500px
+//     overflow-y: auto
+//     font-size: 14px
+
+//     .track
+//       margin: 5px
+//       padding: 5px
+//       border-bottom: 1px dotted black
+//       cursor: pointer
+
+//       .name
+//         float: left
+//         width: 200px
+//         overflow: hidden
+//         text-overflow: ellipsis
+//         white-space: nowrap
+//         pointer-events: none
+
+//       .remove
+//         float: right
+//         cursor: pointer
+
+//       &.current .name
+//         color: #66B7EF
+
+//       .duration
+//         float: right
+//         margin: 0 10px
+
+//         div
+//           display: inline
+
+//   .audio-player
+//     width: 350px
+//     height: $player_height
+
+//     .icon
+//       +fontello
+//       font-family: 'fontello'
+//       font-size: 25px
+//       cursor: pointer
+//       display: inline
+//       float: left
+//       line-height: $player_height
+//       margin: 10px
+//       +transition(color .3s linear)
+
+//       &:hover
+//         color: #66B7EF
+
+//       &.play
+//         font-size: 35px
+//         +font_icon('0c')
+//       &.pause
+//         font-size: 30px
+//         +font_icon('16')
+//       &.stop
+//         +font_icon('16')
+//       &.volume
+//         float: right
+//         +font_icon('15')
+//         &.muted
+//           +font_icon('16')
+//       &.prev-track
+//         +font_icon('0d')
+//       &.next-track
+//         +font_icon('08')
+
+//     .progress-bar
+//       +bar(330px, 15px)
+//       margin: 10px
+
+//     .volume-bar
+//       +bar(75px, 10px)
+//       float: right
+
+//     .controls
+//       margin: 10px
