@@ -1,0 +1,121 @@
+@import "variables"
+
+section#main
+  .login-reg
+    font-family: Arial
+    background: #00305a
+    height: $header_height
+    position: relative
+
+    h3
+      float: left
+      font-size: 24px
+      text-transform: uppercase
+      margin-right: 40px
+      padding-top: 8px
+
+    .log-in-form
+      padding-top: 30px
+      padding-left: 100px
+
+      input
+        width: auto
+        float: left
+        height: 30px
+        border-radius: 0
+        margin-right: 10px
+        font-size: 18px
+        font-style: italic
+
+        &[type=submit]
+          background: #009933
+          border: none
+          text-transform: uppercase
+          color: white
+          height: 42px
+          font-style: normal
+          font-weight: bold
+          font-family: Arial
+
+    .register
+      text-decoration: none
+      color: white
+      background: #f29131
+      float: right
+      margin-right: 30px
+      font-size: 22px
+      font-weight: bold
+      text-transform: uppercase
+      padding: 8px 20px
+
+  .welcome-image
+    position: relative
+
+    img
+      width: 100%
+
+    .title-line
+      font-size: 36px
+      font-style: italic
+      font-family: Arial
+      color: white
+      position: absolute
+
+    .title-line-1
+      top: 49px
+      right: 46px
+
+    .title-line-2
+      top: 90px
+      right: 69px
+      text-transform: lowercase
+
+    .slash
+      color: #ff6218
+      position: absolute
+      top: 35px
+      right: 337px
+      font-weight: lighter
+      font-size: 86px
+
+  .abouts
+    position: relative
+    top: -5px
+
+    .about
+      float: left
+      width: $site_width / 3
+
+    .title, .description
+      padding: 20px
+
+    .title
+      color: white
+      font-size: 30px
+
+      &:after
+        font-family: fontello
+        padding-left: 40px
+
+      &.communication:after
+        content: '\e80b'
+
+      &.files:after
+        content: '\e811'
+
+      &.work:after
+        content: '\e80e'
+
+    .description
+      color: black
+
+    $title_colors: (#004b8d, #0074d9, #7abaf2)
+    $description_colors: (#d9dada, #c5c6c6, #b2b3b3)
+
+    @for $i from 1 through 3
+      .about:nth-child(#{$i})
+        .title
+          background: nth($title_colors, $i)
+
+        .description
+          background: nth($description_colors, $i)

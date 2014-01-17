@@ -1,18 +1,10 @@
 doctype html
 
 html ng-app="BoxApp"
-  head
-    title = title
-    = csrf_meta_tag
-    = stylesheet_link_tag 'application', media: 'all', "data-turbolinks-track" => true
-    = javascript_include_tag 'application', "data-turbolinks-track" => true
+  = render 'shared/head'
 
   body
-    header
-      .logo
-        = image_tag asset_path('logo.png'), width: 400
-      = render 'shared/menu'
-    .clear
+    = render 'shared/header'
     section#main
       aside
         .rainbow-shit

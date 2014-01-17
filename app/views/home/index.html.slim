@@ -1,0 +1,22 @@
+doctype html
+
+html ng-app="BoxApp"
+  = render 'shared/head'
+
+  body
+    = render 'shared/header'
+
+    section#main
+      .block.login-reg
+        = render 'devise/sessions/form'
+      .block.welcome-image
+        = image_tag asset_path('welcome.jpg'), class: 'welcome'
+        .slash
+          | /
+        .title-line.title-line-1 = t '.title_line_1'
+        .title-line.title-line-2 = t '.title_line_2'
+      .block.abouts
+        - %w(communication files work).each do |name|
+          .about
+            div class=['title', name] = t ".for_#{name}"
+            .description = t ".desc_for_#{name}"
