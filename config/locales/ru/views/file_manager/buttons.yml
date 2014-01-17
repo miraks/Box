@@ -1,6 +1,14 @@
 ru:
   file_manager:
     buttons:
+      files: Файлы
       copy: Копировать
       cut: Вырезать
       paste: Вставить
+      itemSettings: 'Настройки'
+      lock: Установить пароль
+      unlock: Снять пароль
+      download: Скачать
+      delete: Удалить
+      play: Воспроизвести
+      addToPlaylist: 'Добавить в плейлист'

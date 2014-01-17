@@ -142,6 +142,9 @@ $element_padding: 10px
 
   .action-buttons
     background: #00305a
+    color: #fff
+    padding-left: 5px
+    font-weight: bold
     .action-button
       text-decoration: none
       color: #fff
@@ -158,6 +161,20 @@ $element_padding: 10px
     .cut
       +font_icon('16')
     .paste
+      +font_icon('16')
+    .lock
+      +font_icon('16')
+    .unlock
+      +font_icon('16')
+    .download
+      +font_icon('05')
+    .itemSettings
+      +font_icon('17')
+    .play
+      +font_icon('0c')
+    .addToPlaylist
+      +font_icon('18')
+    .delete
       +font_icon('16')
 
   .path
@@ -182,6 +199,8 @@ $element_padding: 10px
     min-height: 80px
     &:not(.has-icon)
       +font_icon('16')
+    &.selected
+      color: red
 
   &.small
     .upload

@@ -33,10 +33,10 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', '$rootScope'
 
   # Actions with upload
 
-  $scope.download = (upload) ->
-    $scope.checkPermission upload, (params) ->
-      upload.download(params).then (upload) ->
-        Downloader.download upload.url
+  # $scope.download = (upload) ->
+  #   $scope.checkPermission upload, (params) ->
+  #     upload.download(params).then (upload) ->
+  #       Downloader.download upload.url
 
   $scope.deleteUpload = (upload) ->
     upload.delete().then ->
@@ -86,18 +86,18 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', '$rootScope'
 
   # Password manipulation
 
-  $scope.setPassword = (object) ->
-    password = prompt "Введи пароль"
-    return unless password?
-    object.password = password
-    object.update().then (object) ->
-      delete object.password
-      Notifier.show 'Пароль установлен'
+  # $scope.setPassword = (object) ->
+  #   password = prompt "Введи пароль"
+  #   return unless password?
+  #   object.password = password
+  #   object.update().then (object) ->
+  #     delete object.password
+  #     Notifier.show 'Пароль установлен'
 
-  $scope.deletePassword = (object) ->
-    object.password = null
-    object.update().then (object) ->
-      Notifier.show 'Пароль удален'
+  # $scope.deletePassword = (object) ->
+  #   object.password = null
+  #   object.update().then (object) ->
+  #     Notifier.show 'Пароль удален'
 
   # Actions with clipboard
 
@@ -114,6 +114,19 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', '$rootScope'
         when Clipboard.MODE.cut  then 'move'
       Upload[method](uploads, $scope.currentFolder).then (uploads) ->
         $scope.folder.uploads.push uploads...
+
+  $scope.delete = ->
+    $scope.selectedUploads.map (upload) ->
+      $scope.deleteUpload upload
+
+  $scope.itemSettings = ->
+    $scope.loadPermissions $scope.selectedUploads.last()
+
+  $scope.lock = ->
+  $scope.unlock = ->
+  $scope.download = ->
+  $scope.play = ->
+  $scope.addToPlaylist = ->
 
   # Drag and drop
 

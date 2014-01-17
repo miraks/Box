@@ -1,10 +1,10 @@
-.folder.item ng-repeat="folder in folder.children" ng-click="changeFolder(folder)" ddropable="folder" on-drop="dropped"
-  .marks
-    .locked.mark ng-show="folder.locked"
+.folder.item ng-class='{{folder.locked}}' ng-repeat="folder in folder.children" ng-click="changeFolder(folder)" ddropable="folder" on-drop="dropped"
+  / .marks
+  /   .locked.mark ng-show="folder.locked"
   .name
     | {{folder.name}}
-  - if self? @user
-    .menu stop-propagation="click"
-      a.action.item-settings href="" ng-click="loadPermissions(folder)" title=t('.settings')
-      a.action.lock href="" ng-click="setPassword(folder)" title=t('.set_password')
-      a.action.unlock href="" ng-click="deletePassword(folder)" ng-show="folder.locked" title=t('.delete_password')
+  / - if self? @user
+  /   .menu stop-propagation="click"
+  /     a.action.item-settings href="" ng-click="loadPermissions(folder)" title=t('.settings')
+  /     a.action.lock href="" ng-click="setPassword(folder)" title=t('.set_password')
+  /     a.action.unlock href="" ng-click="deletePassword(folder)" ng-show="folder.locked" title=t('.delete_password')
