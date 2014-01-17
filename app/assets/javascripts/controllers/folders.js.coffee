@@ -155,7 +155,7 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', '$rootScope'
     $scope.download $scope.selectedUploads.last()
 
   $scope.play = ->
-    $scope.playAudio $scope.selectedUploads.last()\
+    $scope.playAudio $scope.selectedUploads.last()
 
   $scope.toPlaylist = ->
     $scope.selectedUploads.map (upload) ->
