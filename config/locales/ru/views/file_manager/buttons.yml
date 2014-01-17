@@ -12,3 +12,7 @@ ru:
       delete: Удалить
       play: Воспроизвести
       addToPlaylist: 'Добавить в плейлист'
+      addFolder: Добавить папку
+      deleteFolder: Удалить папку
+      renameFolder: Переименовать папку
+      moveFolder: Переместить папку

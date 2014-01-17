@@ -1,4 +1,4 @@
-.folder.item ng-class='{{folder.locked}}' ng-repeat="folder in folder.children" ng-click="changeFolder(folder)" ddropable="folder" on-drop="dropped"
+.folder.item ng-class='{selected: isSelectedFolder(folder), locked: folder.locked}' ng-repeat="folder in folder.children" ng-click="toggleFolderSelection(folder)" ng-dblclick="changeFolder(folder)" ddropable="folder" on-drop="dropped"
   / .marks
   /   .locked.mark ng-show="folder.locked"
   .name

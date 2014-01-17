@@ -173,6 +173,14 @@ $element_padding: 10px
       +font_icon('18')
     .delete
       +font_icon('16')
+    .addFolder
+      +font_icon('04')
+    .deleteFolder
+      +font_icon('03')
+    .renameFolder
+      +font_icon('06')
+    .moveFolder
+      +font_icon('07')
 
   .path
     +box-sizing(border-box)
@@ -191,6 +199,10 @@ $element_padding: 10px
 
   .folder
     +font_icon('12')
+    &.locked
+      +font_icon('0f')
+    &.selected
+      color: red
 
   .upload
     min-height: 80px

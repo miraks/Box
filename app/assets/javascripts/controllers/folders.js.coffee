@@ -22,7 +22,7 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', '$rootScope'
   $scope.changeFolder = (folder, checkPermission = true) ->
     actions = (params) ->
       $scope.currentFolder = folder
-      $scope.cleanSelectedUploads()
+      $scope.cleanSelected()
       $scope.uploader?.setUrl "/api/v1/uploads?folder_id=#{$scope.currentFolder.id}"
       $scope.reloadContent params
     if checkPermission then $scope.checkPermission folder, actions else actions()
@@ -42,19 +42,40 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', '$rootScope'
     upload.delete().then ->
       $scope.folder.uploads.remove (up) -> up.equal upload
 
-  # Uploads selection
+  # Selections
+
+  $scope.selectedObjects = ->
+    if $scope.selectedFolders.isEmpty() then $scope.selectedUploads else $scope.selectedFolders
+
+  $scope.toggleFolderSelection = (folder) ->
+    $scope.cleanSelectedUploads()
+    if $scope.isSelectedFolder folder
+      $scope.selectedFolders.remove folder
+    else
+      $scope.selectedFolders.push folder
 
   $scope.toggleUploadSelection = (upload) ->
+    $scope.cleanSelectedFolders()
     if $scope.isSelectedUpload upload
       $scope.selectedUploads.remove upload
     else
       $scope.selectedUploads.push upload
 
+  $scope.isSelectedFolder = (folder) ->
+    $scope.selectedFolders.indexOf(folder) >= 0
+
   $scope.isSelectedUpload = (upload) ->
     $scope.selectedUploads.indexOf(upload) >= 0
 
+  $scope.cleanSelectedFolders = ->
+    $scope.selectedFolders = []
+
   $scope.cleanSelectedUploads = ->
     $scope.selectedUploads = []
+
+  $scope.cleanSelected = ->
+    $scope.cleanSelectedFolders()
+    $scope.cleanSelectedUploads()
 
   # Permissions
 
@@ -120,13 +141,18 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', '$rootScope'
       $scope.deleteUpload upload
 
   $scope.itemSettings = ->
-    $scope.loadPermissions $scope.selectedUploads.last()
+    object = $scope.selectedObjects().last()
+    $scope.loadPermissions object if object?
 
   $scope.lock = ->
   $scope.unlock = ->
   $scope.download = ->
   $scope.play = ->
   $scope.addToPlaylist = ->
+  $scope.addFolder = ->
+  $scope.deleteFolder = ->
+  $scope.renameFolder = ->
+  $scope.moveFolder = ->
 
   # Drag and drop
 
