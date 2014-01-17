@@ -26,23 +26,15 @@ $element_padding: 10px
   .settings
     text-align: center
     position: absolute
-    top: -10px
-    left: -10px
     background: #fff
     width: 100%
     height: 100%
     z-index: 2
-    padding-right: 20px
-    padding-bottom: 20px
-    border-radius: 2px
-    background: rgba(255, 255, 255, .8)
+    background: rgba(148, 148, 148, .8)
     // TODO: show animation
     .options
-      margin: 0 0 0 15px
       width: 100%
       text-align: left
-      .option-title
-        margin: 10px 0
       .search
         display: inline-block
     .title
@@ -92,9 +84,9 @@ $element_padding: 10px
           font-family: 'fontello'
           font-size: 20px
         &.locked
-          +font_icon('26')
+          +font_icon('16')
         &.processing
-          +font_icon('32')
+          +font_icon('16')
 
     .menu
       +transition(opacity .6s linear)
@@ -117,19 +109,19 @@ $element_padding: 10px
             font-size: 20px
 
         &.lock
-          +font_icon('25')
+          +font_icon('16')
         &.unlock
-          +font_icon('24')
+          +font_icon('16')
         &.download
-          +font_icon('0a')
+          +font_icon('05')
         &.item-settings
-          +font_icon('07')
+          +font_icon('17')
         &.play
-          +font_icon('27')
-        &.add-to-playlist
-          +font_icon('31')
-        &.delete
           +font_icon('0c')
+        &.add-to-playlist
+          +font_icon('18')
+        &.delete
+          +font_icon('16')
 
     &:before
       +transition(color .3s linear)
@@ -149,9 +141,10 @@ $element_padding: 10px
       text-shadow: 0 0 5px #66b7ef
 
   .action-buttons
+    background: #00305a
     .action-button
       text-decoration: none
-      color: #555
+      color: #fff
       display: inline-block
       margin: 10px
       +transition(color .3s linear)
@@ -161,36 +154,34 @@ $element_padding: 10px
       &:hover
         color: #66b7ef
     .copy
-      +font_icon('04')
+      +font_icon('16')
     .cut
-      +font_icon('1f')
+      +font_icon('16')
     .paste
-      +font_icon('1e')
+      +font_icon('16')
 
   .path
     +box-sizing(border-box)
     width: 100%
     height: 30px
-    background: #666
+    background: #012240
     color: #fff
-    border-radius: 3px
-    border: 1px solid #bac3cb
     line-height: 30px
     padding: 0 10px
 
   .path-part
     display: inline-block
     margin-left: 5px
-    &:after
-      content: ' >'
+    &:not(:last-child):after
+      content: ' /'
 
   .folder
-    +font_icon('22')
+    +font_icon('12')
 
   .upload
     min-height: 80px
     &:not(.has-icon)
-      +font_icon('23')
+      +font_icon('16')
 
   &.small
     .upload
