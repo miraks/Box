@@ -2,14 +2,20 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', '$timeout', 'Stor
   player = null
 
   class Track
-    constructor: (@name, sources) ->
+    constructor: (name, sources) ->
+      @name = name.split('.')[0..-2].join('.')
       @id = UUID.generate()
+      @setTitleAndArtist()
       @source = @findPlayableSource sources
       # hack for chrome
       $timeout @loadDuration, 10
 
     equal: (other) ->
       @id == other.id
+
+    setTitleAndArtist: ->
+      [@artist, @title] = @name.split '-'
+      [@artist, @title] = ['Неизвестен', @artist] unless @title
 
     findPlayableSource: (sources) ->
       return sources unless Object.isArray sources
