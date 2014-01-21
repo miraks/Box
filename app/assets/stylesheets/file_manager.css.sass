@@ -142,6 +142,18 @@ $element_padding: 10px
     color: #fff
     padding-left: 5px
     font-weight: bold
+    .right-control
+      float: right
+      display: inline-block
+      margin-right: 5px
+    .search
+      background: none !important
+      padding: 0 !important
+      display: inline-block
+      input
+        width: 100px !important
+        float: none !important
+        margin: 0 !important
     .files
       font-size: 18px
       margin-right: 50px
@@ -155,7 +167,7 @@ $element_padding: 10px
       +transition(color .3s linear)
       &:before
         font-family: 'fontello'
-        font-size: 18px
+        font-size: 16px
       &:hover
         color: #66b7ef
     .copy
@@ -186,6 +198,10 @@ $element_padding: 10px
       +font_icon('06')
     .moveFolder
       +font_icon('07')
+    .listStyle
+      +font_icon('1d')
+    .blockStyle
+      +font_icon('1e')
 
   .path
     +box-sizing(border-box)

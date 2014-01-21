@@ -1,4 +1,22 @@
 .action-buttons
   .files = t('.files')
-  - %w(copy cut paste itemSettings lock unlock downloadItem delete play toPlaylist addFolder deleteFolder renameFolder moveFolder).each do |button|
+  - %w(copy cut paste delete).each do |button|
     a href="" class=['action-button', button] ng-click="#{button}()" title=t(".#{button}")
+  | &nbsp;&nbsp;&nbsp;
+  - %w(itemSettings lock unlock downloadItem).each do |button|
+    a href="" class=['action-button', button] ng-click="#{button}()" title=t(".#{button}")
+  | &nbsp;&nbsp;&nbsp;
+  - %w(play toPlaylist).each do |button|
+    a href="" class=['action-button', button] ng-click="#{button}()" title=t(".#{button}")
+  | &nbsp;&nbsp;&nbsp;
+  - %w(addFolder deleteFolder renameFolder moveFolder).each do |button|
+    a href="" class=['action-button', button] ng-click="#{button}()" title=t(".#{button}")
+  | &nbsp;&nbsp;&nbsp;
+  .search
+    input type='text'
+  | &nbsp;&nbsp;&nbsp;
+  a.action-button.itemSettings
+  .right-control
+    a.action-button.listStyle
+    a.action-button.blockStyle
+
