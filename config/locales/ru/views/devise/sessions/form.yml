@@ -1,0 +1,9 @@
+ru:
+  devise:
+    sessions:
+      form:
+        log_in: Войти
+        email: Email
+        password: Пароль
+        sign_in: Go!
+        sign_up: Регистрация

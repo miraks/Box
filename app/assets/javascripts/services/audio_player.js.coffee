@@ -1,23 +1,46 @@
-angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID', ($rootScope, Storage, UUID) ->
+angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', '$timeout', 'Storage', 'UUID', ($rootScope, $timeout, Storage, UUID) ->
   player = null
 
   class Track
-    constructor: (@name, sources) ->
+    constructor: (name, sources) ->
+      @name = name.split('.')[0..-2].join('.')
       @id = UUID.generate()
+      @setTitleAndArtist()
       @source = @findPlayableSource sources
+      # hack for chrome
+      $timeout @loadDuration, 10
 
     equal: (other) ->
       @id == other.id
 
+    setTitleAndArtist: ->
+      [@artist, @title] = @name.split '-'
+      [@artist, @title] = ['Неизвестен', @artist] unless @title
+
     findPlayableSource: (sources) ->
       return sources unless Object.isArray sources
-      sources.find (source) -> player.playerEl.canPlayType "audio/#{source.split('.').last()}"
+      source = if player.playerEl.canPlayType?
+        sources.find (source) -> player.playerEl.canPlayType "audio/#{source.split('.').last()}"
+      else
+        # больше шансов, что это старье поддерживает mp3
+        sources.find (source) -> source.split('.').last() == 'mp3'
+
+    loadDuration: =>
+      audio = if @equal player.currentTrack
+        player.playerEl
+      else
+        audioEl = document.createElement 'audio'
+        audioEl.preload = 'metadata'
+        audioEl.src = @source
+        audioEl
+      audio.addEventListener 'loadedmetadata', =>
+        @duration = audio.duration
 
   class AudioPlayer
     constructor: ->
       # TODO: move playlist to class
       @playlist = []
-      @createDOMElement()
+      @playerEl = document.createElement 'audio'
       @bindCallbacks()
 
     ['play', 'pause', 'load'].each (method) =>
@@ -99,9 +122,6 @@ angular.module('BoxApp').service 'AudioPlayer', ['$rootScope', 'Storage', 'UUID'
         nameOrTrack
       else
         new Track nameOrTrack, sources
-
-    createDOMElement: ->
-      @playerEl = document.createElement 'audio'
 
     bindCallbacks: ->
       @bind 'ended', => @switchToNextTrack()

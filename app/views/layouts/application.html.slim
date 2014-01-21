@@ -1,25 +1,15 @@
 doctype html
 
 html ng-app="BoxApp"
-  head
-    title Box
-    = csrf_meta_tag
-    = stylesheet_link_tag 'application', media: 'all', "data-turbolinks-track" => true
-    = javascript_include_tag 'application', "data-turbolinks-track" => true
+  = render 'shared/head'
 
   body
-    header
-      = render 'shared/menu'
+    = render 'shared/header'
     section#main
       aside
-        /.block.balance
-          = render 'sidebars/balance'
-        - if logged_in?
-          .block
-            =' link_to 'Мои сообщений', user_conversations_path(current_user)
-            | (#{current_user.unread_messages_count})
-        tabs
-          = render 'sidebars/friends'
+        .rainbow-shit
+          = render 'shared/rainbow_menu'
+        = render 'sidebars/friends'
         tabs
           = render 'sidebars/people', users: User.not_companies.last(7)
           = render 'sidebars/company', companies: User.companies.last(7)
@@ -27,8 +17,7 @@ html ng-app="BoxApp"
         = yield
       nav
         - if logged_in?
-          .block
-            = render 'sidebars/file_manager'
+          = render 'sidebars/right_side'
+      .clear
     = render 'shared/uploads_status'
-    = render 'shared/audio_player'
     = render 'shared/current_user'

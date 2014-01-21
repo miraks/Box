@@ -22,7 +22,7 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', '$rootScope'
   $scope.changeFolder = (folder, checkPermission = true) ->
     actions = (params) ->
       $scope.currentFolder = folder
-      $scope.cleanSelectedUploads()
+      $scope.cleanSelected()
       $scope.uploader?.setUrl "/api/v1/uploads?folder_id=#{$scope.currentFolder.id}"
       $scope.reloadContent params
     if checkPermission then $scope.checkPermission folder, actions else actions()
@@ -42,19 +42,40 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', '$rootScope'
     upload.delete().then ->
       $scope.folder.uploads.remove (up) -> up.equal upload
 
-  # Uploads selection
+  # Selections
+
+  $scope.selectedObjects = ->
+    if $scope.selectedFolders.isEmpty() then $scope.selectedUploads else $scope.selectedFolders
+
+  $scope.toggleFolderSelection = (folder) ->
+    $scope.cleanSelectedUploads()
+    if $scope.isSelectedFolder folder
+      $scope.selectedFolders.remove folder
+    else
+      $scope.selectedFolders.push folder
 
   $scope.toggleUploadSelection = (upload) ->
+    $scope.cleanSelectedFolders()
     if $scope.isSelectedUpload upload
       $scope.selectedUploads.remove upload
     else
       $scope.selectedUploads.push upload
 
+  $scope.isSelectedFolder = (folder) ->
+    $scope.selectedFolders.indexOf(folder) >= 0
+
   $scope.isSelectedUpload = (upload) ->
     $scope.selectedUploads.indexOf(upload) >= 0
 
+  $scope.cleanSelectedFolders = ->
+    $scope.selectedFolders = []
+
   $scope.cleanSelectedUploads = ->
     $scope.selectedUploads = []
+
+  $scope.cleanSelected = ->
+    $scope.cleanSelectedFolders()
+    $scope.cleanSelectedUploads()
 
   # Permissions
 
@@ -115,6 +136,36 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', '$rootScope'
       Upload[method](uploads, $scope.currentFolder).then (uploads) ->
         $scope.folder.uploads.push uploads...
 
+  $scope.delete = ->
+    $scope.selectedUploads.map (upload) ->
+      $scope.deleteUpload upload
+
+  $scope.itemSettings = ->
+    object = $scope.selectedObjects().last()
+    $scope.loadPermissions object if object?
+
+  $scope.lock = ->
+    $scope.setPassword $scope.selectedUploads.last()
+
+  $scope.unlock = ->
+    $scope.selectedUploads.map (upload) ->
+      $scope.deletePassword upload
+
+  $scope.downloadItem = ->
+    $scope.download $scope.selectedUploads.last()
+
+  $scope.play = ->
+    $scope.playAudio $scope.selectedUploads.last()
+
+  $scope.toPlaylist = ->
+    $scope.selectedUploads.map (upload) ->
+      $scope.addToPlaylist upload
+
+  $scope.addFolder = ->
+  $scope.deleteFolder = ->
+  $scope.renameFolder = ->
+  $scope.moveFolder = ->
+
   # Drag and drop
 
   $scope.dropped = (upload, folder) ->
@@ -140,12 +191,12 @@ angular.module('BoxApp').controller 'FoldersController', ['$scope', '$rootScope'
   # AudioPlayer
 
   $scope.playAudio = (upload) ->
-    $scope.checkPermission upload, ->
-      upload.download().then (upload) ->
+    $scope.checkPermission upload, (params) ->
+      upload.download(params).then (upload) ->
         AudioPlayer.playNow upload.name, upload.sources
 
   $scope.addToPlaylist = (upload) ->
-    $scope.checkPermission upload, ->
-      upload.download().then (upload) ->
+    $scope.checkPermission upload, (params) ->
+      upload.download(params).then (upload) ->
         AudioPlayer.addToPlaylist upload.name, upload.sources
 ]

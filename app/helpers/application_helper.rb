@@ -4,4 +4,9 @@ module ApplicationHelper
     logged_in? and current_user == user
   end
 
+  # move
+  def except arr, what
+    arr - Array.wrap(what)
+  end
+
 end

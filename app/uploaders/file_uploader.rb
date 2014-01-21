@@ -5,7 +5,7 @@ class FileUploader < CarrierWave::Uploader::Base
   include CarrierWave::Processors::Audio
 
   IMAGE_FORMATS = { normal: [50, 50], thumb: [25, 25] }.freeze
-  AUDIO_FORMATS = { ogg: 'libvorbis' }.freeze
+  AUDIO_FORMATS = { ogg: 'libvorbis', mp3: 'libmp3lame' }.freeze
 
   IMAGE_EXTENSIONS = %w(jpg jpeg gif png webp).freeze
   AUDIO_EXTENSIONS = %w(mp3 ogg aac flac wav m4a m4b).freeze

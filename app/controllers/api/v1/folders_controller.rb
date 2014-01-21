@@ -7,7 +7,7 @@ class Api::V1::FoldersController < Api::V1::BaseController
   end
 
   def update
-    if @folder.update_attributes folder_params
+    if @folder.update folder_params
       render json: @folder
     else
       render_error ValidationError.new(@folder), 403

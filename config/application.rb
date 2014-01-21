@@ -24,5 +24,8 @@ module Box
 
     # Слимовские темплейты можно хранить в ассетах
     assets.register_engine '.slim', Slim::Template
+
+    # См. config/initializers/oj.rb
+    Oj.mimic_JSON
   end
 end

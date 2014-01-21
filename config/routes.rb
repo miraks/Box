@@ -7,7 +7,7 @@ Box::Application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  root to: "users#index"
+  root to: "home#index"
 
   concern :permissions do
     resources :permissions, only: [:index, :create, :destroy] do

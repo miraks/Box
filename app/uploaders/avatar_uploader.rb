@@ -18,7 +18,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    "/assets/fallback/#{model.class.to_s.underscore}/" + [version_name, "default.gif"].compact.join('_')
+    ActionController::Base.helpers.asset_path("fallback/#{model.class.to_s.underscore}/" + [version_name, "default.gif"].compact.join('_'))
   end
 
   private
