@@ -7,10 +7,10 @@ html ng-app="BoxApp"
     = render 'shared/header'
     section#main
       aside
-        .rainbow-shit
+        .beautiful-rainbow
           = render 'shared/rainbow_menu'
         = render 'sidebars/friends'
-        tabs
+        / tabs
           = render 'sidebars/people', users: User.not_companies.last(7)
           = render 'sidebars/company', companies: User.companies.last(7)
       section#content
