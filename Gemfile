@@ -1,13 +1,8 @@
 source 'http://rubygems.org'
 
-#ruby=rbx-2.2.1@box
-ruby '2.1.0', engine: 'rbx', engine_version: '2.2.1'
+ruby '2.1.1'
 
 gem 'rails', '4.0.2'
-
-# Ruby standart library
-gem 'rubysl', require: false
-gem 'racc', require: false
 
 # Server
 gem 'puma'
@@ -20,9 +15,6 @@ gem 'foreigner'
 
 # Pagination
 gem 'kaminari'
-
-# Search
-gem 'tire'
 
 # Human-readable urls
 gem 'friendly_id'
@@ -90,4 +82,4 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'yui-compressor'
 gem 'turbolinks'
-gem 'compass-rails', '~> 2.0.alpha.0'
+gem 'compass-rails'

@@ -1,17 +1,9 @@
 class User < ActiveRecord::Base
   include Roleplayer
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
 
   PROFILE_FIELDS = [:birthday, :city].freeze
   COMPANY_DATA_FIELDS = [:name, :activities, :site_link, :address, :phone_number].freeze
   DEFAULT_SPACE_LIMIT = 2.gigabytes
-
-  mapping do
-    indexes :name, type: 'string', boost: 10, analyzer: 'snowball'
-    indexes :slug, type: 'string', analyzer: 'snowball'
-    indexes :created_at, type: 'date'
-  end
 
   mount_uploader :avatar, AvatarUploader
 
@@ -57,12 +49,6 @@ class User < ActiveRecord::Base
 
   def to_s
     name
-  end
-
-  def self.search params
-    tire.search(load: true) do
-      query { string "name: #{params[:query]}*" } if params[:query].present?
-    end
   end
 
   private
